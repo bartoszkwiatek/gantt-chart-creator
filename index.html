@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Bartosz Kwiatek">
+
+    <title>Gantt chart</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link href="./css/fontawesome-all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="ganttchart.css" rel="stylesheet">
+
+
+
+</head>
+
+<body>
+    <div class='app'>
+        <div class="options"></div>
+        <div id="chart">
+            <div id="tasks">
+                <div id="chart-header" class="tasks">Gantt chart</div>
+                <div id="task-header" class="tasks">Tasks</div>
+      
+                <div id="new-task" class="tasks">
+                    Add task    <button title="Add task" id="add-task-button"><i class="material-icons">add</i></button>
+                </div>
+            </div>
+            <div id="left-side">
+                <div id="scroll-left" class="scroll">
+                    <button id="scroll-left-button"><i class="material-icons">keyboard_arrow_left</i></button>
+                </div>
+            </div>
+
+            <div id="calendar">              
+
+            </div>                                             
+
+
+            <div id="right-side">
+                <div id="scroll-right" class="scroll">
+                    <button id="scroll-right-button"><i class="material-icons">keyboard_arrow_right</i></button>
+                </div>
+            </div>       
+       </div>
+
+    <div id="overlay">
+        <div>
+            <label for="startdate">First day:</label>
+            <input type="date" id="startdate" name="trip-start" value="2018-12-12">
+        </div>
+        <div>
+            <label for="enddate">Last day:</label>
+            <input type="date" id="enddate" name="trip-start" value="2018-12-12">
+        </div>
+        <div>
+            <label for="colorPicker">Color:</label>
+            <input type="color" id="colorPicker">
+        </div>    
+    </div>
+
+
+</body>
+
+<script src="ganttchart.js" type="text/javascript"></script>
+
+</html>
