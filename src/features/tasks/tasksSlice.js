@@ -1,58 +1,83 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { today, addDays } from './dateHelper';
 
 const tasksSlice = createSlice({
     name: 'tasks',
     initialState: {
         cookieConsent: false,
         customCategories: [],
+        today: today(),                 // all dates are to be stored in ms so they can easily be converted and transfered
+        calendar: {
+            firstDay: today(),               // this is default setting for new chart. Later this is going to be updated to date of earliest task
+            lastDay: addDays(today(), 20),  // aka today + 20days; this is going to be updated to day of last task +10 days
+            rows: 10,
+        },
         data: [
             {
-                id: '101',
-                name: 'Configuring npm',
-                description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium aliquid',
+                id: '1',
+                name: 'task manager',
                 startDate: 1591264800000,
                 endDate: 1591351200000,
                 duration: 1,
-                parents: null,
-                children: ['102'],
-                category: 'default'
-            },
-            {
-                id: '102',
-                name: 'Seting up redux',
-                description: 'Lorem ipsum dolor sit amet consectetur adipisicing',
-                startDate: 1591351200000,
-                endDate: 1591437600000,
-                duration: 1,
-                parents: ['101'],
-                children: ['103', '104'],
-                category: 'default'
+                categories: ['default'],
+                responsible: ['Person'],
+                tasks: [
+                    {
+                        id: '101',
+                        name: 'Configuring npm',
+                        description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium aliquid',
+                        startDate: 1591264800000,
+                        endDate: 1591351200000,
+                        duration: 1,
+                        parents: null,
+                        children: ['102'],
+                        category: 'default',
+                        responsible: 'Person'
+                    },
+                    {
+                        id: '102',
+                        name: 'Seting up redux',
+                        description: 'Lorem ipsum dolor sit amet consectetur adipisicing',
+                        startDate: 1591351200000,
+                        endDate: 1591437600000,
+                        duration: 1,
+                        parents: ['101'],
+                        children: ['103', '104'],
+                        category: 'default',
+                        responsible: 'Person'
 
-            },
-            {
-                id: '103',
-                name: 'Making the rest',
-                description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium aliquid <fasdfadsfda></fasdfadsfda>',
-                startDate: 1591437600000,
-                endDate: 1592128800000,
-                duration: 8,
-                parents: ['102'],
-                children: [],
-                category: 'default'
+                    },
+                    {
+                        id: '103',
+                        name: 'Making the rest',
+                        description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium aliquid <fasdfadsfda></fasdfadsfda>',
+                        startDate: 1591437600000,
+                        endDate: 1592128800000,
+                        duration: 8,
+                        parents: ['102'],
+                        children: [],
+                        category: 'default',
+                        responsible: 'Person'
 
-            },
-            {
-                id: '104',
-                name: 'Doing other stuff',
-                description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium aliquid Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ratione expedita deserunt ex labore molestias ipsam cumque repellendus sint optio eveniet. Iusto deserunt corporis ex nisi deleniti, quae ipsam illo velit.',
-                startDate: 1591437600000,
-                endDate: 1591783200000,
-                duration: 4,
-                parents: ['102'],
-                children: [],
-                category: 'default'
+                    },
+                    {
+                        id: '104',
+                        name: 'Doing other stuff',
+                        description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium aliquid Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ratione expedita deserunt ex labore molestias ipsam cumque repellendus sint optio eveniet. Iusto deserunt corporis ex nisi deleniti, quae ipsam illo velit.',
+                        startDate: 1591437600000,
+                        endDate: 1591783200000,
+                        duration: 4,
+                        parents: ['102'],
+                        children: [],
+                        category: 'default',
+                        responsible: 'Person'
 
-            }],
+                    }
+                ]
+
+            }
+        ],
+
     },
     reducers: {
         setCookieConsent: state => {
@@ -89,6 +114,8 @@ const { setCookieConsent, addCategory, addTask } = tasksSlice.actions;
 const selectCookieConsent = state => state.tasks.cookieConsent;
 const selectCustomCategories = state => state.tasks.customCategories;
 const selectTasks = state => state.tasks.data;
+const selectToday = state => state.tasks.today;
+const selectCalendar = state => state.tasks.calendar;
 
 export {
     setCookieConsent,
@@ -96,6 +123,8 @@ export {
     addTask,
     selectCookieConsent,
     selectCustomCategories,
-    selectTasks
+    selectTasks,
+    selectToday,
+    selectCalendar
 }
 export default tasksSlice.reducer;
