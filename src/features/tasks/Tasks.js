@@ -2,20 +2,22 @@ import React, { useState } from 'react';
 import styled from 'styled-components'
 import { useSelector, useDispatch } from 'react-redux';
 import {
-    setCookieConsent,
-    addCategory,
-    addTask,
     selectCookieConsent,
-    selectCustomCategories,
     selectTasks,
     selectToday,
     selectCalendar,
     setToday,
     setCalendarFirstDay,
-    setCalendarLastDay
+    setCalendarLastDay,
+    setCookieConsent
 } from './tasksSlice';
-import { addDays, customGetDate, dateDifference, datesBetween } from './dateHelper';
+import { addDays, customGetDate } from './dateHelper';
 import { Calendar } from './Calendar';
+import { Button, Typography } from '@material-ui/core';
+import { ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails } from '@material-ui/core';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+
+
 
 const Tasks = () => {
     const [testing, setTesting] = useState(true)
@@ -29,10 +31,10 @@ const Tasks = () => {
 
     return (
         <React.Fragment>
-            <button>
+            <Button variant="contained" color="primary" onClick={() => dispatch(setCookieConsent())}>
                 Accept cookies
-            </button>
-            <h2>Today's date: {customGetDate(today)} </h2>
+            </Button>
+            <Typography color='primary'>Today's date: {customGetDate(today)} </Typography>
             {testing && <div>
                 <div>Cookies allowed: {consent ? 'yes' : 'no'}</div>
                 <div>
@@ -56,6 +58,22 @@ const Tasks = () => {
                 </div>
             </div>}
             <h3>Calendar is set from {customGetDate(calendar.firstDay)} to {customGetDate(calendar.lastDay)}</h3>
+            <ExpansionPanel>
+                <ExpansionPanelSummary
+                    expandIcon={<ExpandMoreIcon />}
+                    aria-controls="panel1a-content"
+                    id="panel1a-header"
+                >
+
+                    <Typography >Expansion Panel 1</Typography>
+                </ExpansionPanelSummary>
+                <ExpansionPanelDetails>
+                    <Typography>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
+                        sit amet blandit leo lobortis eget.
+                                                    </Typography>
+                </ExpansionPanelDetails>
+            </ExpansionPanel>
             <Calendar />
             <div>
                 <ul>

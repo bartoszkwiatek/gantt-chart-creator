@@ -5,6 +5,7 @@ const tasksSlice = createSlice({
     name: 'tasks',
     initialState: {
         cookieConsent: false,
+        darkMode: false,
         customCategories: [],
         today: today(),                 // all dates are to be stored in ms so they can easily be converted and transfered
         calendar: {
@@ -110,6 +111,10 @@ const tasksSlice = createSlice({
             state.cookieConsent = true;
         },
 
+        setDarkMode: (state, action) => {
+            state.darkMode = action.payload
+        },
+
         setToday: (state, action) => {
             state.today = action.payload
         },
@@ -131,7 +136,7 @@ const tasksSlice = createSlice({
     },
 });
 
-const { setCookieConsent, addCategory, addTask, setToday, setCalendarFirstDay, setCalendarLastDay } = tasksSlice.actions;
+const { setCookieConsent, setDarkMode, addCategory, addTask, setToday, setCalendarFirstDay, setCalendarLastDay } = tasksSlice.actions;
 
 // // The function below is called a thunk and allows us to perform async logic. It
 // // can be dispatched like a regular action: `dispatch(incrementAsync(10))`. This
@@ -147,6 +152,7 @@ const { setCookieConsent, addCategory, addTask, setToday, setCalendarFirstDay, s
 // the state. Selectors can also be defined inline where they're used instead of
 // in the slice file. For example: `useSelector((state) => state.counter.value)`
 const selectCookieConsent = state => state.tasks.cookieConsent;
+const selectDarkMode = state => state.tasks.darkMode;
 const selectCustomCategories = state => state.tasks.customCategories;
 const selectTasks = state => state.tasks.data;
 const selectToday = state => state.tasks.today;
@@ -154,12 +160,14 @@ const selectCalendar = state => state.tasks.calendar;
 
 export {
     setCookieConsent,
+    setDarkMode,
     addCategory,
     addTask,
     setToday,
     setCalendarFirstDay,
     setCalendarLastDay,
     selectCookieConsent,
+    selectDarkMode,
     selectCustomCategories,
     selectTasks,
     selectToday,
