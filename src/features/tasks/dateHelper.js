@@ -49,7 +49,21 @@ const datesBetween = (firstDate, secondDate) => {
         }
     }
     return dates
+}
 
+//      returns an object consisting of objects with number of occurences
+//      [{title: "Jun`e", count: 24}, {title: "July", count: 17}]
+//      to use with `grid-column: span ${count}`
+const countOccurrences = (firstDay, lastDay, selector) => {
+    const dates = datesBetween(firstDay, lastDay).map(day => customGetDate(day, selector))
+    let countBySelector = [...new Set(dates)].map(
+        selected => {
+            return {
+                'title': selected,
+                'count': dates.filter(check => check === selected).length
+            }
+        });
+    return countBySelector
 }
 
 
@@ -58,5 +72,6 @@ export {
     addDays,
     customGetDate,
     dateDifference,
-    datesBetween
+    datesBetween,
+    countOccurrences
 }

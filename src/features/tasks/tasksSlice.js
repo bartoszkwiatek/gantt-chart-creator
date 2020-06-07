@@ -9,7 +9,7 @@ const tasksSlice = createSlice({
         today: today(),                 // all dates are to be stored in ms so they can easily be converted and transfered
         calendar: {
             firstDay: today(),               // this is default setting for new chart. Later this is going to be updated to date of earliest task
-            lastDay: addDays(today(), 20),  // aka today + 20days; this is going to be updated to day of last task +10 days
+            lastDay: addDays(today(), 40),  // aka today + 20days; this is going to be updated to day of last task +10 days
             rows: 10,
         },
         data: [
