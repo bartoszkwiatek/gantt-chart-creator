@@ -8,17 +8,17 @@ const tasksSlice = createSlice({
         customCategories: [],
         today: today(),                 // all dates are to be stored in ms so they can easily be converted and transfered
         calendar: {
-            firstDay: today(),               // this is default setting for new chart. Later this is going to be updated to date of earliest task
-            lastDay: addDays(today(), 40),  // aka today + 20days; this is going to be updated to day of last task +10 days
-            rows: 10,
+            firstDay: 1590703200000,               // this is default setting for new chart. Later this is going to be updated to date of earliest task
+            lastDay: addDays(1590703200000, 40),  // aka today + 20days; this is going to be updated to day of last task +10 days
+            rows: ['a', 'a', 'a', 'a', 'a'],
         },
         data: [
             {
                 id: '1',
                 name: 'task manager',
-                startDate: 1591264800000,
-                endDate: 1591351200000,
-                duration: 1,
+                startDate: 1590876000000,
+                endDate: 1590962400000,
+                duration: 10,
                 categories: ['default'],
                 responsible: ['Person'],
                 tasks: [
@@ -26,51 +26,73 @@ const tasksSlice = createSlice({
                         id: '101',
                         name: 'Configuring npm',
                         description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium aliquid',
-                        startDate: 1591264800000,
-                        endDate: 1591351200000,
+                        startDate: 1590876000000,
+                        endDate: 1591135200000,
                         duration: 1,
                         parents: null,
-                        children: ['102'],
+                        children: ['102', '105'],
                         category: 'default',
-                        responsible: 'Person'
+                        responsible: 'Person',
+                        completion: '15%'
                     },
                     {
                         id: '102',
                         name: 'Seting up redux',
                         description: 'Lorem ipsum dolor sit amet consectetur adipisicing',
-                        startDate: 1591351200000,
-                        endDate: 1591437600000,
+                        startDate: 1591135200000,
+                        endDate: 1591394400000,
                         duration: 1,
                         parents: ['101'],
                         children: ['103', '104'],
                         category: 'default',
-                        responsible: 'Person'
+                        responsible: 'Person',
+                        completion: '15%'
+
 
                     },
                     {
                         id: '103',
                         name: 'Making the rest',
                         description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium aliquid <fasdfadsfda></fasdfadsfda>',
-                        startDate: 1591437600000,
-                        endDate: 1592128800000,
+                        startDate: 1591394400000,
+                        endDate: 1590962400000,
                         duration: 8,
                         parents: ['102'],
                         children: [],
                         category: 'default',
-                        responsible: 'Person'
+                        responsible: 'Person',
+                        completion: '15%'
+
 
                     },
                     {
                         id: '104',
                         name: 'Doing other stuff',
                         description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium aliquid Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ratione expedita deserunt ex labore molestias ipsam cumque repellendus sint optio eveniet. Iusto deserunt corporis ex nisi deleniti, quae ipsam illo velit.',
-                        startDate: 1591437600000,
-                        endDate: 1591783200000,
+                        startDate: 1591394400000,
+                        endDate: 1590962400000,
                         duration: 4,
                         parents: ['102'],
                         children: [],
                         category: 'default',
-                        responsible: 'Person'
+                        responsible: 'Person',
+                        completion: '15%'
+
+
+                    },
+                    {
+                        id: '105',
+                        name: 'Doing fdygfdssfddddddddddddff',
+                        description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium aliquid Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ratione expedita deserunt ex labore molestias ipsam cumque repellendus sint optio eveniet. Iusto deserunt corporis ex nisi deleniti, quae ipsam illo velit.',
+                        startDate: 1591394400000,
+                        endDate: 1590962400000,
+                        duration: 4,
+                        parents: ['101'],
+                        children: [],
+                        category: 'default',
+                        responsible: 'Person',
+                        completion: '15%'
+
 
                     }
                 ]
@@ -87,6 +109,19 @@ const tasksSlice = createSlice({
             // immutable state based off those changes
             state.cookieConsent = true;
         },
+
+        setToday: (state, action) => {
+            state.today = action.payload
+        },
+
+        setCalendarFirstDay: (state, action) => {
+            state.calendar.firstDay = action.payload
+        },
+
+        setCalendarLastDay: (state, action) => {
+            state.calendar.lastDay = action.payload
+        },
+
         addCategory: (state, action) => {
             state.customCategories.push(action.payload);
         },
@@ -96,7 +131,7 @@ const tasksSlice = createSlice({
     },
 });
 
-const { setCookieConsent, addCategory, addTask } = tasksSlice.actions;
+const { setCookieConsent, addCategory, addTask, setToday, setCalendarFirstDay, setCalendarLastDay } = tasksSlice.actions;
 
 // // The function below is called a thunk and allows us to perform async logic. It
 // // can be dispatched like a regular action: `dispatch(incrementAsync(10))`. This
@@ -121,6 +156,9 @@ export {
     setCookieConsent,
     addCategory,
     addTask,
+    setToday,
+    setCalendarFirstDay,
+    setCalendarLastDay,
     selectCookieConsent,
     selectCustomCategories,
     selectTasks,

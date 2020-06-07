@@ -1,68 +1,99 @@
 import React from 'react';
 import styled from 'styled-components'
 import { useSelector } from 'react-redux';
-import { selectToday, selectCalendar } from './tasksSlice';
+import { selectToday, selectCalendar, selectTasks } from './tasksSlice';
 import { addDays, customGetDate, dateDifference, datesBetween, countOccurrences } from './dateHelper';
-
+import { CalendarHeader } from './CalendarHeader';
+import {
+    cellSize,
+    gapSize,
+    Table,
+    TableSection,
+    TableHeaderCell,
+    TableCell
+} from './tables'
 
 const Calendar = () => {
     const today = useSelector(selectToday)
     const calendar = useSelector(selectCalendar)
-    const cellSize = '3rem'
-    const gapSize = '0.3rem'
+    const data = useSelector(selectTasks)
 
-    const Table = styled.div`
-        margin: 1rem;
-        width: calc(95vw - 3rem);
-        overflow-x:scroll;
-        padding: 1rem;
-    `;
-
-    const TableHead = styled.div`
-        display: grid;
-        grid-auto-rows: ${cellSize};
-        row-gap: ${gapSize};
-    `;
-
-    const TableHeader = styled.div`
+    const TableRow = styled.div`
         display: grid;
         grid-template-columns: repeat(${dateDifference(calendar.firstDay, calendar.lastDay) + 1}, ${cellSize});
         grid-auto-rows: ${cellSize};
         column-gap: ${gapSize};
     `;
 
-    const TableHeaderCell = styled.div`
-        display: block;
-        box-sizing: border-box;
-        box-shadow:0 0 0 ${gapSize} palegreen;
+    const TableMainTask = styled.div`
+        background-color: #230e85;
+    `;
+    const TableTask = styled.div`
+        background-color: #058d1d;
     `;
 
-
-    const monthCount = countOccurrences(calendar.firstDay, calendar.lastDay, 'month')
-
-
     return (
-        <Table>
-            <TableHead>
-                <TableHeader>
-                    {
-                        monthCount.map((month, index) => {
-                            return (
-                                <TableHeaderCell style={{ 'gridColumn': `span ${month.count}` }} key={index} > {month.title}</TableHeaderCell>
-                            )
-                        })
-                    }
-                    {console.log(monthCount)}
+        <Table >
+            <CalendarHeader />
+            {
+                data.map((mainTask, index) => {
+                    return (
+                        <TableSection key={index}>
+                            <TableRow className="maintask">
+                                {datesBetween(calendar.firstDay, calendar.lastDay, [mainTask.startDate, mainTask.duration]).map((day, index) => {
+                                    if (day === mainTask.startDate) {
+                                        return (
+                                            <TableMainTask key={index} className="here" style={{ 'gridColumn': `span ${mainTask.duration}` }} />
+                                        )
+                                    } else {
+                                        return (
+                                            <TableCell className={day === today ? 'today' : 'else'} id={`${mainTask.id}-${customGetDate(day)}`} key={index}></TableCell>
+                                        )
+                                    }
+                                })}
+                            </TableRow>
 
-                </TableHeader>
-                <TableHeader>
-                    {datesBetween(calendar.firstDay, calendar.lastDay).map((day, index) => {
+                            {mainTask.tasks.map((task, index) => {
+                                return (
+                                    <TableRow key={index} className="task">
+                                        {datesBetween(calendar.firstDay, calendar.lastDay, [task.startDate, task.duration]).map((day, index) => {
+                                            if (day === task.startDate) {
+                                                return (
+                                                    <TableTask key={index} className="here" style={{ 'gridColumn': `span ${task.duration}` }} />
+                                                )
+                                            } else {
+                                                return (
+                                                    <TableCell className={day === today ? 'today' : 'else'} id={`${task.id}-${customGetDate(day)}`} key={index}></TableCell>
+                                                )
+                                            }
+                                        })}
+                                    </TableRow>
+                                )
+                            })}
+
+
+                        </TableSection>
+
+                    )
+                })
+            }
+
+            <TableSection>
+
+                {
+                    calendar.rows.map((x, index) => {
                         return (
-                            <TableHeaderCell key={index}>{customGetDate(day, 'day')}</TableHeaderCell>
+                            <TableRow key={index} className="cell">
+                                {datesBetween(calendar.firstDay, calendar.lastDay).map((day, index) => {
+                                    return (
+                                        <TableCell className={day === today ? 'today' : 'else'} key={index}></TableCell>
+                                    )
+                                })}
+                            </TableRow>
                         )
-                    })}
-                </TableHeader>
-            </TableHead>
+                    })
+                }
+            </TableSection>
         </Table >
     )
 }

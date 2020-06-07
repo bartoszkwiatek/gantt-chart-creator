@@ -9,12 +9,16 @@ import {
     selectCustomCategories,
     selectTasks,
     selectToday,
-    selectCalendar
+    selectCalendar,
+    setToday,
+    setCalendarFirstDay,
+    setCalendarLastDay
 } from './tasksSlice';
 import { addDays, customGetDate, dateDifference, datesBetween } from './dateHelper';
 import { Calendar } from './Calendar';
 
 const Tasks = () => {
+    const [testing, setTesting] = useState(true)
 
     const tasks = useSelector(selectTasks);
     const consent = useSelector(selectCookieConsent)
@@ -22,25 +26,37 @@ const Tasks = () => {
     const calendar = useSelector(selectCalendar)
     const dispatch = useDispatch();
 
+
     return (
         <React.Fragment>
-            Cookies allowed: {consent ? 'yes' : 'no'}
-            <button
-                //   className={styles.button}
-                aria-label="Cookie consent"
-                onClick={() => dispatch(setCookieConsent())}
-            >
+            <button>
                 Accept cookies
             </button>
             <h2>Today's date: {customGetDate(today)} </h2>
+            {testing && <div>
+                <div>Cookies allowed: {consent ? 'yes' : 'no'}</div>
+                <div>
+                    Today:
+                <input
+                        onChange={(event) => dispatch(setToday(addDays((event.target.value))))}
+                        type="date"
+                    />
+                </div>
+                <div>
+                    Calendar from:
+                    <input
+                        onChange={(event) => dispatch(setCalendarFirstDay(addDays((event.target.value))))}
+                        type="date"
+                    />
+                    to:
+                    <input
+                        onChange={(event) => dispatch(setCalendarLastDay(addDays((event.target.value))))}
+                        type="date"
+                    />
+                </div>
+            </div>}
             <h3>Calendar is set from {customGetDate(calendar.firstDay)} to {customGetDate(calendar.lastDay)}</h3>
             <Calendar />
-            <ul></ul>
-            <ul>{datesBetween(addDays(calendar.firstDay, 19), calendar.lastDay).map((day) => {
-                return (
-                    <li>{customGetDate(day)}</li>
-                )
-            })}</ul>
             <div>
                 <ul>
                     {tasks.map((mainTask, index) => {
@@ -53,6 +69,7 @@ const Tasks = () => {
                                             return (
                                                 <li key={index}>
                                                     <h3>{task.name}</h3>
+                                                    <h3>{task.id}</h3>
                                                     <h4>Start: {((new Date(task.startDate)).toDateString())}</h4>
                                                     <p>Desc: {(task.description)}</p>
                                                 </li>
