@@ -9,40 +9,40 @@ const tasksSlice = createSlice({
         customCategories: [],
         today: today(),                 // all dates are to be stored in ms so they can easily be converted and transfered
         calendar: {
-            firstDay: 1590703200000,               // this is default setting for new chart. Later this is going to be updated to date of earliest task
-            lastDay: addDays(1590703200000, 40),  // aka today + 20days; this is going to be updated to day of last task +10 days
-            rows: ['a', 'a', 'a', 'a', 'a'],
+            firstDay: 1590962400000,               // this is default setting for new chart. Later this is going to be updated to date of earliest task
+            lastDay: 1593468000000,  // aka today + 20days; this is going to be updated to day of last task +10 days
+            rows: [],
         },
         data: [
             {
                 id: '1',
-                name: 'task manager',
-                startDate: 1590876000000,
-                endDate: 1590962400000,
-                duration: 10,
+                name: 'Task manager',
+                startDate: 1591221600000,
+                endDate: 1592604000000,
+                duration: 17,
                 categories: ['default'],
                 responsible: ['Person'],
                 tasks: [
                     {
                         id: '101',
-                        name: 'Configuring npm',
+                        name: 'Configuring project',
                         description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium aliquid',
-                        startDate: 1590876000000,
-                        endDate: 1591135200000,
+                        startDate: 1591221600000,
+                        endDate: 1591308000000,
                         duration: 1,
                         parents: null,
                         children: ['102', '105'],
                         category: 'default',
                         responsible: 'Person',
-                        completion: '15%'
+                        completion: '100%'
                     },
                     {
                         id: '102',
                         name: 'Seting up redux',
                         description: 'Lorem ipsum dolor sit amet consectetur adipisicing',
-                        startDate: 1591135200000,
-                        endDate: 1591394400000,
-                        duration: 1,
+                        startDate: 1591308000000,
+                        endDate: 1591567200000,
+                        duration: 2,
                         parents: ['101'],
                         children: ['103', '104'],
                         category: 'default',
@@ -55,14 +55,14 @@ const tasksSlice = createSlice({
                         id: '103',
                         name: 'Making the rest',
                         description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium aliquid <fasdfadsfda></fasdfadsfda>',
-                        startDate: 1591394400000,
-                        endDate: 1590962400000,
-                        duration: 8,
+                        startDate: 1591567200000,
+                        endDate: 1591826400000,
+                        duration: 4,
                         parents: ['102'],
                         children: [],
                         category: 'default',
                         responsible: 'Person',
-                        completion: '15%'
+                        completion: '45%'
 
 
                     },
@@ -70,10 +70,25 @@ const tasksSlice = createSlice({
                         id: '104',
                         name: 'Doing other stuff',
                         description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium aliquid Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ratione expedita deserunt ex labore molestias ipsam cumque repellendus sint optio eveniet. Iusto deserunt corporis ex nisi deleniti, quae ipsam illo velit.',
-                        startDate: 1591394400000,
-                        endDate: 1590962400000,
-                        duration: 4,
+                        startDate: 1591567200000,
+                        endDate: 1592604000000,
+                        duration: 12,
                         parents: ['102'],
+                        children: ['106'],
+                        category: 'default',
+                        responsible: 'Person',
+                        completion: '85%'
+
+
+                    },
+                    {
+                        id: '105',
+                        name: 'Doing fdygfdssfddddddddddddff',
+                        description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium aliquid Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ratione expedita deserunt ex labore molestias ipsam cumque repellendus sint optio eveniet. Iusto deserunt corporis ex nisi deleniti, quae ipsam illo velit.',
+                        startDate: 1592604000000,
+                        endDate: 1592690400000,
+                        duration: 1,
+                        parents: ['101'],
                         children: [],
                         category: 'default',
                         responsible: 'Person',
@@ -82,12 +97,108 @@ const tasksSlice = createSlice({
 
                     },
                     {
+                        id: '106',
+                        name: 'Second view',
+                        description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium aliquid Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ratione expedita deserunt ex labore molestias ipsam cumque repellendus sint optio eveniet. Iusto deserunt corporis ex nisi deleniti, quae ipsam illo velit.',
+                        startDate: 1591912800000,
+                        endDate: 1592085600000,
+                        duration: 2,
+                        parents: ['104'],
+                        children: [],
+                        category: 'default',
+                        responsible: 'Person',
+                        completion: '15%'
+                    },
+                    {
+                        id: '107',
+                        name: 'Filtering',
+                        description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium aliquid Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ratione expedita deserunt ex labore molestias ipsam cumque repellendus sint optio eveniet. Iusto deserunt corporis ex nisi deleniti, quae ipsam illo velit.',
+                        startDate: 1592085600000,
+                        endDate: 1592431200000,
+                        duration: 4,
+                        parents: ['106'],
+                        children: [],
+                        category: 'default',
+                        responsible: 'Person',
+                        completion: '15%'
+                    }
+                ]
+
+            },
+            {
+                id: '2',
+                name: 'Task manager',
+                startDate: 1591221600000,
+                endDate: 1592604000000,
+                duration: 17,
+                categories: ['default'],
+                responsible: ['Person'],
+                tasks: [
+                    {
+                        id: '101',
+                        name: 'Configuring project',
+                        description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium aliquid',
+                        startDate: 1591221600000,
+                        endDate: 1591308000000,
+                        duration: 1,
+                        parents: null,
+                        children: ['102', '105'],
+                        category: 'default',
+                        responsible: 'Person',
+                        completion: '100%'
+                    },
+                    {
+                        id: '102',
+                        name: 'Seting up redux',
+                        description: 'Lorem ipsum dolor sit amet consectetur adipisicing',
+                        startDate: 1591308000000,
+                        endDate: 1591567200000,
+                        duration: 2,
+                        parents: ['101'],
+                        children: ['103', '104'],
+                        category: 'default',
+                        responsible: 'Person',
+                        completion: '15%'
+
+
+                    },
+                    {
+                        id: '103',
+                        name: 'Making the rest',
+                        description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium aliquid <fasdfadsfda></fasdfadsfda>',
+                        startDate: 1591567200000,
+                        endDate: 1591826400000,
+                        duration: 4,
+                        parents: ['102'],
+                        children: [],
+                        category: 'default',
+                        responsible: 'Person',
+                        completion: '45%'
+
+
+                    },
+                    {
+                        id: '104',
+                        name: 'Doing other stuff',
+                        description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium aliquid Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ratione expedita deserunt ex labore molestias ipsam cumque repellendus sint optio eveniet. Iusto deserunt corporis ex nisi deleniti, quae ipsam illo velit.',
+                        startDate: 1591567200000,
+                        endDate: 1592604000000,
+                        duration: 12,
+                        parents: ['102'],
+                        children: ['106'],
+                        category: 'default',
+                        responsible: 'Person',
+                        completion: '85%'
+
+
+                    },
+                    {
                         id: '105',
                         name: 'Doing fdygfdssfddddddddddddff',
                         description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium aliquid Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ratione expedita deserunt ex labore molestias ipsam cumque repellendus sint optio eveniet. Iusto deserunt corporis ex nisi deleniti, quae ipsam illo velit.',
-                        startDate: 1591394400000,
-                        endDate: 1590962400000,
-                        duration: 4,
+                        startDate: 1592604000000,
+                        endDate: 1592690400000,
+                        duration: 1,
                         parents: ['101'],
                         children: [],
                         category: 'default',
@@ -95,6 +206,32 @@ const tasksSlice = createSlice({
                         completion: '15%'
 
 
+                    },
+                    {
+                        id: '106',
+                        name: 'Second view',
+                        description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium aliquid Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ratione expedita deserunt ex labore molestias ipsam cumque repellendus sint optio eveniet. Iusto deserunt corporis ex nisi deleniti, quae ipsam illo velit.',
+                        startDate: 1591912800000,
+                        endDate: 1592085600000,
+                        duration: 2,
+                        parents: ['104'],
+                        children: [],
+                        category: 'default',
+                        responsible: 'Person',
+                        completion: '15%'
+                    },
+                    {
+                        id: '107',
+                        name: 'Filtering',
+                        description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium aliquid Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ratione expedita deserunt ex labore molestias ipsam cumque repellendus sint optio eveniet. Iusto deserunt corporis ex nisi deleniti, quae ipsam illo velit.',
+                        startDate: 1592085600000,
+                        endDate: 1592431200000,
+                        duration: 4,
+                        parents: ['106'],
+                        children: [],
+                        category: 'default',
+                        responsible: 'Person',
+                        completion: '15%'
                     }
                 ]
 

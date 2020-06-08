@@ -1,3 +1,5 @@
+import { duration } from "@material-ui/core"
+
 // all function input and return is in ms, unless otherwise stated
 const today = () => {
     const day = ((new Date()).toDateString())           // doing this to be sure that I only get day, with 0 hours and minutes
@@ -8,7 +10,6 @@ const today = () => {
 const addDays = (baseDate, howManyDays = 0) => {
     const dateString = ((new Date(baseDate)).toDateString())            // processing dates like this, so it accepts both ms and yyyy-mm-dd input (default for input[date])
     const dateMS = Date.parse(dateString)
-    console.log(baseDate)
     return (dateMS + 86400000 * Math.floor(howManyDays))          // doing this to be sure that I only get day, with 0 hours and minutes
 }
 
@@ -45,9 +46,19 @@ const dateDifference = (firstDate, secondDate) => {
     return difference
 }
 
+const taskDuration = (firstDate, secondDate) => {
+    const duration = Math.floor((secondDate - firstDate) / 86400000) + 1
+    return duration
+}
+
+
+
 // returns array of days between two dates (in ms)
 const datesBetween = (firstDate, secondDate, skip = null) => {
     const difference = dateDifference(firstDate, secondDate);
+    console.log('dateDifference: ' + dateDifference(firstDate, secondDate))
+    console.log('taskDuration: ' + taskDuration(firstDate, secondDate))
+
     let dates = []
 
     if (difference < 0) {
@@ -62,8 +73,10 @@ const datesBetween = (firstDate, secondDate, skip = null) => {
     if (skip !== null) {
         dates.splice(dates.indexOf(skip[0]) + 1, skip[1] - 1)
     }
+    console.log(dates)
     return dates
 }
+
 
 //      returns an object consisting of objects with number of occurences
 //      [{title: "Jun`e", count: 24}, {title: "July", count: 17}]
