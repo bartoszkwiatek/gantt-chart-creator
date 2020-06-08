@@ -15,14 +15,8 @@ import {
 import { styles } from '../../styles';
 import { ExpansionPanel, ExpansionPanelSummary, Typography, ExpansionPanelDetails } from '@material-ui/core';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import { CalendarTasks } from './CalendarTasks';
 
-
-const TableMainTask = styled.div`
-background-color: #230e85;
-`;
-const TableTask = styled.div`
-background-color: #058d1d;
-`;
 
 
 
@@ -34,68 +28,11 @@ const Calendar = () => {
 
     return (
         <Table >
-
             <CalendarHeader />
-            {
-                data.map((mainTask, index) => {
-                    return (
-                        <TableSection key={index}>
-                            <TableRow gtc={gtc} className="maintask">
-                                {datesBetween(calendar.firstDay, calendar.lastDay, [mainTask.startDate, mainTask.duration]).map((day, index) => {
-                                    if (day === mainTask.startDate) {
-                                        return (
-                                            < TableMainTask key={index} className="here" style={{ 'gridColumn': `span ${mainTask.duration}` }} />
-                                        )
-                                    } else {
-                                        return (
-                                            <TableCell className={day === today ? 'today' : 'else'} id={`${mainTask.id}-${customGetDate(day)}`} key={index}></TableCell>
-                                        )
-                                    }
-                                })}
-                            </TableRow>
-
-                            {mainTask.tasks.map((task, index) => {
-                                return (
-                                    <TableRow gtc={gtc} key={index} className="task">
-                                        {datesBetween(calendar.firstDay, calendar.lastDay, [task.startDate, task.duration]).map((day, index) => {
-                                            if (day === task.startDate) {
-                                                return (
-                                                    <TableTask key={index} className="here" style={{ 'gridColumn': `span ${task.duration}` }} />
-                                                )
-                                            } else {
-                                                return (
-                                                    <TableCell className={day === today ? 'today' : 'else'} id={`${task.id}-${customGetDate(day)}`} key={index}></TableCell>
-                                                )
-                                            }
-                                        })}
-                                    </TableRow>
-                                )
-                            })}
+            <CalendarTasks />
+        </ Table>
 
 
-                        </TableSection>
-
-                    )
-                })
-            }
-
-            <TableSection>
-
-                {
-                    calendar.rows.map((x, index) => {
-                        return (
-                            <TableRow gtc={gtc} key={index} className="cell">
-                                {datesBetween(calendar.firstDay, calendar.lastDay).map((day, index) => {
-                                    return (
-                                        <TableCell className={day === today ? 'today' : 'else'} key={index}></TableCell>
-                                    )
-                                })}
-                            </TableRow>
-                        )
-                    })
-                }
-            </TableSection>
-        </Table >
     )
 }
 
