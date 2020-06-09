@@ -48,7 +48,7 @@ const TableHeaderCell = styled.div`
 
 const TableCell = styled(TableHeaderCell)`
     &:hover {
-        background-color: turquoise;
+        background-color: #1a8a98;
     }
 `;
 

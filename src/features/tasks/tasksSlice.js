@@ -255,11 +255,11 @@ const tasksSlice = createSlice({
     },
 
     setScrollPosition: (state, action) => {
-      if (action.payload < 0) {
+      if (action.payload <= 0) {
         state.scrollPosition = 0;
       } else if (action.payload > 0 && action.payload < state.maxScrollPosition) {
         state.scrollPosition = action.payload;
-      } else if (action.payload > state.maxScrollPosition) {
+      } else if (action.payload >= state.maxScrollPosition) {
         state.scrollPosition = state.maxScrollPosition;
       } else {
         // state.scrollPosition = 0;

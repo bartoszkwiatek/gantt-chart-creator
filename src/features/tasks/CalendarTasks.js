@@ -24,8 +24,8 @@ background-color: #058d1d;
 const ContainerTasks = styled.div`
 width: 90vw;
 overflow-x: scroll;
-padding: 1rem;
-padding-top: 12rem;
+padding-top: 9rem;
+border: 1px solid ${props => props.color};
 scroll-behavior: smooth;
 -ms-overflow-style: none;  /* Internet Explorer 10+ */
 scrollbar-width: none;  /* Firefox */
@@ -52,9 +52,12 @@ const CalendarTasks = () => {
 
   return (
     <React.Fragment>
-      <ContainerTasks ref={tasksRef} onScroll={() => {
-        dispatch(setScrollPosition(tasksRef.current.scrollLeft))
-      }} >
+      <ContainerTasks
+        color={theme.palette.divider}
+        ref={tasksRef}
+        onScroll={() => {
+          dispatch(setScrollPosition(tasksRef.current.scrollLeft))
+        }} >
 
         {
           data.map((mainTask, index) => {
@@ -104,13 +107,7 @@ const CalendarTasks = () => {
                                     <CalendarTask
                                       key={index}
                                       data={task}
-                                      id={task.id}
-                                      title={task.title}
-                                      responsible={task.responsible}
-                                      category={task.category}
-                                      description={task.description}
-                                      duration={task.duration}
-                                      completion={task.completion} />
+                                    />
                                   )
                                 } else {
                                   return (

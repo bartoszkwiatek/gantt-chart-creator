@@ -2,9 +2,10 @@ import React from 'react';
 import { CalendarHeader } from './CalendarHeader';
 import {
   Table
-} from './tables'
-
+} from './tables';
+import { CalendarSidebar } from './CalendarSidebar';
 import { CalendarTasks } from './CalendarTasks';
+
 
 
 
@@ -20,8 +21,11 @@ const Calendar = () => {
 
   return (
     <Table onScroll={() => false}>
-      <CalendarHeader />
-      <CalendarTasks />
+      <CalendarSidebar>
+
+        <CalendarHeader />
+        <CalendarTasks />
+      </CalendarSidebar>
     </ Table>
 
 

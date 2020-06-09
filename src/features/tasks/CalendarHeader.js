@@ -19,7 +19,7 @@ const HeaderContainer = styled.div`
   width: 90vw;
   overflow-x: scroll;
   background-color: #3f51b5;
-  padding: 1rem;
+  border: 1px solid ${props => props.color};
   scroll-behavior: smooth;
   -ms-overflow-style: none;  /* Internet Explorer 10+ */
   scrollbar-width: none;  /* Firefox */
@@ -48,6 +48,7 @@ const CalendarHeader = () => {
 
   return (
     <HeaderContainer
+      color={theme.palette.divider}
       ref={headerRef}
       onScroll={() => {
         dispatch(setScrollPosition(headerRef.current.scrollLeft))
