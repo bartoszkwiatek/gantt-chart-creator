@@ -2,10 +2,10 @@ import styled from 'styled-components'
 import React, { useState } from "react";
 import Popper from "@material-ui/core/Popper";
 import Typography from "@material-ui/core/Typography";
-import Button from "@material-ui/core/Button";
 import Fade from "@material-ui/core/Fade";
 import Paper from "@material-ui/core/Paper";
 import { cellSize } from "./tables"
+import { CalendarTaskPopper } from './CalendarTaskPopper';
 
 
 const TableTask = styled.div`
@@ -32,13 +32,20 @@ const CalendarTask = (props) => {
   return (
     < TableTask
       className="task"
-      id={props.id}
-      style={{ 'gridColumn': `span ${props.duration}` }}>
+      id={props.data.title}
+      style={{ 'gridColumn': `span ${props.data.duration}` }}>
       <Header onClick={handleClick()}>
-        <div style={{ width: props.completion, height: '100%', backgroundColor: 'black', opacity: 0.2, }}></div>
-        <div style={{ display: 'flex', alignItems: 'center', height: cellSize, position: 'relative', bottom: cellSize, paddingLeft: '1rem', paddingRight: '1rem' }}>
-          <Typography style={{ overflow: 'hidden' }}>{props.name}</Typography>
-
+        <div style={
+          { width: props.data.completion, height: '100%', backgroundColor: 'black', opacity: 0.2, }
+        } />
+        <div style={
+          { display: 'flex', alignItems: 'center', height: cellSize, position: 'relative', bottom: cellSize, paddingLeft: '1rem', paddingRight: '1rem' }
+        }>
+          <Typography style={
+            { overflow: 'hidden' }
+          }>
+            {props.data.title}
+          </Typography>
         </div>
       </Header>
       <Popper
@@ -46,11 +53,15 @@ const CalendarTask = (props) => {
         anchorEl={anchorEl}
         placement="bottom-start"
         transition
+        style={{ zIndex: '11' }}
       >
         {({ TransitionProps }) => (
           <Fade {...TransitionProps} timeout={350}>
             <Paper>
-              <Typography>The content of the Popper.</Typography>
+              <CalendarTaskPopper
+                data={props.data}
+                click={handleClick()}
+              />
             </Paper>
           </Fade>
         )}
