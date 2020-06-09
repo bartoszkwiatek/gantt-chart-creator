@@ -15,7 +15,7 @@ top: 0;
 display: flex;
 justify-content: center;
 align-items: center;
-opacity: 0.5;
+opacity: 0.2;
 transition: all 0.5s ease;
 &:hover{
   opacity: 1;

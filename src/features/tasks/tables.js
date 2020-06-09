@@ -1,19 +1,14 @@
 import styled from 'styled-components'
 
 const cellSize = '3rem'
-const gapSize = '0.3rem'
+const gapSize = '0px'
 
 const Table = styled.div`
-    // margin: 1rem;
-    // width: calc(95vw - 3rem);
-    // overflow-x:scroll;
-    // padding: 1rem;
     display: grid;
     row-gap: 1.5rem;
     
-    
     .today {
-        background-color: red
+        background-color: #ff1744;
     }
 `;
 
@@ -35,16 +30,23 @@ const TableRow = styled.div`
 `;
 
 const TableHeaderCell = styled.div`
-    display: block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     box-sizing: border-box;
-    box-shadow:0 0 0 ${gapSize} palegreen;
+    // box-shadow: 
+    // 1px 0 0 0 ${props => props.color}, 
+    // 0 1px 0 0 ${props => props.color}, 
+    // 1px 1px 0 0 ${props => props.color},   
+    // 1px 0 0 0 ${props => props.color} inset, 
+    // 0 1px 0 0 ${props => props.color}
+    // inset;
+
+    border: 1px solid ${props => props.color};
+    // box-shadow:0 0 0 ${gapSize} rgba(255,255,255,0);
 `;
 
-const TableCell = styled.div`
-    display: block;
-    box-sizing: border-box;
-    box-shadow:0 0 0 ${gapSize} palegreen;
-
+const TableCell = styled(TableHeaderCell)`
     &:hover {
         background-color: turquoise;
     }

@@ -6,7 +6,8 @@ const tasksSlice = createSlice({
   initialState: {
     cookieConsent: false,
     darkMode: false,
-    scrollPosition: 0,       // all dates are to be stored in ms so they can easily be converted and 
+    scrollPosition: 0,
+    maxScrollPosition: 0,       // all dates are to be stored in ms so they can easily be converted and 
     customCategories: [],
     today: today(),
     calendar: {
@@ -17,12 +18,13 @@ const tasksSlice = createSlice({
     data: [
       {
         id: '1',
-        name: 'Task manager',
+        title: 'Task manager',
         startDate: 1591221600000,
         endDate: 1592604000000,
         duration: 17,
         categories: ['default'],
         responsible: ['Person'],
+        color: '#0d47a1',
         tasks: [
           {
             id: '101',
@@ -35,7 +37,8 @@ const tasksSlice = createSlice({
             children: ['102', '105'],
             category: 'default',
             responsible: 'Person',
-            completion: '100%'
+            completion: '100%',
+            color: '#0097a7',
           },
           {
             id: '102',
@@ -48,9 +51,8 @@ const tasksSlice = createSlice({
             children: ['103', '104'],
             category: 'default',
             responsible: 'Person',
-            completion: '15%'
-
-
+            completion: '15%',
+            color: '#0097a7',
           },
           {
             id: '103',
@@ -63,9 +65,8 @@ const tasksSlice = createSlice({
             children: [],
             category: 'default',
             responsible: 'Person',
-            completion: '45%'
-
-
+            completion: '45%',
+            color: '#0097a7',
           },
           {
             id: '104',
@@ -78,9 +79,8 @@ const tasksSlice = createSlice({
             children: ['106'],
             category: 'default',
             responsible: 'Person',
-            completion: '85%'
-
-
+            completion: '85%',
+            color: '#0097a7',
           },
           {
             id: '105',
@@ -93,9 +93,8 @@ const tasksSlice = createSlice({
             children: [],
             category: 'default',
             responsible: 'Person',
-            completion: '15%'
-
-
+            completion: '15%',
+            color: '#0097a7',
           },
           {
             id: '106',
@@ -108,7 +107,8 @@ const tasksSlice = createSlice({
             children: [],
             category: 'default',
             responsible: 'Person',
-            completion: '15%'
+            completion: '15%',
+            color: '#0097a7',
           },
           {
             id: '107',
@@ -121,7 +121,8 @@ const tasksSlice = createSlice({
             children: [],
             category: 'default',
             responsible: 'Person',
-            completion: '15%'
+            completion: '15%',
+            color: '#0097a7',
           }
         ]
 
@@ -134,9 +135,10 @@ const tasksSlice = createSlice({
         duration: 17,
         categories: ['default'],
         responsible: ['Person'],
+        color: '#388e3c',
         tasks: [
           {
-            id: '101',
+            id: '201',
             title: 'Configuring project',
             description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium aliquid',
             startDate: 1591221600000,
@@ -146,10 +148,11 @@ const tasksSlice = createSlice({
             children: ['102', '105'],
             category: 'default',
             responsible: 'Person',
-            completion: '100%'
+            completion: '100%',
+            color: '#8d6e63',
           },
           {
-            id: '102',
+            id: '202',
             title: 'Seting up redux',
             description: 'Lorem ipsum dolor sit amet consectetur adipisicing',
             startDate: 1591308000000,
@@ -159,12 +162,11 @@ const tasksSlice = createSlice({
             children: ['103', '104'],
             category: 'default',
             responsible: 'Person',
-            completion: '15%'
-
-
+            completion: '15%',
+            color: '#8d6e63',
           },
           {
-            id: '103',
+            id: '203',
             title: 'Making the rest',
             description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium aliquid <fasdfadsfda></fasdfadsfda>',
             startDate: 1591567200000,
@@ -174,12 +176,11 @@ const tasksSlice = createSlice({
             children: [],
             category: 'default',
             responsible: 'Person',
-            completion: '45%'
-
-
+            completion: '45%',
+            color: '#8d6e63',
           },
           {
-            id: '104',
+            id: '204',
             title: 'Doing other stuff',
             description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium aliquid Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ratione expedita deserunt ex labore molestias ipsam cumque repellendus sint optio eveniet. Iusto deserunt corporis ex nisi deleniti, quae ipsam illo velit.',
             startDate: 1591567200000,
@@ -189,12 +190,11 @@ const tasksSlice = createSlice({
             children: ['106'],
             category: 'default',
             responsible: 'Person',
-            completion: '85%'
-
-
+            completion: '85%',
+            color: '#8d6e63',
           },
           {
-            id: '105',
+            id: '205',
             title: 'Doing fdygfdssfddddddddddddff',
             description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium aliquid Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ratione expedita deserunt ex labore molestias ipsam cumque repellendus sint optio eveniet. Iusto deserunt corporis ex nisi deleniti, quae ipsam illo velit.',
             startDate: 1592604000000,
@@ -204,12 +204,11 @@ const tasksSlice = createSlice({
             children: [],
             category: 'default',
             responsible: 'Person',
-            completion: '15%'
-
-
+            completion: '15%',
+            color: '#8d6e63',
           },
           {
-            id: '106',
+            id: '206',
             title: 'Second view',
             description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium aliquid Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ratione expedita deserunt ex labore molestias ipsam cumque repellendus sint optio eveniet. Iusto deserunt corporis ex nisi deleniti, quae ipsam illo velit.',
             startDate: 1591912800000,
@@ -219,10 +218,11 @@ const tasksSlice = createSlice({
             children: [],
             category: 'default',
             responsible: 'Person',
-            completion: '15%'
+            completion: '15%',
+            color: '#8d6e63',
           },
           {
-            id: '107',
+            id: '207',
             title: 'Filtering',
             description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium aliquid Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ratione expedita deserunt ex labore molestias ipsam cumque repellendus sint optio eveniet. Iusto deserunt corporis ex nisi deleniti, quae ipsam illo velit.',
             startDate: 1592085600000,
@@ -232,7 +232,8 @@ const tasksSlice = createSlice({
             children: [],
             category: 'default',
             responsible: 'Person',
-            completion: '15%'
+            completion: '15%',
+            color: '#8d6e63',
           }
         ]
 
@@ -254,7 +255,20 @@ const tasksSlice = createSlice({
     },
 
     setScrollPosition: (state, action) => {
-      state.scrollPosition = action.payload
+      if (action.payload < 0) {
+        state.scrollPosition = 0;
+      } else if (action.payload > 0 && action.payload < state.maxScrollPosition) {
+        state.scrollPosition = action.payload;
+      } else if (action.payload > state.maxScrollPosition) {
+        state.scrollPosition = state.maxScrollPosition;
+      } else {
+        // state.scrollPosition = 0;
+      }
+
+    },
+
+    setMaxScrollPosition: (state, action) => {
+      state.maxScrollPosition = action.payload
     },
 
     setToday: (state, action) => {
@@ -278,7 +292,7 @@ const tasksSlice = createSlice({
   },
 });
 
-const { setCookieConsent, setDarkMode, setScrollPosition, addCategory, addTask, setToday, setCalendarFirstDay, setCalendarLastDay } = tasksSlice.actions;
+const { setCookieConsent, setDarkMode, setScrollPosition, setMaxScrollPosition, addCategory, addTask, setToday, setCalendarFirstDay, setCalendarLastDay } = tasksSlice.actions;
 
 // // The function below is called a thunk and allows us to perform async logic. It
 // // can be dispatched like a regular action: `dispatch(incrementAsync(10))`. This
@@ -296,6 +310,7 @@ const { setCookieConsent, setDarkMode, setScrollPosition, addCategory, addTask, 
 const selectCookieConsent = state => state.tasks.cookieConsent;
 const selectDarkMode = state => state.tasks.darkMode;
 const selectScrollPosition = state => state.tasks.scrollPosition;
+const selectMaxScrollPosition = state => state.tasks.maxScrollPosition;
 const selectCustomCategories = state => state.tasks.customCategories;
 const selectTasks = state => state.tasks.data;
 const selectToday = state => state.tasks.today;
@@ -305,6 +320,7 @@ export {
   setCookieConsent,
   setDarkMode,
   setScrollPosition,
+  setMaxScrollPosition,
   addCategory,
   addTask,
   setToday,
@@ -313,6 +329,7 @@ export {
   selectCookieConsent,
   selectDarkMode,
   selectScrollPosition,
+  selectMaxScrollPosition,
   selectCustomCategories,
   selectTasks,
   selectToday,

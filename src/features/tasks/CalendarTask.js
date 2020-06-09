@@ -33,17 +33,36 @@ const CalendarTask = (props) => {
     < TableTask
       className="task"
       id={props.data.title}
-      style={{ 'gridColumn': `span ${props.data.duration}` }}>
+      style={{
+        gridColumn: `span ${props.data.duration}`,
+        backgroundColor: props.data.color
+      }}>
       <Header onClick={handleClick()}>
         <div style={
-          { width: props.data.completion, height: '100%', backgroundColor: 'black', opacity: 0.2, }
+          {
+            width: props.data.completion,
+            height: '100%',
+            backgroundColor: 'black',
+            opacity: 0.2,
+          }
         } />
         <div style={
-          { display: 'flex', alignItems: 'center', height: cellSize, position: 'relative', bottom: cellSize, paddingLeft: '1rem', paddingRight: '1rem' }
+          {
+            display: 'flex',
+            alignItems: 'center',
+            height: cellSize,
+            position: 'relative',
+            bottom: cellSize,
+            paddingLeft: '1rem',
+            paddingRight: '1rem'
+          }
         }>
-          <Typography style={
-            { overflow: 'hidden' }
-          }>
+          <Typography style=
+            {{
+              color: '#fff',
+              overflow: 'hidden',
+              textOverflow: 'ellipsis'
+            }}>
             {props.data.title}
           </Typography>
         </div>
