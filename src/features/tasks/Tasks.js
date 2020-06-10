@@ -32,7 +32,7 @@ const Tasks = () => {
   return (
     <React.Fragment>
       <Calendar />
-      <Button variant="contained" color="primary" onClick={() => dispatch(setCookieConsent())}>
+      {/* <Button variant="contained" color="primary" onClick={() => dispatch(setCookieConsent())}>
         Accept cookies
             </Button>
       <Typography color='primary'>Today's date: {customGetDate(today)} </Typography>
@@ -98,7 +98,7 @@ const Tasks = () => {
             )
           })}
         </ul>
-      </div>
+      </div> */}
     </React.Fragment>
   )
 

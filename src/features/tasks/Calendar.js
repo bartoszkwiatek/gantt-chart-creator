@@ -5,10 +5,7 @@ import {
 } from './tables';
 import { CalendarSidebar } from './CalendarSidebar';
 import { CalendarTasks } from './CalendarTasks';
-
-
-
-
+import { FABs } from './FABs';
 
 const Calendar = () => {
   // const today = useSelector(selectToday)
@@ -20,13 +17,13 @@ const Calendar = () => {
 
 
   return (
-    <Table onScroll={() => false}>
+    <React.Fragment >
       <CalendarSidebar>
-
         <CalendarHeader />
         <CalendarTasks />
       </CalendarSidebar>
-    </ Table>
+      <FABs />
+    </ React.Fragment>
 
 
   )

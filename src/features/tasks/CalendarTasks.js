@@ -20,9 +20,13 @@ import { useTheme } from '@material-ui/core';
 // background-color: #058d1d;
 // `;
 const ContainerTasks = styled.div`
-width: 90vw;
-overflow-x: scroll;
-padding-top: 9rem;
+// width: 90vw;
+// overflow-x: scroll;
+// padding-top: 9rem;
+height: calc(100vh - ${cellSize} * 5);
+overflow: auto;
+width: max-content;
+
 border: 1px solid ${props => props.color};
 scroll-behavior: smooth;
 -ms-overflow-style: none;  /* Internet Explorer 10+ */

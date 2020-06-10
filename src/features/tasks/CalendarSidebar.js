@@ -20,6 +20,7 @@ const drawerWidth = 360;
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
+    height: '100vh'
 
   },
   appBar: {
@@ -29,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
     }),
   },
   appBarShift: {
-    width: `calc(100% - ${drawerWidth}px)`,
+    paddingLeft: '0',
     marginLeft: drawerWidth,
     transition: theme.transitions.create(['margin', 'width'], {
       easing: theme.transitions.easing.easeOut,
@@ -48,7 +49,7 @@ const useStyles = makeStyles((theme) => ({
   },
   drawerPaper: {
     width: drawerWidth,
-    position: 'relative',
+    // position: 'relative',
 
   },
   drawerHeader: {
@@ -61,6 +62,10 @@ const useStyles = makeStyles((theme) => ({
   },
   content: {
     flexGrow: 1,
+    width: "98vw",
+    height: "100vh",
+    overflowX: "scroll",
+    overflowY: "hidden",
     padding: theme.spacing(3),
     paddingTop: theme.spacing(6),
     transition: theme.transitions.create('margin', {

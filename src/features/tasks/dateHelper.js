@@ -51,8 +51,6 @@ const dateDifference = (firstDate, secondDate) => {
 //   return duration
 // }
 
-
-
 // returns array of days between two dates (in ms)
 const datesBetween = (firstDate, secondDate, skip = null) => {
   const difference = dateDifference(firstDate, secondDate);

@@ -13,11 +13,11 @@ import { ScrollButtonRight, ScrollButtonLeft } from './ScrollButton';
 import { Typography, useTheme } from '@material-ui/core';
 
 const HeaderContainer = styled.div`
-  position: fixed;
+  // position: fixed;
   z-index: 10;
-  width: 90vw;
-  overflow-x: scroll;
-  background-color: #3f51b5;
+  // width: 90vw;
+  width: max-content;
+    background-color: #3f51b5;
   border: 1px solid ${props => props.color};
   scroll-behavior: smooth;
   -ms-overflow-style: none;  /* Internet Explorer 10+ */
@@ -148,8 +148,8 @@ const CalendarHeader = () => {
           })}
         </TableRow>
       </TableSection>
-      <ScrollButtonLeft />
-      <ScrollButtonRight />
+      {/* <ScrollButtonLeft /> */}
+      {/* <ScrollButtonRight /> */}
     </HeaderContainer >
   )
 }
