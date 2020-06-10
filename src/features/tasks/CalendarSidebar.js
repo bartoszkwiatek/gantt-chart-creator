@@ -147,21 +147,17 @@ const CalendarSidebar = (props) => {
         <List style={{ padding: 0 }}>
           {calendarHeaders.map((text, index) => (
             text && (
-              <React.Fragment>
-                <ListItem
-                  style={{
-                    borderBottom: `1px solid ${theme.palette.divider
-
-                      }`
-                  }}
-                  key={index}
-                  className={classes.cellSize}
-                >
-                  <ListItemText align="right" >
-                    {text}
-                  </ListItemText>
-                </ListItem>
-              </React.Fragment>
+              <ListItem
+                style={{
+                  borderBottom: `1px solid ${theme.palette.divider}`
+                }}
+                key={index}
+                className={classes.cellSize}
+              >
+                <ListItemText align="right" >
+                  {text}
+                </ListItemText>
+              </ListItem>
 
             )
           ))}
