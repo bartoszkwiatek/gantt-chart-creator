@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from 'react';
 import styled from 'styled-components'
 import { useSelector, useDispatch } from 'react-redux';
-import { selectToday, selectCalendar, selectScrollPosition, setScrollPosition, setMaxScrollPosition } from './tasksSlice';
+import { selectToday, selectCalendar, selectScrollPosition, setScrollPosition, setMaxScrollPosition, selectGridLines } from './tasksSlice';
 import { customGetDate, dateDifference, datesBetween, countOccurrences } from './dateHelper';
 import {
   cellSize,
@@ -31,11 +31,12 @@ const HeaderContainer = styled.div`
 const CalendarHeader = () => {
   const today = useSelector(selectToday)
   const calendar = useSelector(selectCalendar)
-  const headerRef = useRef(null)
   const scroll = useSelector(selectScrollPosition)
+  const gridLines = useSelector(selectGridLines)
   const dispatch = useDispatch();
   const theme = useTheme();
 
+  const headerRef = useRef(null)
   const monthCount = countOccurrences(calendar.firstDay, calendar.lastDay, 'month')
   const yearsCount = countOccurrences(calendar.firstDay, calendar.lastDay, 'year')
   const showYears = (yearsCount.length === 1 ? false : true);
@@ -83,7 +84,7 @@ const CalendarHeader = () => {
           {monthCount.map((month, index) => {
             return (
               <TableHeaderCell
-                color={theme.palette.divider}
+                color={gridLines ? theme.palette.divider : 'rgba(0,0,0,0)'}
                 key={index}
                 style={{
                   display: 'flex',
@@ -112,7 +113,7 @@ const CalendarHeader = () => {
           {datesBetween(calendar.firstDay, calendar.lastDay).map((day, index) => {
             return (
               <TableHeaderCell
-                color={theme.palette.divider}
+                color={gridLines ? theme.palette.divider : 'rgba(0,0,0,0)'}
                 className={day === today ? 'today' : 'else'}
                 key={index}
                 style={{
@@ -133,7 +134,7 @@ const CalendarHeader = () => {
           {datesBetween(calendar.firstDay, calendar.lastDay).map((day, index) => {
             return (
               <TableHeaderCell
-                color={theme.palette.divider}
+                color={gridLines ? theme.palette.divider : 'rgba(0,0,0,0)'}
                 className={day === today ? 'today' : 'else'}
                 key={index}
                 style={{

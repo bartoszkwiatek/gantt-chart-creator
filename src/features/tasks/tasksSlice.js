@@ -4,16 +4,28 @@ import { today } from './dateHelper';
 const tasksSlice = createSlice({
   name: 'tasks',
   initialState: {
-    cookieConsent: false,
-    darkMode: false,
+    view: {
+      cookieConsent: false,
+      darkMode: false,
+      gridLines: true,
+    },
     scrollPosition: 0,
-    maxScrollPosition: 0,       // all dates are to be stored in ms so they can easily be converted and 
-    categories: [],
-    people: [],
-    today: today(),
+    maxScrollPosition: 0,
+    custom: {
+      categories: [],
+      people: [],
+    },       // all dates are to be stored in ms so they can easily be converted and 
     calendar: {
-      firstDay: 1590962400000,     // this is default setting for new chart. Later this is going to be updated to date of earliest task
-      lastDay: 1593468000000,  // aka today + 20days; this is going to be updated to day of last task +10 days
+      today: today(),
+      firstDay: 1590962400000,     // this is default setting for new chart. Later this is going to be      updated to date of earliest task
+      lastDay: 1593468000000,
+      headers: {
+        year: false,
+        month: true,
+        shortDay: true,
+        day: true
+      },  // aka today + 20days; this is going to be updated to day of last task +10 days
+
       rows: [],
     },
     data: [
@@ -248,11 +260,15 @@ const tasksSlice = createSlice({
   // immutable state based off those changes
   reducers: {
     setCookieConsent: state => {
-      state.cookieConsent = true;
+      state.view.cookieConsent = true;
     },
 
     setDarkMode: (state, action) => {
-      state.darkMode = action.payload
+      state.view.darkMode = action.payload
+    },
+
+    setGridLines: (state, action) => {
+      state.view.gridLines = action.payload
     },
 
     setScrollPosition: (state, action) => {
@@ -273,7 +289,7 @@ const tasksSlice = createSlice({
     },
 
     setToday: (state, action) => {
-      state.today = action.payload
+      state.calendar.today = action.payload
     },
 
     setCalendarFirstDay: (state, action) => {
@@ -285,7 +301,10 @@ const tasksSlice = createSlice({
     },
 
     addCategory: (state, action) => {
-      state.customCategories.push(action.payload);
+      state.custom.categories.push(action.payload);
+    },
+    addPerson: (state, action) => {
+      state.custom.people.push(action.payload);
     },
     addTask: (state, action) => {
       state.data.push(action.payload);
@@ -293,7 +312,7 @@ const tasksSlice = createSlice({
   },
 });
 
-const { setCookieConsent, setDarkMode, setScrollPosition, setMaxScrollPosition, addCategory, addTask, setToday, setCalendarFirstDay, setCalendarLastDay } = tasksSlice.actions;
+const { setCookieConsent, setDarkMode, setGridLines, setScrollPosition, setMaxScrollPosition, addCategory, addTask, setToday, setCalendarFirstDay, setCalendarLastDay } = tasksSlice.actions;
 
 // // The function below is called a thunk and allows us to perform async logic. It
 // // can be dispatched like a regular action: `dispatch(incrementAsync(10))`. This
@@ -308,18 +327,20 @@ const { setCookieConsent, setDarkMode, setScrollPosition, setMaxScrollPosition, 
 // The function below is called a selector and allows us to select a value from
 // the state. Selectors can also be defined inline where they're used instead of
 // in the slice file. For example: `useSelector((state) => state.counter.value)`
-const selectCookieConsent = state => state.tasks.cookieConsent;
-const selectDarkMode = state => state.tasks.darkMode;
+const selectCookieConsent = state => state.tasks.view.cookieConsent;
+const selectDarkMode = state => state.tasks.view.darkMode;
+const selectGridLines = state => state.tasks.view.gridLines;
 const selectScrollPosition = state => state.tasks.scrollPosition;
 const selectMaxScrollPosition = state => state.tasks.maxScrollPosition;
-const selectCustomCategories = state => state.tasks.customCategories;
+const selectCustomCategories = state => state.tasks.custom.categories;
 const selectTasks = state => state.tasks.data;
-const selectToday = state => state.tasks.today;
+const selectToday = state => state.tasks.calendar.today;
 const selectCalendar = state => state.tasks.calendar;
 
 export {
   setCookieConsent,
   setDarkMode,
+  setGridLines,
   setScrollPosition,
   setMaxScrollPosition,
   addCategory,
@@ -329,6 +350,7 @@ export {
   setCalendarLastDay,
   selectCookieConsent,
   selectDarkMode,
+  selectGridLines,
   selectScrollPosition,
   selectMaxScrollPosition,
   selectCustomCategories,

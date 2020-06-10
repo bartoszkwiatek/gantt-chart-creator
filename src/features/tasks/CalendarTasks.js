@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from 'react';
 import styled from 'styled-components'
 import { useSelector, useDispatch } from 'react-redux';
-import { selectToday, selectCalendar, selectTasks, selectScrollPosition, setScrollPosition, setMaxScrollPosition } from './tasksSlice';
+import { selectToday, selectCalendar, selectTasks, selectScrollPosition, setScrollPosition, setMaxScrollPosition, selectGridLines } from './tasksSlice';
 import { customGetDate, dateDifference, datesBetween } from './dateHelper';
 import {
   cellSize,
@@ -39,6 +39,7 @@ const CalendarTasks = () => {
   const today = useSelector(selectToday)
   const calendar = useSelector(selectCalendar)
   const data = useSelector(selectTasks)
+  const gridLines = useSelector(selectGridLines)
   const gtc = `repeat(${dateDifference(calendar.firstDay, calendar.lastDay) + 1}, ${cellSize})`
   const theme = useTheme();
 
@@ -55,7 +56,7 @@ const CalendarTasks = () => {
   return (
     <React.Fragment>
       <ContainerTasks
-        color={theme.palette.divider}
+        color={gridLines ? theme.palette.divider : 'rgba(0,0,0,0)'}
         ref={tasksRef}
         onScroll={() => {
           dispatch(setScrollPosition(tasksRef.current.scrollLeft))
@@ -84,7 +85,7 @@ const CalendarTasks = () => {
                         } else {
                           return (
                             <TableCell
-                              color={theme.palette.divider}
+                              color={gridLines ? theme.palette.divider : 'rgba(0,0,0,0)'}
                               className={day === today ? 'today' : 'else'}
                               id={`${mainTask.id}-${customGetDate(day)}`}
                               key={index} />
@@ -114,7 +115,7 @@ const CalendarTasks = () => {
                                 } else {
                                   return (
                                     <TableCell
-                                      color={theme.palette.divider}
+                                      color={gridLines ? theme.palette.divider : 'rgba(0,0,0,0)'}
                                       className={day === today ? 'today' : 'else'}
                                       id={`${task.id}-${customGetDate(day)}`}
                                       key={index} />

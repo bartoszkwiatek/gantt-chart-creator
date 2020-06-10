@@ -7,9 +7,7 @@ const Table = styled.div`
     display: grid;
     row-gap: 1.5rem;
     
-    .today {
-        background-color: #ff1744;
-    }
+
 `;
 
 const TableSection = styled.div`
@@ -45,12 +43,16 @@ const TableHeaderCell = styled.div`
 
     border: 1px solid ${props => props.color};
     // box-shadow:0 0 0 ${gapSize} rgba(255,255,255,0);
+    &.today {
+      background-color: #ff1744;
+  }
 `;
 
 const TableCell = styled(TableHeaderCell)`
     &:hover {
         background-color: #1a8a98;
     }
+  
 `;
 
 export {

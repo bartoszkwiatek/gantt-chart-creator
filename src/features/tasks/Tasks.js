@@ -5,16 +5,8 @@ import {
   selectTasks,
   selectToday,
   selectCalendar,
-  setToday,
-  setCalendarFirstDay,
-  setCalendarLastDay,
-  setCookieConsent
 } from './tasksSlice';
-import { addDays, customGetDate } from './dateHelper';
 import { Calendar } from './Calendar';
-import { Button, Typography } from '@material-ui/core';
-import { ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails } from '@material-ui/core';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 
 

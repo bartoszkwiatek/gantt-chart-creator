@@ -2,6 +2,8 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { DialogActions, DialogContent, DialogContentText, DialogTitle, IconButton, FormGroup, FormLabel, FormControl, FormControlLabel, FormHelperText, Switch, Checkbox } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
+import { useSelector, useDispatch } from 'react-redux';
+import { selectDarkMode, setDarkMode, setGridLines, selectGridLines } from './tasksSlice';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -14,10 +16,11 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SwitchLabels() {
   const classes = useStyles()
+  const dispatch = useDispatch()
+  const darkMode = useSelector(selectDarkMode)
+  const gridLines = useSelector(selectGridLines)
 
   const [state, setState] = React.useState({
-    darkMode: true,
-    gridLines: true,
     year: false,
     month: true,
     shortDay: true,
@@ -28,20 +31,32 @@ export default function SwitchLabels() {
     setState({ ...state, [event.target.name]: event.target.checked });
   };
 
-  const { darkMode, gridLines, year, month, shortDay, day } = state;
+  const handleChangeRedux = (event) => {
+    switch (event.target.name) {
+      case "darkMode":
+        dispatch(setDarkMode(event.target.checked));
+        break;
+      case "gridLines":
+        dispatch(setGridLines(event.target.checked));
+        break;
 
+      default:
+        break;
+    }
+  };
 
+  const { year, month, shortDay, day } = state;
   return (
     <div className={classes.root}>
       <div className={classes.root}>
         <FormControl component="fieldset" className={classes.formControl}>
           <FormLabel component="legend">View</FormLabel>
-          <FormGroup column>
+          <FormGroup>
             <FormControlLabel
               control={
                 <Switch
                   checked={darkMode}
-                  onChange={handleChange}
+                  onChange={handleChangeRedux}
                   name="darkMode" />}
               label="Dark mode"
             />
@@ -49,7 +64,7 @@ export default function SwitchLabels() {
               control={
                 <Switch
                   checked={gridLines}
-                  onChange={handleChange}
+                  onChange={handleChangeRedux}
                   name="gridLines"
                 />
               }
@@ -62,7 +77,7 @@ export default function SwitchLabels() {
         <FormControl component="fieldset" className={classes.formControl}>
 
           <FormLabel component="legend">Calendar headers:</FormLabel>
-          <FormGroup column>
+          <FormGroup>
             <FormControlLabel
               control={
                 <Checkbox
@@ -106,20 +121,13 @@ export default function SwitchLabels() {
 
 const OptionsDialog = (props) => {
 
-
   return (
-
     < React.Fragment >
       <DialogTitle style={{ cursor: 'move' }} id={`draggable-dialog-${props.title}`}>
         Options
         </DialogTitle>
       <DialogContent>
-        <SwitchLabels>
-
-        </SwitchLabels>
-
-
-
+        <SwitchLabels />
       </DialogContent>
       <DialogActions>
         {/* <Button autoFocus onClick={props.handleClose} color="primary">
