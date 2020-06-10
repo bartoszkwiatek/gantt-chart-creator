@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import './App.css';
 import { Tasks } from './features/tasks/Tasks';
-import { ThemeProvider, useMediaQuery, Container, CssBaseline } from '@material-ui/core';
+import { ThemeProvider, useMediaQuery, CssBaseline } from '@material-ui/core';
 import { Theme } from './Theme';
 import { setDarkMode, selectDarkMode } from './features/tasks/tasksSlice';
 import { useSelector, useDispatch } from 'react-redux';
@@ -15,16 +15,14 @@ function App() {
 
   useEffect(() => {
     dispatch(setDarkMode(prefersDarkMode))
-  }, [prefersDarkMode])
+  }, [prefersDarkMode, dispatch])
 
 
   return (
-    <Container fluid="xl">
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <Tasks />
-      </ThemeProvider>
-    </Container>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <Tasks />
+    </ThemeProvider>
   );
 }
 

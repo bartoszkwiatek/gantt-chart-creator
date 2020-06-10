@@ -1,4 +1,4 @@
-import { duration } from "@material-ui/core"
+// import { duration } from "@material-ui/core"
 
 // all function input and return is in ms, unless otherwise stated
 const today = () => {
@@ -46,10 +46,10 @@ const dateDifference = (firstDate, secondDate) => {
   return difference
 }
 
-const taskDuration = (firstDate, secondDate) => {
-  const duration = Math.floor((secondDate - firstDate) / 86400000) + 1
-  return duration
-}
+// const taskDuration = (firstDate, secondDate) => {
+//   const duration = Math.floor((secondDate - firstDate) / 86400000) + 1
+//   return duration
+// }
 
 
 

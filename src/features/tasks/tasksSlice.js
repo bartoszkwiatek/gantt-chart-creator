@@ -8,7 +8,8 @@ const tasksSlice = createSlice({
     darkMode: false,
     scrollPosition: 0,
     maxScrollPosition: 0,       // all dates are to be stored in ms so they can easily be converted and 
-    customCategories: [],
+    categories: [],
+    people: [],
     today: today(),
     calendar: {
       firstDay: 1590962400000,     // this is default setting for new chart. Later this is going to be updated to date of earliest task

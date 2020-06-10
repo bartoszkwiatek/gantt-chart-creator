@@ -1,6 +1,5 @@
-import React, { useRef, useEffect, useContext } from 'react';
+import React, { useRef, useEffect } from 'react';
 import styled from 'styled-components'
-
 import { useSelector, useDispatch } from 'react-redux';
 import { selectToday, selectCalendar, selectScrollPosition, setScrollPosition, setMaxScrollPosition } from './tasksSlice';
 import { customGetDate, dateDifference, datesBetween, countOccurrences } from './dateHelper';
@@ -11,7 +10,7 @@ import {
   TableHeaderCell
 } from './tables'
 import { ScrollButtonRight, ScrollButtonLeft } from './ScrollButton';
-import { Typography, ThemeProvider, useTheme } from '@material-ui/core';
+import { Typography, useTheme } from '@material-ui/core';
 
 const HeaderContainer = styled.div`
   position: fixed;
@@ -36,9 +35,10 @@ const CalendarHeader = () => {
   const scroll = useSelector(selectScrollPosition)
   const dispatch = useDispatch();
   const theme = useTheme();
-  console.log(theme.palette.primary.main)
+
   const monthCount = countOccurrences(calendar.firstDay, calendar.lastDay, 'month')
   const yearsCount = countOccurrences(calendar.firstDay, calendar.lastDay, 'year')
+  const showYears = (yearsCount.length === 1 ? false : true);
   const gtc = `repeat(${dateDifference(calendar.firstDay, calendar.lastDay) + 1}, ${cellSize})`
 
   useEffect(() => {
@@ -55,7 +55,7 @@ const CalendarHeader = () => {
       }}
     >
       <TableSection>
-        {(yearsCount.length === 1 ? false : true) &&        //most of the year we now what year is it, so I am showing year only if calendar spans over 2 years
+        {(showYears) &&        //most of the year we now what year is it, so I am showing year only if calendar spans over 2 years
           <TableRow
             gtc={gtc}
             className="years">

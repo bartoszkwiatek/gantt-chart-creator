@@ -5,22 +5,20 @@ import { selectToday, selectCalendar, selectTasks, selectScrollPosition, setScro
 import { customGetDate, dateDifference, datesBetween } from './dateHelper';
 import {
   cellSize,
-  TableSection,
+  TableSectionTasks,
   TableRow,
   TableCell,
 } from './tables'
-
 import { CalendarMainTask } from './CalendarMainTask';
 import { CalendarTask } from './CalendarTask';
 import { useTheme } from '@material-ui/core';
 
-
-const TableMainTask = styled.div`
-background-color: #230e85;
-`;
-const TableTask = styled.div`
-background-color: #058d1d;
-`;
+// const TableMainTask = styled.div`
+// background-color: #230e85;
+// `;
+// const TableTask = styled.div`
+// background-color: #058d1d;
+// `;
 const ContainerTasks = styled.div`
 width: 90vw;
 overflow-x: scroll;
@@ -47,7 +45,7 @@ const CalendarTasks = () => {
   useEffect(() => {
     tasksRef.current.scrollLeft = scroll;
     dispatch(setMaxScrollPosition(tasksRef.current.scrollWidth - tasksRef.current.clientWidth))
-  }, [scroll])
+  }, [scroll, dispatch])
 
 
   return (
@@ -62,7 +60,7 @@ const CalendarTasks = () => {
         {
           data.map((mainTask, index) => {
             return (
-              <TableSection key={index}>
+              <TableSectionTasks key={index}>
                 <TableRow
                   gtc={gtc}
                   className="maintask">
@@ -122,7 +120,7 @@ const CalendarTasks = () => {
                         </TableRow>
                       )
                     })}
-              </TableSection>
+              </TableSectionTasks>
             )
           })
         }

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useTheme, makeStyles } from '@material-ui/core';
+import { useTheme, makeStyles, ListItem, ListItemText } from '@material-ui/core';
 
 import clsx from 'clsx';
 import Drawer from '@material-ui/core/Drawer';
@@ -12,17 +12,15 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
+import { cellSize } from './tables';
+import { SidebarTasksList } from './SidebarTasksList'
 
-const drawerWidth = 240;
+const drawerWidth = 360;
 
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
+
   },
   appBar: {
     transition: theme.transitions.create(['margin', 'width'], {
@@ -50,18 +48,21 @@ const useStyles = makeStyles((theme) => ({
   },
   drawerPaper: {
     width: drawerWidth,
+    position: 'relative',
+
   },
   drawerHeader: {
     display: 'flex',
     alignItems: 'center',
     padding: theme.spacing(0, 1),
     // necessary for content to be below app bar
-    ...theme.mixins.toolbar,
+    ...theme.mixins.toolbar.dense,
     justifyContent: 'flex-end',
   },
   content: {
     flexGrow: 1,
     padding: theme.spacing(3),
+    paddingTop: theme.spacing(6),
     transition: theme.transitions.create('margin', {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
@@ -74,6 +75,9 @@ const useStyles = makeStyles((theme) => ({
       duration: theme.transitions.duration.enteringScreen,
     }),
     marginLeft: 0,
+  },
+  cellSize: {
+    height: cellSize,
   },
 }));
 
@@ -90,6 +94,8 @@ const CalendarSidebar = (props) => {
     setOpen(false);
   };
 
+  const calendarHeaders = [false, 'Months', 'Day names', 'Days']
+
   return (
     <div className={classes.root}>
       <AppBar
@@ -98,7 +104,7 @@ const CalendarSidebar = (props) => {
           [classes.appBarShift]: open,
         })}
       >
-        <Toolbar>
+        <Toolbar variant="dense">
           <IconButton
             color="inherit"
             aria-label="open drawer"
@@ -122,29 +128,41 @@ const CalendarSidebar = (props) => {
           paper: classes.drawerPaper,
         }}
       >
-        <div className={classes.drawerHeader}>
+        <div
+          className={classes.drawerHeader}
+        >
+          <Typography variant="h6" >
+            Task list
+          </Typography>
           <IconButton onClick={handleDrawerClose}>
             {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
           </IconButton>
         </div>
         <Divider />
-        <List>
-          {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
+        <List style={{ padding: 0 }}>
+          {calendarHeaders.map((text, index) => (
+            text && (
+              <React.Fragment>
+                <ListItem
+                  style={{
+                    borderBottom: `1px solid ${theme.palette.divider
+
+                      }`
+                  }}
+                  key={index}
+                  className={classes.cellSize}
+                >
+                  <ListItemText align="right" >
+                    {text}
+                  </ListItemText>
+                </ListItem>
+              </React.Fragment>
+
+            )
           ))}
         </List>
         <Divider />
-        <List>
-          {['All mail', 'Trash', 'Spam'].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
-        </List>
+        <SidebarTasksList></SidebarTasksList>
       </Drawer>
       <main
         className={clsx(classes.content, {

@@ -19,7 +19,8 @@ const TableSection = styled.div`
 `;
 
 const TableSectionTasks = styled(TableSection)`
-    height: 500px;
+    padding-bottom: calc(${cellSize} / 2);
+
 `;
 
 const TableRow = styled.div`

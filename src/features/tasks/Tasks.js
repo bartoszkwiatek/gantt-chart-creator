@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import styled from 'styled-components'
 import { useSelector, useDispatch } from 'react-redux';
 import {
   selectCookieConsent,
@@ -13,14 +12,15 @@ import {
 } from './tasksSlice';
 import { addDays, customGetDate } from './dateHelper';
 import { Calendar } from './Calendar';
-import { Button, Typography, Container } from '@material-ui/core';
+import { Button, Typography } from '@material-ui/core';
 import { ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails } from '@material-ui/core';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 
 
 const Tasks = () => {
-  const [testing, setTesting] = useState(true)
+  // const [testing, setTesting] = useState(true)
+  const [testing] = useState(true)
 
   const tasks = useSelector(selectTasks);
   const consent = useSelector(selectCookieConsent)
@@ -31,9 +31,7 @@ const Tasks = () => {
 
   return (
     <React.Fragment>
-      <Container fluid="xl">
-        <Calendar />
-      </Container>
+      <Calendar />
       <Button variant="contained" color="primary" onClick={() => dispatch(setCookieConsent())}>
         Accept cookies
             </Button>

@@ -36,7 +36,6 @@ const CalendarTask = (props) => {
     setOpen(open === false ? true : false);
   };
 
-  console.log(convertHex(props.data.color))
   return (
     < TableTask
       className="task"
