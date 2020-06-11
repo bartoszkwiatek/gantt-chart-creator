@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { DialogActions, DialogContent, DialogContentText, DialogTitle, IconButton, FormGroup, FormLabel, FormControl, FormControlLabel, FormHelperText, Switch, Checkbox } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
 import { useSelector, useDispatch } from 'react-redux';
-import { selectDarkMode, setDarkMode, setGridLines, selectGridLines } from './tasksSlice';
+import { selectDarkMode, setDarkMode, setGridLines, selectGridLines, selectCalendar, setCalendar } from './tasksSlice';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -19,17 +19,19 @@ export default function SwitchLabels() {
   const dispatch = useDispatch()
   const darkMode = useSelector(selectDarkMode)
   const gridLines = useSelector(selectGridLines)
+  const headers = useSelector(selectCalendar).headers
 
-  const [state, setState] = React.useState({
-    year: false,
-    month: true,
-    shortDay: true,
-    day: true,
-  });
+  // const [state, setState] = React.useState({
+  //   year: false,
+  //   month: true,
+  //   shortDay: true,
+  // });
 
-  const handleChange = (event) => {
-    setState({ ...state, [event.target.name]: event.target.checked });
-  };
+
+
+  // const handleChange = (event) => {
+  //   setState({ ...state, [event.target.name]: event.target.checked });
+  // };
 
   const handleChangeRedux = (event) => {
     switch (event.target.name) {
@@ -39,13 +41,21 @@ export default function SwitchLabels() {
       case "gridLines":
         dispatch(setGridLines(event.target.checked));
         break;
-
+      case "year":
+        dispatch(setCalendar({ 'headers': { ...headers, ...{ "year": event.target.checked } } }))
+        break;
+      case "month":
+        dispatch(setCalendar({ 'headers': { ...headers, ...{ "month": event.target.checked } } }))
+        break;
+      case "shortDay":
+        dispatch(setCalendar({ 'headers': { ...headers, ...{ "shortDay": event.target.checked } } }))
+        break;
       default:
         break;
     }
   };
 
-  const { year, month, shortDay, day } = state;
+  // const { year, month, shortDay } = state;
   return (
     <div className={classes.root}>
       <div className={classes.root}>
@@ -81,34 +91,26 @@ export default function SwitchLabels() {
             <FormControlLabel
               control={
                 <Checkbox
-                  checked={year}
-                  onChange={handleChange}
+                  checked={headers.year}
+                  onChange={handleChangeRedux}
                   name="year" />}
               label="Years"
             />
             <FormControlLabel
               control={
                 <Checkbox
-                  checked={month}
-                  onChange={handleChange}
+                  checked={headers.month}
+                  onChange={handleChangeRedux}
                   name="month" />}
               label="Months"
             />
             <FormControlLabel
               control={
                 <Checkbox
-                  checked={shortDay}
-                  onChange={handleChange}
+                  checked={headers.shortDay}
+                  onChange={handleChangeRedux}
                   name="shortDay" />}
               label="Day names"
-            />
-            <FormControlLabel
-              control={
-                <Checkbox
-                  checked={day}
-                  onChange={handleChange}
-                  name="day" />}
-              label="Days"
             />
           </FormGroup>
           <FormHelperText>Be careful</FormHelperText>

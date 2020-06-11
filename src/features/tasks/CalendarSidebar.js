@@ -14,6 +14,8 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import { cellSize } from './tables';
 import { SidebarTasksList } from './SidebarTasksList'
+import { useSelector } from 'react-redux';
+import { selectCalendar } from './tasksSlice';
 
 const drawerWidth = 360;
 
@@ -90,6 +92,7 @@ const CalendarSidebar = (props) => {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = useState(false);
+  const headers = Object.values(useSelector(selectCalendar).headers)
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -99,7 +102,7 @@ const CalendarSidebar = (props) => {
     setOpen(false);
   };
 
-  const calendarHeaders = [false, 'Months', 'Day names', 'Days']
+  const calendarHeaders = ['Years', 'Months', 'Day names', 'Days']
 
   return (
     <div className={classes.root}>
@@ -146,8 +149,8 @@ const CalendarSidebar = (props) => {
         <Divider />
         <List style={{ padding: 0 }}>
           {calendarHeaders.map((text, index) => (
-            text && (
-              <ListItem
+            headers[index] && (
+              < ListItem
                 style={{
                   borderBottom: `1px solid ${theme.palette.divider}`
                 }}
@@ -157,7 +160,7 @@ const CalendarSidebar = (props) => {
                 <ListItemText align="right" >
                   {text}
                 </ListItemText>
-              </ListItem>
+              </ ListItem>
 
             )
           ))}
@@ -172,7 +175,7 @@ const CalendarSidebar = (props) => {
       >
         {props.children}
       </main>
-    </div>
+    </div >
   );
 }
 

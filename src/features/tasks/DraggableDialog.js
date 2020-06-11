@@ -11,7 +11,6 @@ function PaperComponent(props) {
 }
 
 const DraggableDialog = (props) => {
-  console.log(props.open)
   return (
     <Dialog
       open={props.open}

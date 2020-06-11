@@ -8,13 +8,13 @@ import { OptionsDialog } from './OptionsDialog';
 const useStyles = makeStyles((theme) => ({
   margin2: {
     position: 'fixed',
-    bottom: theme.spacing(10),
-    right: theme.spacing(10),
+    bottom: theme.spacing(7),
+    right: theme.spacing(7),
   },
   margin1: {
     position: 'fixed',
-    bottom: theme.spacing(10),
-    right: theme.spacing(20),
+    bottom: theme.spacing(7),
+    right: theme.spacing(17),
   },
 
 }));
