@@ -49,7 +49,14 @@ const SidebarTasksNestedList = (props) => {
           {props.data.tasks.map((task, index) => {
             return (
 
-              <ListItem key={index} button className={classes.nested}>
+              <ListItem
+                onClick={() => {
+                  document.getElementById(`task-${task.id}`).scrollIntoView({ behavior: 'smooth', alignTo: false });
+                  console.log(`task-${task.id}`)
+                }}
+                key={index}
+                button
+                className={classes.nested}>
                 <ListItemText primary={task.title} />
                 <ListItemSecondaryAction>
                   <ListItemText secondary={task.completion} />

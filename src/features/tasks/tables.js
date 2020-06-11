@@ -18,7 +18,6 @@ const TableSection = styled.div`
 
 const TableSectionTasks = styled(TableSection)`
     padding-bottom: calc(${cellSize} / 2);
-
 `;
 
 const TableRow = styled.div`
@@ -41,10 +40,11 @@ const TableHeaderCell = styled.div`
     &[id~="${props => props.id}"][class~="today"]::after {
       content:'';
       position: absolute;
-      top: -12rem;
+      top: calc( -1 * calc(${cellSize} * ${props => props.headersCount}));
+      // top: 0;
       left: 0;
-      width: 3rem;
-      height: 300vh;
+      width: ${cellSize};
+      height: calc(88vh + ${cellSize});
       background-color: rgba(100%, 9%, 26.7%, 0.5);
   }
 `;

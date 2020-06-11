@@ -17,7 +17,7 @@ const HeaderContainer = styled.div`
   z-index: 10;
   // width: 90vw;
   width: max-content;
-    background-color: #3f51b5;
+  background-color: #3f51b5;
   border: 1px solid ${props => props.color};
   scroll-behavior: smooth;
   -ms-overflow-style: none;  /* Internet Explorer 10+ */
@@ -40,6 +40,8 @@ const CalendarHeader = () => {
   const monthCount = countOccurrences(calendar.firstDay, calendar.lastDay, 'month')
   const yearsCount = countOccurrences(calendar.firstDay, calendar.lastDay, 'year')
   const gtc = `repeat(${dateDifference(calendar.firstDay, calendar.lastDay) + 1}, ${cellSize})`
+  const headersCount = Object.values(headers).filter(val => val).length
+
 
   useEffect(() => {
     const showYears = (yearsCount.length === 1 ? false : true);
@@ -145,6 +147,7 @@ const CalendarHeader = () => {
                 color={gridLines ? theme.palette.divider : 'rgba(0,0,0,0)'}
                 className={day === today ? 'today' : 'else'}
                 id={customGetDate(day)}
+                headersCount={headersCount}
                 key={index}
                 style={{
                   color: '#fff'

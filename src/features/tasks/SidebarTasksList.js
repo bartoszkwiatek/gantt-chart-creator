@@ -14,7 +14,9 @@ const SidebarTasksList = () => {
       {data.map((mainTask, index) => {
 
         return (
-          < SidebarTasksNestedList key={index} data={mainTask} />
+          < SidebarTasksNestedList
+            key={index}
+            data={mainTask} />
         )
       })}
     </List>

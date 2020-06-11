@@ -68,7 +68,7 @@ const useStyles = makeStyles((theme) => ({
     height: "100vh",
     overflowX: "scroll",
     overflowY: "hidden",
-    padding: theme.spacing(3),
+    // paddingBottom: theme.spacing(3),
     paddingTop: theme.spacing(6),
     transition: theme.transitions.create('margin', {
       easing: theme.transitions.easing.sharp,
@@ -166,7 +166,7 @@ const CalendarSidebar = (props) => {
           ))}
         </List>
         <Divider />
-        <SidebarTasksList></SidebarTasksList>
+        <SidebarTasksList />
       </Drawer>
       <main
         className={clsx(classes.content, {

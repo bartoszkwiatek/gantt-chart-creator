@@ -23,7 +23,7 @@ const ContainerTasks = styled.div`
 // width: 90vw;
 // overflow-x: scroll;
 // padding-top: 9rem;
-height: calc(100vh - ${cellSize} * 5);
+height: calc(100vh - ${cellSize} * 1.5 - ${cellSize} * ${props => props.headerCount});
 overflow: auto;
 width: max-content;
 
@@ -42,7 +42,8 @@ const CalendarTasks = () => {
   const gridLines = useSelector(selectGridLines)
   const gtc = `repeat(${dateDifference(calendar.firstDay, calendar.lastDay) + 1}, ${cellSize})`
   const theme = useTheme();
-
+  const headerCount = Object.values(calendar.headers).filter(val => val).length
+  console.log(headerCount)
   const tasksRef = useRef(null)
   const scroll = useSelector(selectScrollPosition)
   const dispatch = useDispatch();
@@ -58,6 +59,7 @@ const CalendarTasks = () => {
       <ContainerTasks
         color={gridLines ? theme.palette.divider : 'rgba(0,0,0,0)'}
         ref={tasksRef}
+        headerCount={headerCount}
         onScroll={() => {
           dispatch(setScrollPosition(tasksRef.current.scrollLeft))
         }} >
