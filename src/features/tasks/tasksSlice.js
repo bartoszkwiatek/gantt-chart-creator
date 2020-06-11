@@ -292,12 +292,10 @@ const tasksSlice = createSlice({
       state.calendar.today = action.payload
     },
 
-    setCalendarFirstDay: (state, action) => {
-      state.calendar.firstDay = action.payload
-    },
+    setCalendar: (state, action) => {
+      state.calendar = { ...state.calendar, ...action.payload };
 
-    setCalendarLastDay: (state, action) => {
-      state.calendar.lastDay = action.payload
+      // state.calendar.firstDay = action.payload
     },
 
     addCategory: (state, action) => {
@@ -312,7 +310,7 @@ const tasksSlice = createSlice({
   },
 });
 
-const { setCookieConsent, setDarkMode, setGridLines, setScrollPosition, setMaxScrollPosition, addCategory, addTask, setToday, setCalendarFirstDay, setCalendarLastDay } = tasksSlice.actions;
+const { setCookieConsent, setDarkMode, setGridLines, setScrollPosition, setMaxScrollPosition, addCategory, addTask, setToday, setCalendar } = tasksSlice.actions;
 
 // // The function below is called a thunk and allows us to perform async logic. It
 // // can be dispatched like a regular action: `dispatch(incrementAsync(10))`. This
@@ -346,8 +344,7 @@ export {
   addCategory,
   addTask,
   setToday,
-  setCalendarFirstDay,
-  setCalendarLastDay,
+  setCalendar,
   selectCookieConsent,
   selectDarkMode,
   selectGridLines,

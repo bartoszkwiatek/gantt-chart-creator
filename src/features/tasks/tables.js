@@ -33,25 +33,34 @@ const TableHeaderCell = styled.div`
     justify-content: center;
     align-items: center;
     box-sizing: border-box;
-    // box-shadow: 
-    // 1px 0 0 0 ${props => props.color}, 
-    // 0 1px 0 0 ${props => props.color}, 
-    // 1px 1px 0 0 ${props => props.color},   
-    // 1px 0 0 0 ${props => props.color} inset, 
-    // 0 1px 0 0 ${props => props.color}
-    // inset;
 
     border: 1px solid ${props => props.color};
-    // box-shadow:0 0 0 ${gapSize} rgba(255,255,255,0);
-    &.today {
-      background-color: #ff1744;
+    &[class~="today"] {
+      position: relative;
+  }
+    &[id~="${props => props.id}"][class~="today"]::after {
+      content:'';
+      position: absolute;
+      top: -12rem;
+      left: 0;
+      width: 3rem;
+      height: 300vh;
+      background-color: rgba(100%, 9%, 26.7%, 0.5);
   }
 `;
 
-const TableCell = styled(TableHeaderCell)`
+const TableCell = styled.div`
     &:hover {
         background-color: #1a8a98;
     }
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+
+    border: 1px solid ${props => props.color};
+
   
 `;
 

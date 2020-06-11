@@ -32,7 +32,8 @@ const CalendarHeader = () => {
   const today = useSelector(selectToday)
   const calendar = useSelector(selectCalendar)
   const scroll = useSelector(selectScrollPosition)
-  const gridLines = useSelector(selectGridLines)
+  // const gridLines = useSelector(selectGridLines)
+  const gridLines = true
   const dispatch = useDispatch();
   const theme = useTheme();
 
@@ -136,6 +137,7 @@ const CalendarHeader = () => {
               <TableHeaderCell
                 color={gridLines ? theme.palette.divider : 'rgba(0,0,0,0)'}
                 className={day === today ? 'today' : 'else'}
+                id={customGetDate(day)}
                 key={index}
                 style={{
                   color: '#fff'
