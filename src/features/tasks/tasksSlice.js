@@ -32,9 +32,12 @@ const tasksSlice = createSlice({
       {
         id: '1',
         title: 'Task manager',
+        description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium aliquid',
         startDate: 1591221600000,
         endDate: 1592604000000,
         duration: 17,
+        parents: null,
+        children: ['102', '105'],
         categories: ['default'],
         responsible: ['Person'],
         color: '#0d47a1',

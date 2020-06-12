@@ -4,6 +4,7 @@ import AddIcon from '@material-ui/icons/Add';
 import SettingsIcon from '@material-ui/icons/Settings';
 import { DraggableDialog } from './DraggableDialog';
 import { OptionsDialog } from './OptionsDialog';
+import { AddTaskDialog } from './AddTaskDialog';
 
 const useStyles = makeStyles((theme) => ({
   margin2: {
@@ -70,6 +71,8 @@ const FABs = () => {
         className={classes.margin2}
         color="primary"
         aria-label="add"
+        onClick={() => handleClickOpen(add)}
+
       >
         <AddIcon />
       </Fab>
@@ -81,6 +84,16 @@ const FABs = () => {
         <OptionsDialog
           title={options}
           handleClose={() => handleClose(options)}
+        />
+      </DraggableDialog>
+      <DraggableDialog
+        open={openAdd}
+        title={add}
+        handleClose={() => handleClose(add)}
+      >
+        <AddTaskDialog
+          title={add}
+          handleClose={() => handleClose(add)}
         />
       </DraggableDialog>
     </Box>

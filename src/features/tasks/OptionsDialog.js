@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SwitchLabels() {
+function SwitchLabels() {
   const classes = useStyles()
   const dispatch = useDispatch()
   const darkMode = useSelector(selectDarkMode)
@@ -113,7 +113,6 @@ export default function SwitchLabels() {
               label="Day names"
             />
           </FormGroup>
-          <FormHelperText>Be careful</FormHelperText>
         </FormControl>
       </div>
     </div>);
