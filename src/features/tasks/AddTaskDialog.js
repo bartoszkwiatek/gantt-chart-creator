@@ -11,6 +11,8 @@ import { MainAndParentOptions } from './MainAndParentOptions'
 import { ColorPicker } from './ColorPicker';
 import { DatePicker } from './DatePicker';
 import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import { selectCustom } from './tasksSlice';
 
 
 
@@ -34,6 +36,9 @@ const useStyles = makeStyles((theme) => ({
 
 const AddTaskForm = (props) => {
   const classes = useStyles();
+  const categories = useSelector(selectCustom).categories.map((category) => { return { 'category': category } })
+  const people = useSelector(selectCustom).people.map((person) => { return { 'responsible': person } })
+
   const [data, setData] = useState(
     {
       id: '',
@@ -51,26 +56,9 @@ const AddTaskForm = (props) => {
       tasks: [],
     })
 
-  /* get from store */
-  const categories = [
-    { category: 'The Shawshank Redemption' },
-    { category: 'The Godfather' },
-    { category: 'The Godfather: Part II' },
-  ]
-
-  /* get from store */
-  const people = [
-    { responsible: 'asdf' },
-    { responsible: 'zxcv' },
-    { responsible: 'qwer' },
-  ]
-
-
   const handleChangeData = (value) => {
     setData({ ...data, ...value });
   };
-
-
 
   console.log(data)
   return (

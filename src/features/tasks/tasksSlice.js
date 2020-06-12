@@ -12,8 +12,8 @@ const tasksSlice = createSlice({
     scrollPosition: 0,
     maxScrollPosition: 0,
     custom: {
-      categories: [],
-      people: [],
+      categories: ['default', 'frontend', 'backend', 'UX', 'UI', 'setup'],
+      people: ['me', 'Person', 'Hatsune Miku', 'Elon Musk'],
     },       // all dates are to be stored in ms so they can easily be converted and 
     calendar: {
       today: today(),
@@ -287,6 +287,10 @@ const tasksSlice = createSlice({
 
     },
 
+    setCustom: (state, action) => {
+      state.custom = { ...state.custom, ...action.payload };
+    },
+
     setMaxScrollPosition: (state, action) => {
       state.maxScrollPosition = action.payload
     },
@@ -297,9 +301,8 @@ const tasksSlice = createSlice({
 
     setCalendar: (state, action) => {
       state.calendar = { ...state.calendar, ...action.payload };
-
-      // state.calendar.firstDay = action.payload
     },
+
 
     addCategory: (state, action) => {
       state.custom.categories.push(action.payload);
@@ -313,7 +316,7 @@ const tasksSlice = createSlice({
   },
 });
 
-const { setCookieConsent, setDarkMode, setGridLines, setScrollPosition, setMaxScrollPosition, addCategory, addTask, setToday, setCalendar } = tasksSlice.actions;
+const { setCookieConsent, setDarkMode, setGridLines, setCustom, setScrollPosition, setMaxScrollPosition, addCategory, addTask, setToday, setCalendar } = tasksSlice.actions;
 
 // // The function below is called a thunk and allows us to perform async logic. It
 // // can be dispatched like a regular action: `dispatch(incrementAsync(10))`. This
@@ -331,6 +334,7 @@ const { setCookieConsent, setDarkMode, setGridLines, setScrollPosition, setMaxSc
 const selectCookieConsent = state => state.tasks.view.cookieConsent;
 const selectDarkMode = state => state.tasks.view.darkMode;
 const selectGridLines = state => state.tasks.view.gridLines;
+const selectCustom = state => state.tasks.custom;
 const selectScrollPosition = state => state.tasks.scrollPosition;
 const selectMaxScrollPosition = state => state.tasks.maxScrollPosition;
 const selectCustomCategories = state => state.tasks.custom.categories;
@@ -342,6 +346,7 @@ export {
   setCookieConsent,
   setDarkMode,
   setGridLines,
+  setCustom,
   setScrollPosition,
   setMaxScrollPosition,
   addCategory,
@@ -351,6 +356,7 @@ export {
   selectCookieConsent,
   selectDarkMode,
   selectGridLines,
+  selectCustom,
   selectScrollPosition,
   selectMaxScrollPosition,
   selectCustomCategories,

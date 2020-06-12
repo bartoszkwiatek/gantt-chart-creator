@@ -1,6 +1,8 @@
 import { Checkbox, FormControl, FormControlLabel, FormGroup, ListSubheader, MenuItem, Select, makeStyles } from '@material-ui/core';
 import React from 'react';
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
+import { selectTasks } from './tasksSlice';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -14,6 +16,18 @@ const useStyles = makeStyles((theme) => ({
 
 const MainAndParentOptions = (props) => {
   const classes = useStyles()
+  const data = useSelector(selectTasks)
+  console.log(data)
+
+  const list = [];
+
+  data.forEach((mainTask) => {
+    list.push({ value: mainTask.id, title: mainTask.title, nested: false })
+    mainTask.tasks.forEach((task) => {
+      list.push({ value: task.id, title: task.title, nested: true })
+    })
+  })
+
 
   return (
     <FormGroup
@@ -47,17 +61,17 @@ const MainAndParentOptions = (props) => {
           id="grouped-select">
           <MenuItem value="" disabled>
             Parent task
-          </MenuItem>
-
-          {/* get from store */}
-
-          <MenuItem value={'asasdgasdggdasdgas'}>Category 1</MenuItem>
-          <MenuItem className={classes.nested} value={1}>Option 1sdgfasdgasdgasg</MenuItem>
-          <MenuItem className={classes.nested} value={2}>Option 2</MenuItem>
-          <MenuItem value={'asdgas'}>Category 2</MenuItem>
-          <MenuItem className={classes.nested} value={3}>Option 3</MenuItem>
-          <MenuItem className={classes.nested} value={4}>Option 4</MenuItem>
-          {/* ///// */}
+              </MenuItem>
+          {
+            list.map((task, index) => {
+              return (
+                <MenuItem
+                  key={index}
+                  className={task.nested ? classes.nested : ''}
+                  value={task.value}>{task.title}</MenuItem>
+              )
+            })
+          }
 
         </Select>
       </FormControl>
