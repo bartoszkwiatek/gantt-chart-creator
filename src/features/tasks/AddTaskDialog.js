@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { TextField, DialogActions, DialogContent, DialogContentText, DialogTitle, IconButton, FormGroup, FormLabel, FormControl, FormControlLabel, FormHelperText, Switch, Checkbox, makeStyles, Button, Select, MenuItem, InputLabel, ListSubheader, ListItemText, ListItemIcon } from '@material-ui/core';
+import { TextField, DialogActions, DialogContent, DialogContentText, DialogTitle, IconButton, FormGroup, FormLabel, FormControl, FormControlLabel, FormHelperText, Switch, Checkbox, makeStyles, Button, Select, MenuItem, InputLabel, ListSubheader, ListItemText, ListItemIcon, Input } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
 import SaveAltIcon from '@material-ui/icons/SaveAlt';
 import StopIcon from '@material-ui/icons/Stop';
@@ -9,6 +9,8 @@ import { today, addDays } from './dateHelper';
 import { SelectWithAdd } from './SelectWithAdd';
 import { MainAndParentOptions } from './MainAndParentOptions'
 import { ColorPicker } from './ColorPicker';
+import { DatePicker } from './DatePicker';
+import { useEffect } from 'react';
 
 
 
@@ -17,9 +19,16 @@ import { ColorPicker } from './ColorPicker';
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
+    flexDirection: 'column',
+  },
+  form: {
+    display: 'grid',
+    gridTemplateColumns: '2fr 1fr',
+    columnGap: theme.spacing(3)
+
   },
   formControl: {
-    margin: theme.spacing(3),
+    marginBottom: theme.spacing(1),
   },
 }));
 
@@ -32,16 +41,15 @@ const AddTaskForm = (props) => {
       description: '',
       mainTask: false,
       startDate: today(),
-      endDate: addDays(today(), 1),
-      duration: 2,
+      endDate: 0,
+      duration: 1,
       parent: '',
       children: [],
       category: '',
-      responsible: [],
+      responsible: '',
       color: '',
       tasks: [],
     })
-
 
   /* get from store */
   const categories = [
@@ -64,13 +72,12 @@ const AddTaskForm = (props) => {
 
 
 
-
   console.log(data)
   return (
 
-    <form className={classes.root} noValidate autoComplete="off">
+    <form className={classes.form} noValidate autoComplete="off">
       <div className={classes.root}>
-        <div>
+        <FormControl className={classes.formControl}>
           <TextField
             id="standard-name"
             name="title"
@@ -79,6 +86,8 @@ const AddTaskForm = (props) => {
             onChange={e => {
               handleChangeData({ [e.target.name]: e.target.value })
             }} />
+        </FormControl>
+        <FormControl className={classes.formControl}>
           <SelectWithAdd
             id="select-category"
             name="category"
@@ -87,6 +96,9 @@ const AddTaskForm = (props) => {
             value={data.category}
             onChange={handleChangeData}
           />
+        </FormControl>
+        <FormControl className={classes.formControl}>
+
           <TextField
             id="standard-name-multiline"
             label="Description"
@@ -97,6 +109,8 @@ const AddTaskForm = (props) => {
             multiline
             rows={4}
           />
+        </FormControl>
+        <FormControl className={classes.formControl}>
           <SelectWithAdd
             id="select-person"
             name="responsible"
@@ -105,50 +119,52 @@ const AddTaskForm = (props) => {
             value={data.responsible}
             onChange={handleChangeData}
           />
-        </div>
+        </FormControl>
+      </div>
 
-        <div >
+      <div className={classes.root}>
+        <FormControl className={classes.formControl}>
           <MainAndParentOptions
             onChange={handleChangeData}
             data={data}
           />
+        </FormControl>
+        <FormControl className={classes.formControl}>
+
           <ColorPicker
             onChange={e => {
               handleChangeData({ [e.target.name]: e.target.value })
             }}
             data={data}
           />
-          <FormControl component="fieldset" className={classes.formControl}>
-
-            <FormLabel component="legend">Calendar headers:</FormLabel>
-            <FormGroup>
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    // checked={headers.year}
-                    // onChange={handleChangeRedux}
-                    name="year" />}
-                label="Years"
-              />
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    // checked={headers.month}
-                    // onChange={handleChangeRedux}
-                    name="month" />}
-                label="Months"
-              />
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    // checked={headers.shortDay}
-                    // onChange={handleChangeRedux}
-                    name="shortDay" />}
-                label="Day names"
-              />
-            </FormGroup>
-          </FormControl>
-        </div>
+        </FormControl>
+        <FormControl className={classes.formControl}>
+          <DatePicker
+            onChange={e => {
+              handleChangeData({ "startDate": addDays(e) })
+            }}
+            data={data}
+          />
+        </FormControl>
+        <FormControl className={classes.formControl}>
+          <TextField
+            id="standard-number"
+            label="Task duration"
+            name="duration"
+            value={data.duration}
+            onChange={e => {
+              handleChangeData({ [e.target.name]: e.target.value })
+            }}
+            type="number"
+            inputProps={{
+              "min": 1,
+              "step": 1,
+            }}
+            InputLabelProps={{
+              shrink: true,
+            }}
+          />
+        </FormControl>
       </div>
 
     </form >

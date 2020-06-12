@@ -1,20 +1,23 @@
-import { Checkbox, FormControl, FormControlLabel, FormGroup, ListSubheader, MenuItem, Select } from '@material-ui/core';
+import { Checkbox, FormControl, FormControlLabel, FormGroup, ListSubheader, MenuItem, Select, makeStyles } from '@material-ui/core';
 import React from 'react';
 import { useState } from 'react';
 
+const useStyles = makeStyles((theme) => ({
+  root: {
+    // width: '100%',
+    // maxWidth: 360,
+  },
+  nested: {
+    paddingLeft: theme.spacing(4),
+  },
+}));
 
 const MainAndParentOptions = (props) => {
-  const [hasParent, setHasParent] = useState(false);
-
-  const handleParent = (event) => {
-    setHasParent(event.target.checked);
-    if (event.target.checked === false) {
-      props.onChange({ 'parent': '' })
-    }
-  };
+  const classes = useStyles()
 
   return (
-    <FormGroup>
+    <FormGroup
+    >
       <FormControlLabel
         control={
           <Checkbox
@@ -31,39 +34,29 @@ const MainAndParentOptions = (props) => {
         label="Main task"
       />
       <FormControl>
-        <FormControlLabel
-          control={
-            <Checkbox
-              name="parent"
-              disabled={props.data.mainTask}
-              checked={props.data.mainTask ? false : hasParent}
-              onChange={handleParent}
-            />
-          }
-          label="Has parent"
-        />
         <Select
           value={props.data.parent}
           name="parent"
           onChange={e => {
             props.onChange({ [e.target.name]: e.target.value })
           }}
-          disabled={props.data.mainTask || !hasParent}
+          disabled={props.data.mainTask}
           autoWidth
           displayEmpty
 
           id="grouped-select">
           <MenuItem value="" disabled>
-            <em>Parent task</em>
+            Parent task
           </MenuItem>
 
           {/* get from store */}
-          <ListSubheader>Category 1</ListSubheader>
-          <MenuItem value={1}>Option 1sdgfasdgasdgasg</MenuItem>
-          <MenuItem value={2}>Option 2</MenuItem>
-          <ListSubheader>Category 2</ListSubheader>
-          <MenuItem value={3}>Option 3</MenuItem>
-          <MenuItem value={4}>Option 4</MenuItem>
+
+          <MenuItem value={'asasdgasdggdasdgas'}>Category 1</MenuItem>
+          <MenuItem className={classes.nested} value={1}>Option 1sdgfasdgasdgasg</MenuItem>
+          <MenuItem className={classes.nested} value={2}>Option 2</MenuItem>
+          <MenuItem value={'asdgas'}>Category 2</MenuItem>
+          <MenuItem className={classes.nested} value={3}>Option 3</MenuItem>
+          <MenuItem className={classes.nested} value={4}>Option 4</MenuItem>
           {/* ///// */}
 
         </Select>

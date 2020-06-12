@@ -1,4 +1,3 @@
-// import { duration } from "@material-ui/core"
 
 // all function input and return is in ms, unless otherwise stated
 const today = () => {
