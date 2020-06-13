@@ -21,7 +21,6 @@ const CalendarMainTask = (props) => {
           display: 'flex',
           alignItems: 'center',
           height: cellSize,
-          // position: 'relative',
           bottom: cellSize,
           paddingLeft: '1rem',
           paddingRight: '1rem'

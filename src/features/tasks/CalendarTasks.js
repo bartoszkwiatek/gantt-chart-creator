@@ -13,12 +13,6 @@ import { CalendarMainTask } from './CalendarMainTask';
 import { CalendarTask } from './CalendarTask';
 import { useTheme } from '@material-ui/core';
 
-// const TableMainTask = styled.div`
-// background-color: #230e85;
-// `;
-// const TableTask = styled.div`
-// background-color: #058d1d;
-// `;
 const ContainerTasks = styled.div`
 // width: 90vw;
 // overflow-x: scroll;
@@ -43,7 +37,6 @@ const CalendarTasks = () => {
   const gtc = `repeat(${dateDifference(calendar.firstDay, calendar.lastDay) + 1}, ${cellSize})`
   const theme = useTheme();
   const headerCount = Object.values(calendar.headers).filter(val => val).length
-  console.log(headerCount)
   const tasksRef = useRef(null)
   const scroll = useSelector(selectScrollPosition)
   const dispatch = useDispatch();

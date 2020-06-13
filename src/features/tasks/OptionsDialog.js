@@ -1,9 +1,9 @@
-import React from 'react';
+import { Checkbox, DialogActions, DialogContent, DialogTitle, FormControl, FormControlLabel, FormGroup, FormLabel, IconButton, Switch } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import { DialogActions, DialogContent, DialogContentText, DialogTitle, IconButton, FormGroup, FormLabel, FormControl, FormControlLabel, FormHelperText, Switch, Checkbox } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
-import { useSelector, useDispatch } from 'react-redux';
-import { selectDarkMode, setDarkMode, setGridLines, selectGridLines, selectCalendar, setCalendar } from './tasksSlice';
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectCalendar, selectDarkMode, selectGridLines, setCalendar, setDarkMode, setGridLines } from './tasksSlice';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -20,18 +20,6 @@ function SwitchLabels() {
   const darkMode = useSelector(selectDarkMode)
   const gridLines = useSelector(selectGridLines)
   const headers = useSelector(selectCalendar).headers
-
-  // const [state, setState] = React.useState({
-  //   year: false,
-  //   month: true,
-  //   shortDay: true,
-  // });
-
-
-
-  // const handleChange = (event) => {
-  //   setState({ ...state, [event.target.name]: event.target.checked });
-  // };
 
   const handleChangeRedux = (event) => {
     switch (event.target.name) {
@@ -55,7 +43,6 @@ function SwitchLabels() {
     }
   };
 
-  // const { year, month, shortDay } = state;
   return (
     <div className={classes.root}>
       <div className={classes.root}>
@@ -119,9 +106,7 @@ function SwitchLabels() {
 
 }
 
-
 const OptionsDialog = (props) => {
-
   return (
     < React.Fragment >
       <DialogTitle style={{ cursor: 'move' }} id={`draggable-dialog-${props.title}`}>
@@ -131,9 +116,6 @@ const OptionsDialog = (props) => {
         <SwitchLabels />
       </DialogContent>
       <DialogActions>
-        {/* <Button autoFocus onClick={props.handleClose} color="primary">
-          Cancel
-          </Button> */}
         <IconButton
           onClick={props.handleClose}
           aria-label="close"
@@ -146,7 +128,7 @@ const OptionsDialog = (props) => {
 
 }
 
-export { OptionsDialog }
+export { OptionsDialog };
 
 
 

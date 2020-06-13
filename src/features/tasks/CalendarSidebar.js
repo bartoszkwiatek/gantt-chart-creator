@@ -1,20 +1,12 @@
 import React, { useState } from 'react';
-import { useTheme, makeStyles, ListItem, ListItemText } from '@material-ui/core';
-
+import { useSelector } from 'react-redux';
 import clsx from 'clsx';
-import Drawer from '@material-ui/core/Drawer';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import List from '@material-ui/core/List';
-import Typography from '@material-ui/core/Typography';
-import Divider from '@material-ui/core/Divider';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
+import { ListItem, ListItemText, makeStyles, useTheme, AppBar, Divider, Drawer, IconButton, List, Toolbar, Typography } from '@material-ui/core';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import MenuIcon from '@material-ui/icons/Menu';
+import { SidebarTasksList } from './SidebarTasksList';
 import { cellSize } from './tables';
-import { SidebarTasksList } from './SidebarTasksList'
-import { useSelector } from 'react-redux';
 import { selectCalendar } from './tasksSlice';
 
 const drawerWidth = 360;
@@ -179,4 +171,4 @@ const CalendarSidebar = (props) => {
   );
 }
 
-export { CalendarSidebar }
+export { CalendarSidebar };

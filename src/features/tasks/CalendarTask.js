@@ -1,14 +1,9 @@
-import styled from 'styled-components'
 import React, { useState } from "react";
-import Popper from "@material-ui/core/Popper";
-import Typography from "@material-ui/core/Typography";
-import Fade from "@material-ui/core/Fade";
-import Paper from "@material-ui/core/Paper";
-import { cellSize } from "./tables"
-import { CalendarTaskPopper } from './CalendarTaskPopper';
+import styled from 'styled-components';
+import { useTheme, Fade, Paper, Popper, Typography } from "@material-ui/core/";
 import { convertHex } from './convertHex';
-import { useTheme } from '@material-ui/core';
-
+import { cellSize } from "./tables";
+import { CalendarTaskPopper } from './CalendarTaskPopper';
 
 const TableTask = styled.div`
   background-color: ${props => props.color};
@@ -96,4 +91,4 @@ const CalendarTask = (props) => {
   )
 
 }
-export { CalendarTask }
+export { CalendarTask };

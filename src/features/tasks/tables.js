@@ -6,8 +6,6 @@ const gapSize = '0px'
 const Table = styled.div`
     display: grid;
     row-gap: 1.5rem;
-    
-
 `;
 
 const TableSection = styled.div`
@@ -32,7 +30,6 @@ const TableHeaderCell = styled.div`
     justify-content: center;
     align-items: center;
     box-sizing: border-box;
-
     border: 1px solid ${props => props.color};
     &[class~="today"] {
       position: relative;

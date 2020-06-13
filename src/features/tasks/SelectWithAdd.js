@@ -8,7 +8,6 @@ const SelectWithAdd = (props) => {
   const filter = createFilterOptions();
   return (
     <Autocomplete
-
       value={props.value}
       onChange={(event, newValue) => {
         if (typeof newValue === 'string') {

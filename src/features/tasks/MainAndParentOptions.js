@@ -17,36 +17,37 @@ const useStyles = makeStyles((theme) => ({
 const MainAndParentOptions = (props) => {
   const classes = useStyles()
   const data = useSelector(selectTasks)
-  console.log(data)
 
   const list = [];
-
   data.forEach((mainTask) => {
     list.push({ value: mainTask.id, title: mainTask.title, nested: false })
-    mainTask.tasks.forEach((task) => {
-      list.push({ value: task.id, title: task.title, nested: true })
-    })
+
+    // TODO: adding to other tasks not only main
+    // mainTask.tasks.forEach((task) => {
+    //   list.push({ value: task.id, title: task.title, nested: true })
+    // })
   })
 
 
   return (
     <FormGroup
-    >
-      <FormControlLabel
-        control={
-          <Checkbox
-            name="mainTask"
-            checked={props.data.mainTask}
-            onChange={e => {
-              if (e.target.checked) {
-                props.onChange({ [e.target.name]: e.target.checked, 'parent': '' })
-              } else {
-                props.onChange({ [e.target.name]: e.target.checked })
-              }
-            }}
-          />}
-        label="Main task"
-      />
+    ><FormControl>
+        <FormControlLabel
+          control={
+            <Checkbox
+              name="mainTask"
+              checked={props.data.mainTask}
+              onChange={e => {
+                if (e.target.checked) {
+                  props.onChange({ [e.target.name]: e.target.checked, 'parent': '' })
+                } else {
+                  props.onChange({ [e.target.name]: e.target.checked })
+                }
+              }}
+            />}
+          label="Main task"
+        />
+      </FormControl>
       <FormControl>
         <Select
           value={props.data.parent}
@@ -68,14 +69,14 @@ const MainAndParentOptions = (props) => {
                 <MenuItem
                   key={index}
                   className={task.nested ? classes.nested : ''}
-                  value={task.value}>{task.title}</MenuItem>
+                  value={task.value}>
+                  {task.title}
+                </MenuItem>
               )
             })
           }
-
         </Select>
       </FormControl>
-
     </FormGroup>
   )
 }

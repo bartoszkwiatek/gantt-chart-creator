@@ -1,8 +1,8 @@
-import { colors } from "./colors"
-
-import React, { useState } from 'react';
-import { TextField, DialogActions, DialogContent, DialogContentText, DialogTitle, IconButton, FormGroup, FormLabel, FormControl, FormControlLabel, FormHelperText, Switch, Checkbox, makeStyles, Button, Select, MenuItem, InputLabel, ListSubheader, ListItemText, ListItemIcon } from '@material-ui/core';
+import React from 'react';
+import { colors } from "./colors";
+import { FormControl, ListItemIcon, ListItemText, makeStyles, MenuItem, Select } from '@material-ui/core';
 import StopIcon from '@material-ui/icons/Stop';
+
 
 const useStyles = makeStyles((theme) => ({
   select: {
@@ -54,4 +54,4 @@ const ColorPicker = (props) => {
 
 }
 
-export { ColorPicker }
+export { ColorPicker };

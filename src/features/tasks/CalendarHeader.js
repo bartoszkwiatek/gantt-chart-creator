@@ -25,14 +25,13 @@ const HeaderContainer = styled.div`
   &::-webkit-scrollbar { 
     display: none;  /* Safari and Chrome */
 }
-
 `
 
 const CalendarHeader = () => {
   const today = useSelector(selectToday)
   const calendar = useSelector(selectCalendar)
   // const scroll = useSelector(selectScrollPosition)
-  const gridLines = true
+  const gridLines = true;
   const dispatch = useDispatch();
   const theme = useTheme();
   const headers = calendar.headers;
@@ -49,6 +48,7 @@ const CalendarHeader = () => {
     // dispatch(setMaxScrollPosition(headerRef.current.scrollWidth - headerRef.current.clientWidth))
     // headerRef.current.scrollLeft = scroll;
 
+    // }, [dispatch, headers, yearsCount.length])
   }, [dispatch])
 
   return (

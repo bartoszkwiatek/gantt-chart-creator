@@ -13,7 +13,7 @@ const tasksSlice = createSlice({
     maxScrollPosition: 0,
     custom: {
       categories: ['default', 'frontend', 'backend', 'UX', 'UI', 'setup'],
-      people: ['me', 'Person', 'Hatsune Miku', 'Elon Musk'],
+      people: ['me', 'Person', 'Hatsune Miku', 'Elon Musk', '2B', 'Wheatley'],
     },       // all dates are to be stored in ms so they can easily be converted and 
     calendar: {
       today: today(),
@@ -306,17 +306,23 @@ const tasksSlice = createSlice({
 
     addCategory: (state, action) => {
       state.custom.categories.push(action.payload);
+      state.custom.categories = Array.from(new Set(state.custom.categories))
     },
     addPerson: (state, action) => {
       state.custom.people.push(action.payload);
+      state.custom.people = Array.from(new Set(state.custom.people))
     },
-    addTask: (state, action) => {
+    addMainTask: (state, action) => {
       state.data.push(action.payload);
+    },
+    addTaskTo: (state, action) => {
+      const targetIndex = state.data.findIndex((mainTask) => mainTask.id === action.payload.target)
+      state.data[targetIndex].tasks.push(action.payload.data)
     },
   },
 });
 
-const { setCookieConsent, setDarkMode, setGridLines, setCustom, setScrollPosition, setMaxScrollPosition, addCategory, addTask, setToday, setCalendar } = tasksSlice.actions;
+const { setCookieConsent, setDarkMode, setGridLines, setCustom, setScrollPosition, setMaxScrollPosition, addCategory, addPerson, addMainTask, addTaskTo, setToday, setCalendar } = tasksSlice.actions;
 
 // // The function below is called a thunk and allows us to perform async logic. It
 // // can be dispatched like a regular action: `dispatch(incrementAsync(10))`. This
@@ -350,7 +356,9 @@ export {
   setScrollPosition,
   setMaxScrollPosition,
   addCategory,
-  addTask,
+  addPerson,
+  addMainTask,
+  addTaskTo,
   setToday,
   setCalendar,
   selectCookieConsent,
