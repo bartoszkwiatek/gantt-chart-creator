@@ -118,7 +118,6 @@ const AddTaskForm = (props) => {
           />
         </FormControl>
         <FormControl className={classes.formControl}>
-
           <TextField
             id="standard-name-multiline"
             label="Description"

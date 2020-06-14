@@ -1,6 +1,6 @@
 import React from 'react';
-import { colors } from "./colors";
 import { FormControl, ListItemIcon, ListItemText, makeStyles, MenuItem, Select } from '@material-ui/core';
+import { colors } from "./colors";
 import StopIcon from '@material-ui/icons/Stop';
 
 

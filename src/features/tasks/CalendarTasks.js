@@ -38,13 +38,13 @@ const CalendarTasks = () => {
   const theme = useTheme();
   const headerCount = Object.values(calendar.headers).filter(val => val).length
   const tasksRef = useRef(null)
-  const scroll = useSelector(selectScrollPosition)
+  // const scroll = useSelector(selectScrollPosition)
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    tasksRef.current.scrollLeft = scroll;
-    dispatch(setMaxScrollPosition(tasksRef.current.scrollWidth - tasksRef.current.clientWidth))
-  }, [scroll, dispatch])
+  // useEffect(() => {
+  //   tasksRef.current.scrollLeft = scroll;
+  //   dispatch(setMaxScrollPosition(tasksRef.current.scrollWidth - tasksRef.current.clientWidth))
+  // }, [scroll, dispatch])
 
 
   return (
@@ -53,9 +53,8 @@ const CalendarTasks = () => {
         color={gridLines ? theme.palette.divider : 'rgba(0,0,0,0)'}
         ref={tasksRef}
         headerCount={headerCount}
-        onScroll={() => {
-          dispatch(setScrollPosition(tasksRef.current.scrollLeft))
-        }} >
+
+      >
 
         {
           data.map((mainTask, index) => {

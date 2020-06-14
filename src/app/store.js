@@ -1,10 +1,22 @@
-import { configureStore } from '@reduxjs/toolkit';
+import { configureStore, createStore } from '@reduxjs/toolkit';
 import counterReducer from '../features/counter/counterSlice';
 import tasksReducer from '../features/tasks/tasksSlice'
+import { loadLocalStorage, saveLocalStorage } from '../features/tasks/localStorage';
 
-export default configureStore({
+const persistedState = loadLocalStorage();
+
+const store = configureStore({
   reducer: {
-    counter: counterReducer,
     tasks: tasksReducer,
   },
+  preloadedState: {
+    tasks: persistedState,
+  }
 });
+// const store = createStore(tasksReducer, persistedState)
+
+store.subscribe(() => {
+  saveLocalStorage(store.getState().tasks)
+})
+
+export default store

@@ -22,14 +22,12 @@ const AddTaskDialog = (props) => {
   }
 
   const handleDataValidation = (isDataValid) => {
-    console.log(isDataValid)
     setValidData(isDataValid)
   }
   const dispatch = useDispatch()
   const calendar = useSelector(selectCalendar)
 
   const saveData = () => {
-    console.log(data)
     const id = Math.floor(Math.random() * 1000);
     const endDate = addDays(data.startDate, data.duration);
     const completion = '0%';
@@ -40,8 +38,8 @@ const AddTaskDialog = (props) => {
       dispatch(addTaskTo({ "target": objectToSave.parent, "data": objectToSave }))
     }
     console.log(objectToSave)
-    const leftBoundaryDate = addDays(data.startDate, -15);
-    const rightBoundaryDate = addDays(data.startDate, 15);
+    const leftBoundaryDate = addDays(objectToSave.startDate, -15);
+    const rightBoundaryDate = addDays(objectToSave.endDate, 15);
     dispatch(setCalendar(
       {
         firstDay: Math.min(leftBoundaryDate, calendar.firstDay),
@@ -49,11 +47,8 @@ const AddTaskDialog = (props) => {
       }))
     dispatch(addCategory(data.category))
     dispatch(addPerson(data.responsible))
-    // check if calendar start date is 10 days before startDate
-    // check if calendar end date is 10 days after endDate
-    // if mainTask === true -> push to data
-    // if mainTask === false -> check parent id, push to that parent tasks
     props.handleClose(true)
+
   }
   return (
     < React.Fragment >
