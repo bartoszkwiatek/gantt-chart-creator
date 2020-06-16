@@ -14,9 +14,9 @@ import { SelectWithAdd } from './SelectWithAdd';
 import { AddTaskForm } from './AddTaskForm';
 
 const AddTaskDialog = (props) => {
-  const [data, setData] = useState({});
+  const [data, setData] = useState(props.data || {});
   const [validData, setValidData] = useState(false)
-
+  console.log(data)
   const handleDataInput = (formData) => {
     setData(formData)
   }
@@ -28,9 +28,9 @@ const AddTaskDialog = (props) => {
   const calendar = useSelector(selectCalendar)
 
   const saveData = () => {
-    const id = Math.floor(Math.random() * 1000);
+    const id = data.id || Math.floor(Math.random() * 1000);
     const endDate = addDays(data.startDate, data.duration);
-    const completion = '0%';
+    const completion = data.completion || '0%';
     const objectToSave = { ...data, ...{ "id": id, "endDate": endDate, "completion": completion } }
     if (data.mainTask) {
       dispatch(addMainTask(objectToSave))

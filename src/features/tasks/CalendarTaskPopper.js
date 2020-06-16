@@ -4,6 +4,9 @@ import { CardHeader, CardContent, CardActions, IconButton, Typography, Card } fr
 import CloseIcon from '@material-ui/icons/Close';
 import EditIcon from '@material-ui/icons/Edit';
 import { LetterAvatar } from "./LetterAvatar";
+import { useState } from "react";
+import { DraggableDialog } from "./DraggableDialog";
+import { AddTaskDialog } from "./AddTaskDialog";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -13,6 +16,16 @@ const useStyles = makeStyles((theme) => ({
 
 const CalendarTaskPopper = (props) => {
   const classes = useStyles()
+  const [openEdit, setOpenEdit] = useState(false);
+
+  const handleOpenEdit = () => {
+    setOpenEdit(true)
+  }
+
+  const handleCloseEdit = () => {
+    setOpenEdit(false)
+  }
+
   return (
     <Card className={classes.root}>
       <CardHeader
@@ -36,7 +49,9 @@ const CalendarTaskPopper = (props) => {
         <LetterAvatar responsible={props.data.responsible} />
         <div>
           <IconButton
-            aria-label="edit">
+            aria-label="edit"
+            onClick={handleOpenEdit}
+          >
             <EditIcon />
           </IconButton>
           <IconButton
@@ -47,6 +62,17 @@ const CalendarTaskPopper = (props) => {
           </IconButton>
         </div>
       </CardActions>
+      <DraggableDialog
+        open={openEdit}
+        title={'edit'}
+        handleClose={handleCloseEdit}
+      >
+        <AddTaskDialog
+          title={'edit'}
+          data={props.data}
+          handleClose={handleCloseEdit}
+        />
+      </DraggableDialog>
     </Card>
   );
 }

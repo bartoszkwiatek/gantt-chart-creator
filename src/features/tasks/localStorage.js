@@ -12,7 +12,6 @@ const loadLocalStorage = () => {
 
 const saveLocalStorage = (state) => {
   try {
-    console.log(state)
     const serializedState = JSON.stringify(state);
     localStorage.setItem('chartData', serializedState);
   } catch {

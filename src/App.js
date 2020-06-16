@@ -16,14 +16,11 @@ function App() {
   const primaryColor = '#e91e63'
   const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');   // check prefered user mode 
   const theme = Theme(darkMode, primaryColor);
-  // const storeState = useSelector(selectWholeStore)
 
   useEffect(() => {
-    dispatch(setDarkMode(prefersDarkMode))
-    // const localStorage = loadLocalStorage();
-    // dispatch(setWholeStore(localStorage))
-    // console.log(localStorage)
-
+    if (darkMode === null) {
+      dispatch(setDarkMode(prefersDarkMode))
+    }
   }, [prefersDarkMode, dispatch])
 
 

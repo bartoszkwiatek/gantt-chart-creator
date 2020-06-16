@@ -30,34 +30,27 @@ const HeaderContainer = styled.div`
 const CalendarHeader = () => {
   const today = useSelector(selectToday)
   const calendar = useSelector(selectCalendar)
-  // const scroll = useSelector(selectScrollPosition)
-  const gridLines = true;
   const dispatch = useDispatch();
+  const gridLines = true;
   const theme = useTheme();
   const headers = calendar.headers;
-  const headerRef = useRef(null)
   const monthCount = countOccurrences(calendar.firstDay, calendar.lastDay, 'month')
   const yearsCount = countOccurrences(calendar.firstDay, calendar.lastDay, 'year')
   const gtc = `repeat(${dateDifference(calendar.firstDay, calendar.lastDay) + 1}, ${cellSize})`
   const headersCount = Object.values(headers).filter(val => val).length
-
-
   useEffect(() => {
-    const showYears = (yearsCount.length === 1 ? false : true);
-    dispatch(setCalendar({ 'headers': { ...headers, ...{ 'year': showYears } } }))
-    // dispatch(setMaxScrollPosition(headerRef.current.scrollWidth - headerRef.current.clientWidth))
-    // headerRef.current.scrollLeft = scroll;
-
-    // }, [dispatch, headers, yearsCount.length])
-  }, [dispatch])
+    if (headers.year === null) {
+      const showYears = (yearsCount.length === 1 ? false : true);
+      dispatch(setCalendar({ 'headers': { ...headers, ...{ 'year': showYears } } }))
+    } else {
+      const showYears = calendar.headers.year
+    }
+  }, [])
 
   return (
     <HeaderContainer
       color={theme.palette.divider}
-      ref={headerRef}
-    // onScroll={() => {
-    //   dispatch(setScrollPosition(headerRef.current.scrollLeft))
-    // }}
+    // ref={headerRef}
     >
       <TableSection>
         {(headers.year) &&

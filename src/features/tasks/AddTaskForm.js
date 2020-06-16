@@ -38,22 +38,29 @@ const AddTaskForm = (props) => {
     })
 
   // TODO: change from object to consts. Right know each key event in text fields rerenders whole form and causes lags
-  const [data, setData] = useState(
-    {
+  let initialState = {}
+  if (props.initialData.id) {
+    initialState = props.initialData
+  } else {
+    initialState = {
       id: '',
       title: '',
       description: '',
       mainTask: false,
       startDate: 0,
-      // endDate: 0,
       duration: 0,
       parent: '',
-      // children: [],
       category: '',
       responsible: '',
       color: '',
       tasks: [],
-    })
+    }
+  }
+
+
+  const [data, setData] = useState(initialState)
+
+  console.log(data)
 
   const handleChangeData = (value) => {
     setData({ ...data, ...value });
