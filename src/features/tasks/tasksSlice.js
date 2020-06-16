@@ -312,15 +312,24 @@ const tasksSlice = createSlice({
     },
 
     deleteTask: (state, action) => {
-      console.log(action.payload.mainTask)
       if (action.payload.mainTask) {
         const filteredArray = state.data.filter((mainTask) => mainTask.id !== action.payload.id)
         state.data = filteredArray
       } else {
         const targetParentIndex = state.data.findIndex((mainTask) => mainTask.id === action.payload.parent)
         const filteredArray = state.data[targetParentIndex].tasks.filter((task) => task.id !== action.payload.id)
-        console.log(filteredArray)
         state.data[targetParentIndex].tasks = filteredArray
+      }
+    },
+
+    setCompletion: (state, action) => {
+      const targetParentIndex = state.data.findIndex((mainTask) => mainTask.id === action.payload.data.parent)
+
+      const taskIndex = state.data[targetParentIndex].tasks.findIndex((task) => task.id === action.payload.data.id)
+      if (taskIndex === -1) {
+        console.warn('error')
+      } else {
+        state.data[targetParentIndex].tasks[taskIndex].completion = action.payload.completion
       }
     },
 
@@ -334,7 +343,7 @@ const tasksSlice = createSlice({
   },
 });
 
-const { setCookieConsent, setDarkMode, setGridLines, setCustom, setScrollPosition, setMaxScrollPosition, addCategory, addPerson, addEditMainTask, addEditTask, setToday, setCalendar, deleteTask, setWholeStore } = tasksSlice.actions;
+const { setCookieConsent, setDarkMode, setGridLines, setCustom, setScrollPosition, setMaxScrollPosition, addCategory, addPerson, addEditMainTask, addEditTask, setToday, setCalendar, deleteTask, setCompletion, setWholeStore } = tasksSlice.actions;
 
 // // The function below is called a thunk and allows us to perform async logic. It
 // // can be dispatched like a regular action: `dispatch(incrementAsync(10))`. This
@@ -375,6 +384,7 @@ export {
   setToday,
   setCalendar,
   deleteTask,
+  setCompletion,
   setWholeStore,
   selectCookieConsent,
   selectDarkMode,

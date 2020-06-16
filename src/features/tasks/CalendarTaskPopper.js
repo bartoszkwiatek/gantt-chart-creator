@@ -9,6 +9,7 @@ import { useState } from "react";
 import { DraggableDialog } from "./DraggableDialog";
 import { AddTaskDialog } from "./AddTaskDialog";
 import { DeleteDialog } from "./DeleteDialog";
+import { TaskCompletionIndicator } from "./TaskCompletionIndicator";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -43,9 +44,9 @@ const CalendarTaskPopper = (props) => {
         title={props.data.title}
         subheader={props.data.category}
         action={
-          <IconButton aria-label="settings">
-            {props.data.completion}
-          </IconButton>
+          <TaskCompletionIndicator
+            data={props.data}
+          />
         }
       />
       <CardContent>
