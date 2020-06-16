@@ -3,10 +3,12 @@ import { makeStyles } from "@material-ui/core/styles";
 import { CardHeader, CardContent, CardActions, IconButton, Typography, Card } from "@material-ui/core";
 import CloseIcon from '@material-ui/icons/Close';
 import EditIcon from '@material-ui/icons/Edit';
+import DeleteIcon from '@material-ui/icons/Delete';
 import { LetterAvatar } from "./LetterAvatar";
 import { useState } from "react";
 import { DraggableDialog } from "./DraggableDialog";
 import { AddTaskDialog } from "./AddTaskDialog";
+import { DeleteDialog } from "./DeleteDialog";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -17,6 +19,7 @@ const useStyles = makeStyles((theme) => ({
 const CalendarTaskPopper = (props) => {
   const classes = useStyles()
   const [openEdit, setOpenEdit] = useState(false);
+  const [openDelete, setOpenDelete] = useState(false);
 
   const handleOpenEdit = () => {
     setOpenEdit(true)
@@ -24,6 +27,14 @@ const CalendarTaskPopper = (props) => {
 
   const handleCloseEdit = () => {
     setOpenEdit(false)
+  }
+
+  const handleOpenDelete = () => {
+    setOpenDelete(true)
+  }
+
+  const handleCloseDelete = () => {
+    setOpenDelete(false)
   }
 
   return (
@@ -49,6 +60,12 @@ const CalendarTaskPopper = (props) => {
         <LetterAvatar responsible={props.data.responsible} />
         <div>
           <IconButton
+            aria-label="delete"
+            onClick={handleOpenDelete}
+          >
+            <DeleteIcon />
+          </IconButton>
+          <IconButton
             aria-label="edit"
             onClick={handleOpenEdit}
           >
@@ -71,6 +88,18 @@ const CalendarTaskPopper = (props) => {
           title={'edit'}
           data={props.data}
           handleClose={handleCloseEdit}
+        />
+      </DraggableDialog>
+      <DraggableDialog
+        open={openDelete}
+        title={'delete'}
+        handleClose={handleCloseDelete}
+      >
+        <DeleteDialog
+          title={'delete'}
+          task={props.data}
+          handleClose={handleCloseDelete}
+
         />
       </DraggableDialog>
     </Card>

@@ -290,7 +290,7 @@ const tasksSlice = createSlice({
       state.custom.people.push(action.payload);
       state.custom.people = Array.from(new Set(state.custom.people))
     },
-    addMainTask: (state, action) => {
+    addEditMainTask: (state, action) => {
       const mainTaskIndex = state.data.findIndex((mainTask) => mainTask.id === action.payload.data.id)
       if (mainTaskIndex === -1) {
         state.data.push(action.payload);
@@ -299,7 +299,7 @@ const tasksSlice = createSlice({
       }
     },
 
-    addTaskTo: (state, action) => {
+    addEditTask: (state, action) => {
       const targetParentIndex = state.data.findIndex((mainTask) => mainTask.id === action.payload.target)
 
       //check if task already exists
@@ -308,6 +308,19 @@ const tasksSlice = createSlice({
         state.data[targetParentIndex].tasks.push(action.payload.data)
       } else {
         state.data[targetParentIndex].tasks[taskIndex] = action.payload.data
+      }
+    },
+
+    deleteTask: (state, action) => {
+      console.log(action.payload.mainTask)
+      if (action.payload.mainTask) {
+        const filteredArray = state.data.filter((mainTask) => mainTask.id !== action.payload.id)
+        state.data = filteredArray
+      } else {
+        const targetParentIndex = state.data.findIndex((mainTask) => mainTask.id === action.payload.parent)
+        const filteredArray = state.data[targetParentIndex].tasks.filter((task) => task.id !== action.payload.id)
+        console.log(filteredArray)
+        state.data[targetParentIndex].tasks = filteredArray
       }
     },
 
@@ -321,7 +334,7 @@ const tasksSlice = createSlice({
   },
 });
 
-const { setCookieConsent, setDarkMode, setGridLines, setCustom, setScrollPosition, setMaxScrollPosition, addCategory, addPerson, addMainTask, addTaskTo, setToday, setCalendar, setWholeStore } = tasksSlice.actions;
+const { setCookieConsent, setDarkMode, setGridLines, setCustom, setScrollPosition, setMaxScrollPosition, addCategory, addPerson, addEditMainTask, addEditTask, setToday, setCalendar, deleteTask, setWholeStore } = tasksSlice.actions;
 
 // // The function below is called a thunk and allows us to perform async logic. It
 // // can be dispatched like a regular action: `dispatch(incrementAsync(10))`. This
@@ -357,10 +370,11 @@ export {
   setMaxScrollPosition,
   addCategory,
   addPerson,
-  addMainTask,
-  addTaskTo,
+  addEditMainTask,
+  addEditTask,
   setToday,
   setCalendar,
+  deleteTask,
   setWholeStore,
   selectCookieConsent,
   selectDarkMode,

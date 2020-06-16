@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { selectCustom, selectCalendar, addMainTask, addTaskTo, setCalendar, addCategory, addPerson } from './tasksSlice';
+import { selectCustom, selectCalendar, addEditMainTask, addEditTask, setCalendar, addCategory, addPerson } from './tasksSlice';
 import { Button, DialogActions, DialogContent, DialogTitle, FormControl, IconButton, makeStyles, TextField } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
 import SaveAltIcon from '@material-ui/icons/SaveAlt';
@@ -28,14 +28,14 @@ const AddTaskDialog = (props) => {
   const calendar = useSelector(selectCalendar)
 
   const saveData = () => {
-    const id = data.id || Math.floor(Math.random() * 1000);
+    const id = data.id || Math.floor(Math.random() * 10000);
     const endDate = addDays(data.startDate, data.duration);
     const completion = data.completion || '0%';
     const objectToSave = { ...data, ...{ "id": id, "endDate": endDate, "completion": completion } }
     if (data.mainTask) {
-      dispatch(addMainTask(objectToSave))
+      dispatch(addEditMainTask(objectToSave))
     } else {
-      dispatch(addTaskTo({ "target": objectToSave.parent, "data": objectToSave }))
+      dispatch(addEditTask({ "target": objectToSave.parent, "data": objectToSave }))
     }
     console.log(objectToSave)
     const leftBoundaryDate = addDays(objectToSave.startDate, -15);
