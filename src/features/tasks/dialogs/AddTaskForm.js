@@ -3,12 +3,11 @@ import { FormControl, makeStyles, TextField } from '@material-ui/core';
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { ColorPicker } from './ColorPicker';
-import { addDays, today } from './dateHelper';
+import { addDays } from '../common/dateHelper';
 import { DatePicker } from './DatePicker';
 import { MainAndParentOptions } from './MainAndParentOptions';
 import { SelectWithAdd } from './SelectWithAdd';
-import { selectCustom } from './tasksSlice';
-
+import { selectCustom } from '../tasksSlice';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -57,10 +56,7 @@ const AddTaskForm = (props) => {
     }
   }
 
-
   const [data, setData] = useState(initialState)
-
-  console.log(data)
 
   const handleChangeData = (value) => {
     setData({ ...data, ...value });
@@ -68,7 +64,7 @@ const AddTaskForm = (props) => {
 
   const sendData = () => {
     dataValidation(data)
-    props.onBlur(data)
+    props.onChange(data)
   }
 
   const dataValidation = (inputData) => {
@@ -100,7 +96,7 @@ const AddTaskForm = (props) => {
       className={classes.form}
       noValidate
       autoComplete="off"
-      onBlur={sendData}
+      onChange={sendData}
     >
 
       <div className={classes.root}>

@@ -5,7 +5,7 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { deleteTask } from './tasksSlice';
+import { deleteTask } from '../tasksSlice';
 
 
 const DeleteDialog = (props) => {

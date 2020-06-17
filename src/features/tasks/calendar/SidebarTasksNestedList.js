@@ -8,51 +8,60 @@ import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 
 import { ListItemSecondaryAction } from '@material-ui/core';
+import { cellSize } from './tables';
 
 const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%',
     maxWidth: 360,
     backgroundColor: theme.palette.background.paper,
-
   },
   nested: {
     paddingLeft: theme.spacing(4),
+    height: cellSize,
+    textOverflow: "ellipsis"
   },
 }));
 
 const SidebarTasksNestedList = (props) => {
   const classes = useStyles();
-  const [open, setOpen] = React.useState(true);
+  const [open, setOpen] = React.useState(props.startOpen);
 
   const handleClick = () => {
     setOpen(!open);
   };
 
+  const scrollTo = (id) => {
+    document.getElementById(`task-${id}`).scrollIntoView({ behavior: 'smooth', alignTo: false });
+  }
   return (
     <List
       style={{
         padding: 0,
         paddingBottom: '24px',
+        wordBreak: "break-all"
       }}
       component="nav"
-      aria-labelledby="nested-list-subheader"
+      aria-labelledby="main task"
       className={classes.root}
     >
       <ListItem button onClick={handleClick}>
-        <ListItemText primary={props.data.title} />
+        <ListItemText
+          primary={props.title || props.data.title}
+        />
         {open ? <ExpandLess /> : <ExpandMore />}
       </ListItem>
-      <Collapse in={open} timeout="auto" unmountOnExit>
-        <List component="div" disablePadding>
+      <Collapse
+        in={open}
+        timeout="auto"
+        unmountOnExit>
+        <List
+          component="div"
+          disablePadding>
           {props.data.tasks.map((task, index) => {
             return (
-
               <ListItem
-                onClick={() => {
-                  document.getElementById(`task-${task.id}`).scrollIntoView({ behavior: 'smooth', alignTo: false });
-                  console.log(`task-${task.id}`)
-                }}
+                onClick={() => scrollTo(task.id)}
                 key={index}
                 button
                 className={classes.nested}>

@@ -7,7 +7,7 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import MenuIcon from '@material-ui/icons/Menu';
 import { SidebarTasksList } from './SidebarTasksList';
 import { cellSize } from './tables';
-import { selectCalendar } from './tasksSlice';
+import { selectCalendar } from '../tasksSlice';
 
 const drawerWidth = 360;
 
@@ -153,7 +153,6 @@ const CalendarSidebar = (props) => {
                   {text}
                 </ListItemText>
               </ ListItem>
-
             )
           ))}
         </List>

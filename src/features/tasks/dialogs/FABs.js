@@ -5,10 +5,6 @@ import SettingsIcon from '@material-ui/icons/Settings';
 import { DraggableDialog } from './DraggableDialog';
 import { OptionsDialog } from './OptionsDialog';
 import { AddTaskDialog } from './AddTaskDialog';
-import { useEffect } from 'react';
-import { useSelector } from 'react-redux';
-import { selectWholeStore } from './tasksSlice';
-import { saveLocalStorage } from './localStorage';
 
 const useStyles = makeStyles((theme) => ({
   margin2: {
@@ -30,8 +26,6 @@ const FABs = () => {
   const [openAdd, setOpenAdd] = useState(false);
   const options = 'options'
   const add = 'add'
-  // const storeState = useSelector(selectWholeStore)
-  // console.log(storeState)
 
   const handleClickOpen = (type) => {
     switch (type) {
@@ -48,9 +42,6 @@ const FABs = () => {
   };
 
   const handleClose = (type) => {
-
-    // saveLocalStorage(storeState);
-
     switch (type) {
       case 'options':
         setOpenOptions(false)

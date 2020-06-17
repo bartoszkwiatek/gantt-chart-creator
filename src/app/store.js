@@ -1,6 +1,6 @@
-import { configureStore, createStore } from '@reduxjs/toolkit';
+import { configureStore } from '@reduxjs/toolkit';
 import tasksReducer from '../features/tasks/tasksSlice'
-import { loadLocalStorage, saveLocalStorage } from '../features/tasks/localStorage';
+import { loadLocalStorage, saveLocalStorage } from '../features/tasks/common/localStorage';
 
 const persistedState = loadLocalStorage();
 

@@ -3,11 +3,9 @@ import './App.css';
 import { Tasks } from './features/tasks/Tasks';
 import { ThemeProvider, useMediaQuery, CssBaseline } from '@material-ui/core';
 import { Theme } from './Theme';
-import { setDarkMode, selectDarkMode, selectWholeStore, setWholeStore, selectTasks } from './features/tasks/tasksSlice';
+import { setDarkMode, selectDarkMode, selectWholeStore, setWholeStore, selectTasks, selectCookieConsent } from './features/tasks/tasksSlice';
 import { useSelector, useDispatch } from 'react-redux';
-import { loadLocalStorage, saveLocalStorage } from './features/tasks/localStorage';
-// import { configureStore } from '@reduxjs/toolkit';
-// import store from './app/store';
+
 
 function App() {
 
@@ -16,9 +14,10 @@ function App() {
   const primaryColor = '#e91e63'
   const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');   // check prefered user mode 
   const theme = Theme(darkMode, primaryColor);
+  const cookies = useSelector(selectCookieConsent)
 
   useEffect(() => {
-    if (darkMode === null) {
+    if (cookies === false) {
       dispatch(setDarkMode(prefersDarkMode))
     }
   }, [prefersDarkMode, dispatch])

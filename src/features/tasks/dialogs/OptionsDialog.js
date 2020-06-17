@@ -1,9 +1,9 @@
-import { Checkbox, DialogActions, DialogContent, DialogTitle, FormControl, FormControlLabel, FormGroup, FormLabel, IconButton, Switch } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
-import CloseIcon from '@material-ui/icons/Close';
 import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectCalendar, selectDarkMode, selectGridLines, setCalendar, setDarkMode, setGridLines } from './tasksSlice';
+import { Checkbox, DialogActions, DialogContent, DialogTitle, FormControl, FormControlLabel, FormGroup, FormLabel, IconButton, Switch } from '@material-ui/core';
+import CloseIcon from '@material-ui/icons/Close';
+import { selectCalendar, selectDarkMode, selectGridLines, setCalendar, setDarkMode, setGridLines } from '../tasksSlice';
 
 const useStyles = makeStyles((theme) => ({
   root: {

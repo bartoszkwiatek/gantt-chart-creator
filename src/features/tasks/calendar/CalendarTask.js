@@ -1,30 +1,18 @@
 import React, { useState } from "react";
 import styled from 'styled-components';
-import { useTheme, Fade, Paper, Popper, Typography } from "@material-ui/core/";
-import { convertHex } from './convertHex';
-import { cellSize } from "./tables";
+import { Fade, Paper, Popper, Typography } from "@material-ui/core/";
+import { cellSize, TableTask } from "./tables";
 import { CalendarTaskPopper } from './CalendarTaskPopper';
-
-const TableTask = styled.div`
-  background-color: ${props => props.color};
-  cursor: pointer;
-  &:hover {
-    background-color:  ${props => convertHex(props.color)};
-  }
-  transition: all 0.2s ease;
-`;
 
 const Header = styled.div`
   width: 100%;
   height: 100%;
   posistion: relative;
-
 `;
 
 const CalendarTask = (props) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [open, setOpen] = useState(false);
-  const theme = useTheme();
 
   const handleClick = () => event => {
     setAnchorEl(event.currentTarget);
@@ -36,7 +24,7 @@ const CalendarTask = (props) => {
     < TableTask
       className="task"
       id={`task-${props.data.id}`}
-      color={props.data.completion === '100%' ? theme.palette.action.disabled : props.data.color}
+      color={props.data.color}
       style={{
         gridColumn: `span ${props.data.duration}`,
       }}>

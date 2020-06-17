@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { selectTasks } from './tasksSlice';
+import { selectTasks } from '../tasksSlice';
 import { List } from "@material-ui/core"
 import { SidebarTasksNestedList } from './SidebarTasksNestedList'
 
@@ -14,7 +14,9 @@ const SidebarTasksList = () => {
         return (
           < SidebarTasksNestedList
             key={index}
-            data={mainTask} />
+            data={mainTask}
+            startOpen={true}
+          />
         )
       })}
     </List>

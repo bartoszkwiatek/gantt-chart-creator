@@ -1,16 +1,12 @@
 
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { selectCustom, selectCalendar, addEditMainTask, addEditTask, setCalendar, addCategory, addPerson } from './tasksSlice';
-import { Button, DialogActions, DialogContent, DialogTitle, FormControl, IconButton, makeStyles, TextField } from '@material-ui/core';
+import { selectCalendar, addEditMainTask, addEditTask, setCalendar, addCategory, addPerson } from '../tasksSlice';
+import { Button, DialogActions, DialogContent, DialogTitle, IconButton } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
 import SaveAltIcon from '@material-ui/icons/SaveAlt';
-import { ColorPicker } from './ColorPicker';
-// import TextField from '@material-ui/core/TextField';
-import { addDays, today } from './dateHelper';
-import { DatePicker } from './DatePicker';
-import { MainAndParentOptions } from './MainAndParentOptions';
-import { SelectWithAdd } from './SelectWithAdd';
+import { addDays } from '../common/dateHelper';
+
 import { AddTaskForm } from './AddTaskForm';
 
 const AddTaskDialog = (props) => {
@@ -60,7 +56,7 @@ const AddTaskDialog = (props) => {
       <DialogContent>
         <AddTaskForm
           initialData={data}
-          onBlur={handleDataInput}
+          onChange={handleDataInput}
           dataValidation={handleDataValidation}
         />
       </DialogContent>

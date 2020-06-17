@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { convertHex } from '../common/convertHex';
 
 const cellSize = '3rem'
 const gapSize = '0px'
@@ -50,15 +51,20 @@ const TableCell = styled.div`
     &:hover {
         background-color: #1a8a98;
     }
-
     display: flex;
     justify-content: center;
     align-items: center;
     box-sizing: border-box;
+    border: 1px solid ${props => props.color}; 
+`;
 
-    border: 1px solid ${props => props.color};
-
-  
+const TableTask = styled.div`
+  background-color: ${props => props.color};
+  cursor: pointer;
+  &:hover {
+    background-color:  ${props => convertHex(props.color)};
+  }
+  transition: all 0.2s ease;
 `;
 
 export {
@@ -69,5 +75,6 @@ export {
   TableSectionTasks,
   TableRow,
   TableHeaderCell,
-  TableCell
+  TableCell,
+  TableTask
 }

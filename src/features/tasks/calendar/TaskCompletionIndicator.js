@@ -1,9 +1,7 @@
 import React, { useState } from "react"
 import { useDispatch } from "react-redux"
 import { IconButton, TextField, InputAdornment } from "@material-ui/core"
-import { setCompletion } from "./tasksSlice"
-
-
+import { setCompletion } from "../tasksSlice"
 
 const TaskCompletionIndicator = (props) => {
   const dispatch = useDispatch()

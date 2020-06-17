@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import {
   selectCookieConsent,
 } from './tasksSlice';
-import { Calendar } from './Calendar';
+import { Calendar } from './calendar/Calendar';
 
 
 // TODO:

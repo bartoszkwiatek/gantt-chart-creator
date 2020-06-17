@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { today, addDays } from './dateHelper';
+import { today, addDays } from './common/dateHelper';
 
 const tasksSlice = createSlice({
   name: 'tasks',
@@ -11,13 +11,12 @@ const tasksSlice = createSlice({
     },
     custom: {
       categories: ['default', 'frontend', 'backend', 'UX', 'UI', 'setup'],
-      people: ['me', 'Person', 'Hatsune Miku', 'Elon Musk', '2B', 'Wheatley'],
-    },       // all dates are to be stored in ms so they can easily be converted 
+      people: ['me', 'Person', 'Elon Musk', '初音ミク', '2B', 'Wheatley'],
+    },
     calendar: {
-      today: today(),
-      // this is default setting for new chart. Later this is going to be updated to date of earliest task
-      firstDay: addDays(today(), -15),
-      lastDay: addDays(today(), 15),
+      today: today(),       // all dates are to be stored in ms so they can easily be converted 
+      firstDay: addDays(today(), -20),
+      lastDay: addDays(today(), 20),
       headers: {
         year: null,
         month: true,
@@ -291,11 +290,12 @@ const tasksSlice = createSlice({
       state.custom.people = Array.from(new Set(state.custom.people))
     },
     addEditMainTask: (state, action) => {
-      const mainTaskIndex = state.data.findIndex((mainTask) => mainTask.id === action.payload.data.id)
+      const mainTaskIndex = state.data.findIndex((mainTask) => mainTask.id === action.payload.id)
+
       if (mainTaskIndex === -1) {
         state.data.push(action.payload);
       } else {
-        state.data[mainTaskIndex] = action.payload.data
+        state.data[mainTaskIndex] = action.payload
       }
     },
 
@@ -334,7 +334,6 @@ const tasksSlice = createSlice({
     },
 
     setWholeStore: (state, action) => {
-      console.log(action.payload)
       state.view = action.payload.view
       state.custom = action.payload.custom
       state.calendar = action.payload.calendar

@@ -1,15 +1,14 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components'
 import { useSelector, useDispatch } from 'react-redux';
-import { selectToday, selectCalendar, selectScrollPosition, setScrollPosition, setMaxScrollPosition, selectGridLines, setCalendar } from './tasksSlice';
-import { customGetDate, dateDifference, datesBetween, countOccurrences, addDays } from './dateHelper';
+import { selectToday, selectCalendar, setCalendar } from '../tasksSlice';
+import { customGetDate, dateDifference, datesBetween, countOccurrences } from '../common/dateHelper';
 import {
   cellSize,
   TableSection,
   TableRow,
   TableHeaderCell
 } from './tables'
-import { ScrollButtonRight, ScrollButtonLeft } from './ScrollButton';
 import { Typography, useTheme } from '@material-ui/core';
 
 const HeaderContainer = styled.div`
@@ -50,7 +49,6 @@ const CalendarHeader = () => {
   return (
     <HeaderContainer
       color={theme.palette.divider}
-    // ref={headerRef}
     >
       <TableSection>
         {(headers.year) &&

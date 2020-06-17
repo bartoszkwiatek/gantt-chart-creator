@@ -1,14 +1,9 @@
-import { Checkbox, FormControl, FormControlLabel, FormGroup, ListSubheader, MenuItem, Select, makeStyles } from '@material-ui/core';
+import { Checkbox, FormControl, FormControlLabel, FormGroup, MenuItem, Select, makeStyles } from '@material-ui/core';
 import React from 'react';
-import { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { selectTasks } from './tasksSlice';
+import { selectTasks } from '../tasksSlice';
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    // width: '100%',
-    // maxWidth: 360,
-  },
   nested: {
     paddingLeft: theme.spacing(4),
   },
@@ -17,17 +12,11 @@ const useStyles = makeStyles((theme) => ({
 const MainAndParentOptions = (props) => {
   const classes = useStyles()
   const data = useSelector(selectTasks)
-
   const list = [];
+
   data.forEach((mainTask) => {
     list.push({ value: mainTask.id, title: mainTask.title, nested: false })
-
-    // TODO: adding to other tasks not only main
-    // mainTask.tasks.forEach((task) => {
-    //   list.push({ value: task.id, title: task.title, nested: true })
-    // })
   })
-
 
   return (
     <FormGroup

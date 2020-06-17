@@ -4,8 +4,7 @@ import { IconButton, makeStyles } from "@material-ui/core"
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
 import { useDispatch, useSelector } from 'react-redux';
-import { setScrollPosition, selectScrollPosition } from './tasksSlice';
-
+import { setScrollPosition, selectScrollPosition } from '../tasksSlice';
 
 const CustomButton = styled.div`
 height: 100vh;

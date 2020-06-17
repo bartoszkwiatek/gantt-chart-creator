@@ -2,7 +2,7 @@ import React from 'react';
 import { CalendarHeader } from './CalendarHeader';
 import { CalendarSidebar } from './CalendarSidebar';
 import { CalendarTasks } from './CalendarTasks';
-import { FABs } from './FABs';
+import { FABs } from '../dialogs/FABs';
 
 const Calendar = () => {
   // const today = useSelector(selectToday)
