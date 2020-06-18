@@ -43,7 +43,6 @@ const useStyles = makeStyles((theme) => ({
   },
   drawerPaper: {
     width: drawerWidth,
-    // position: 'relative',
 
   },
   drawerHeader: {
@@ -60,7 +59,6 @@ const useStyles = makeStyles((theme) => ({
     height: "100vh",
     overflowX: "scroll",
     overflowY: "hidden",
-    // paddingBottom: theme.spacing(3),
     paddingTop: theme.spacing(6),
     transition: theme.transitions.create('margin', {
       easing: theme.transitions.easing.sharp,
@@ -115,7 +113,7 @@ const CalendarSidebar = (props) => {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap>
-            Persistent drawer
+            Task planner
           </Typography>
         </Toolbar>
       </AppBar>

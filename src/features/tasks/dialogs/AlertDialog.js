@@ -5,8 +5,6 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import { useSelector, useDispatch } from 'react-redux';
-import { setCookieConsent } from '../tasksSlice';
 import { saveConsent, checkConsent } from '../common/localStorage';
 import { useEffect } from 'react';
 
@@ -44,10 +42,17 @@ export default function AlertDialog() {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={() => handleClose(false)} color="primary">
+          <Button
+            variant="contained"
+            onClick={() => handleClose(false)}
+            color="secondary">
             Decline
           </Button>
-          <Button onClick={() => handleClose(true)} color="primary" autoFocus>
+          <Button
+            variant="contained"
+            onClick={() => handleClose(true)}
+            color="primary"
+            autoFocus>
             Agree
           </Button>
         </DialogActions>

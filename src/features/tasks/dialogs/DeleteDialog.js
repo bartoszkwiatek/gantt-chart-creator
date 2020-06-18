@@ -17,7 +17,7 @@ const DeleteDialog = (props) => {
           <DialogContentText align="center">
             "{props.task.title}"
           </DialogContentText>
-          <DialogContentText>
+          <DialogContentText align="center">
             and each of its subtasks?
           </DialogContentText>
         </React.Fragment>
@@ -28,11 +28,9 @@ const DeleteDialog = (props) => {
   }
 
 const handleDelete = () => {
-  console.log(props.task)
   dispatch(deleteTask(props.task))
   props.handleClose(true)
 }
-
 
   return (
     <React.Fragment>
@@ -47,10 +45,18 @@ const handleDelete = () => {
         {dialogText()}
       </DialogContent>
       <DialogActions>
-        <Button autoFocus onClick={props.handleClose} color="primary">
+        <Button 
+          variant="contained"
+          autoFocus 
+          onClick={props.handleClose} 
+          color="secondary">
           No
           </Button>
-        <Button onClick={handleDelete} color="primary" autoFocus>
+        <Button 
+          variant="contained"
+          onClick={handleDelete} 
+          color="primary" 
+        >
           Yes
           </Button>
       </DialogActions>

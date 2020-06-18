@@ -1,8 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
-import tasksReducer, { selectCookieConsent } from '../features/tasks/tasksSlice'
+import tasksReducer from '../features/tasks/tasksSlice'
 import { loadLocalStorage, saveLocalStorage, checkConsent } from '../features/tasks/common/localStorage';
 
-const storageConsent = checkConsent()
 const persistedState = loadLocalStorage();
 const store = configureStore({
   reducer: {
@@ -14,7 +13,7 @@ const store = configureStore({
 });
 
 store.subscribe(() => {
-  if (storageConsent === true) {
+  if (checkConsent() === true) {
     saveLocalStorage(store.getState().tasks)
   }
 })
