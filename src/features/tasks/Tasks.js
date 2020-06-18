@@ -4,6 +4,7 @@ import {
   selectCookieConsent,
 } from './tasksSlice';
 import { Calendar } from './calendar/Calendar';
+import AlertDialog from './dialogs/AlertDialog';
 
 
 // TODO:
@@ -22,10 +23,9 @@ import { Calendar } from './calendar/Calendar';
 // *tutorial component
 // *more than one chart
 const Tasks = () => {
-  const consent = useSelector(selectCookieConsent)
-
   return (
     <React.Fragment>
+      <AlertDialog />
       <Calendar />
     </React.Fragment>
   )

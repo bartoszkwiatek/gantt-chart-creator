@@ -24,7 +24,7 @@ const CalendarTask = (props) => {
     < TableTask
       className="task"
       id={`task-${props.data.id}`}
-      color={props.data.color}
+      color={props.data.completion === "100%" ? "#505050" : props.data.color}
       style={{
         gridColumn: `span ${props.data.duration}`,
       }}>

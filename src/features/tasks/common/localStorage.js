@@ -19,4 +19,25 @@ const saveLocalStorage = (state) => {
   }
 };
 
-export { loadLocalStorage, saveLocalStorage }
+const saveConsent = (state) => {
+  try {
+    const serializedState = JSON.stringify(state);
+    localStorage.setItem('consent', serializedState);
+  } catch {
+    console.warn("Save to localStorage failed")
+  }
+};
+
+const checkConsent = () => {
+  try {
+    const serializedState = localStorage.getItem('consent');
+    if (serializedState === null) {
+      return undefined;
+    }
+    return JSON.parse(serializedState);
+  } catch (err) {
+    return undefined;
+  }
+};
+
+export { loadLocalStorage, saveLocalStorage, saveConsent, checkConsent }

@@ -257,8 +257,8 @@ const tasksSlice = createSlice({
   // which detects changes to a "draft state" and produces a brand new
   // immutable state based off those changes
   reducers: {
-    setCookieConsent: state => {
-      state.view.cookieConsent = true;
+    setCookieConsent: (state, action) => {
+      state.view.cookieConsent = action.payload;
     },
 
     setDarkMode: (state, action) => {
