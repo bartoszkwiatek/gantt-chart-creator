@@ -97,6 +97,7 @@ const AddTaskForm = (props) => {
       noValidate
       autoComplete="off"
       onChange={sendData}
+      onBlur={sendData}
     >
 
       <div className={classes.root}>

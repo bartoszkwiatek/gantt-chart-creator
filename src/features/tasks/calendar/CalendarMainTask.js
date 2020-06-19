@@ -1,15 +1,9 @@
-import React from 'react'
-import styled from 'styled-components'
 import { Typography } from '@material-ui/core';
-import { cellSize, TableTask } from './tables'
 import { Fade, Paper, Popper } from "@material-ui/core/";
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { CalendarTaskPopper } from './CalendarTaskPopper';
+import { cellSize, TableTask } from './tables';
 
-
-const TableMainTask = styled.div`
-background-color: #230e85;
-`;
 
 const CalendarMainTask = (props) => {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -70,4 +64,4 @@ const CalendarMainTask = (props) => {
   )
 
 }
-export { CalendarMainTask }
+export { CalendarMainTask };

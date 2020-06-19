@@ -1,15 +1,13 @@
+import { Typography, useTheme } from '@material-ui/core';
 import React, { useEffect } from 'react';
-import styled from 'styled-components'
-import { useSelector, useDispatch } from 'react-redux';
-import { selectToday, selectCalendar, setCalendar } from '../tasksSlice';
-import { customGetDate, dateDifference, datesBetween, countOccurrences } from '../common/dateHelper';
+import { useDispatch, useSelector } from 'react-redux';
+import styled from 'styled-components';
+import { countOccurrences, customGetDate, dateDifference, datesBetween } from '../common/dateHelper';
+import { selectCalendar, selectToday, setCalendar } from '../tasksSlice';
 import {
   cellSize,
-  TableSection,
-  TableRow,
-  TableHeaderCell
-} from './tables'
-import { Typography, useTheme } from '@material-ui/core';
+  TableHeaderCell, TableRow, TableSection
+} from './tables';
 
 const HeaderContainer = styled.div`
   z-index: 10;
@@ -39,10 +37,8 @@ const CalendarHeader = () => {
     if (headers.year === null) {
       const showYears = (yearsCount.length === 1 ? false : true);
       dispatch(setCalendar({ 'headers': { ...headers, ...{ 'year': showYears } } }))
-    } else {
-      const showYears = calendar.headers.year
     }
-  }, [])
+  })
 
   return (
     <HeaderContainer
@@ -156,4 +152,5 @@ const CalendarHeader = () => {
   )
 }
 
-export { CalendarHeader }
+export { CalendarHeader };
+

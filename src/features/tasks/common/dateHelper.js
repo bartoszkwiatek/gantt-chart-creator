@@ -1,5 +1,9 @@
 
 // all function input and return is in ms, unless otherwise stated
+const now = () => {
+  return Date.parse(new Date())
+}
+
 const today = () => {
   const day = ((new Date()).toDateString())           // doing this to be sure that I only get day, with 0 hours and minutes
   const today = Date.parse(day)
@@ -71,7 +75,6 @@ const datesBetween = (firstDate, secondDate, skip = null) => {
   return dates
 }
 
-
 //      returns an object consisting of objects with number of occurences
 //      [{title: "Jun`e", count: 24}, {title: "July", count: 17}]
 //      to use with `grid-column: span ${count}`
@@ -89,6 +92,7 @@ const countOccurrences = (firstDay, lastDay, selector) => {
 
 
 export {
+  now,
   today,
   addDays,
   customGetDate,

@@ -1,16 +1,15 @@
-import React from "react";
+import { Card, CardActions, CardContent, CardHeader, Container, IconButton, Tooltip, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import { CardHeader, CardContent, CardActions, IconButton, Typography, Card, Container, Tooltip } from "@material-ui/core";
 import CloseIcon from '@material-ui/icons/Close';
-import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
-import { LetterAvatar } from "./LetterAvatar";
-import { useState } from "react";
-import { DraggableDialog } from "../dialogs/DraggableDialog";
+import EditIcon from '@material-ui/icons/Edit';
+import React, { useState } from "react";
 import { AddTaskDialog } from "../dialogs/AddTaskDialog";
 import { DeleteDialog } from "../dialogs/DeleteDialog";
-import { TaskCompletionIndicator } from "./TaskCompletionIndicator";
+import { DraggableDialog } from "../dialogs/DraggableDialog";
+import { LetterAvatar } from "./LetterAvatar";
 import { SidebarTasksNestedList } from "./SidebarTasksNestedList";
+import { TaskCompletionIndicator } from "./TaskCompletionIndicator";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -74,7 +73,7 @@ const CalendarTaskPopper = (props) => {
         <CardActions style={{ justifyContent: 'space-between' }}>
           <LetterAvatar responsible={props.data.responsible} />
           <div>
-            <Tooltip title={'delete'}>
+            <Tooltip title={'Delete'}>
               <IconButton
                 aria-label="delete"
                 onClick={handleOpenDelete}
@@ -82,7 +81,7 @@ const CalendarTaskPopper = (props) => {
                 <DeleteIcon />
               </IconButton>
             </Tooltip>
-            <Tooltip title={'edit'}>
+            <Tooltip title={'Edit'}>
               <IconButton
                 aria-label="edit"
                 onClick={handleOpenEdit}
@@ -90,7 +89,7 @@ const CalendarTaskPopper = (props) => {
                 <EditIcon />
               </IconButton>
             </Tooltip>
-            <Tooltip title={'close'}>
+            <Tooltip title={'Close'}>
               <IconButton
                 onClick={(event) => props.click(event)}
                 aria-label="close"
@@ -128,4 +127,4 @@ const CalendarTaskPopper = (props) => {
   );
 }
 
-export { CalendarTaskPopper }
+export { CalendarTaskPopper };

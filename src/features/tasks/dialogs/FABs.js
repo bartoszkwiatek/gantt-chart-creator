@@ -1,16 +1,15 @@
-import React, { useState } from 'react'
-import { Box, Fab, makeStyles, Backdrop, CircularProgress, Typography, Tooltip } from '@material-ui/core'
+import { Backdrop, Box, Fab, makeStyles, Tooltip, Typography } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 import SettingsIcon from '@material-ui/icons/Settings';
+import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { useFirstRender } from '../common/useFirstRender';
+import { selectLastMessage, selectTasks } from '../tasksSlice';
+import { AddTaskDialog } from './AddTaskDialog';
 import { DraggableDialog } from './DraggableDialog';
 import { OptionsDialog } from './OptionsDialog';
-import { AddTaskDialog } from './AddTaskDialog';
-import { useEffect } from 'react';
-import { useSelector } from 'react-redux';
-import { selectTasks, selectLastMessage } from '../tasksSlice';
 import { SnackbarStatus } from './SnackbarStatus';
-import store from '../../../app/store';
-import { useFirstRender } from '../common/useFirstRender';
+import { now } from '../common/dateHelper';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -59,7 +58,7 @@ const FABs = () => {
       handleClose(backdrop)
     }
   },
-    [tasks.length])
+    [tasks.length, backdrop])
 
   useEffect(() => {
     if (isFirstRender) {
@@ -67,7 +66,7 @@ const FABs = () => {
     } else {
       handleOpen(snackbar)
     }
-  }, [message])
+  }, [message, snackbar])
 
 
   const handleOpen = (type) => {
@@ -112,7 +111,7 @@ const FABs = () => {
 
   return (
     <Box>
-      <Tooltip title={'options'}>
+      <Tooltip title={'Options'}>
         <Fab
           className={classes.margin1}
           size="small"
@@ -123,7 +122,7 @@ const FABs = () => {
           <SettingsIcon />
         </Fab>
       </Tooltip>
-      <Tooltip title={'add task'}>
+      <Tooltip title={'Add task'}>
         <Fab
           className={classes.margin2}
           color="primary"
@@ -181,9 +180,10 @@ const FABs = () => {
         message={message}
         open={openSnackbar}
         close={() => handleClose(snackbar)}
-        id={'snackbar'}
+        id={`${now()}-snackbar`}
       />
     </Box >
   )
 }
-export { FABs }
+export { FABs };
+

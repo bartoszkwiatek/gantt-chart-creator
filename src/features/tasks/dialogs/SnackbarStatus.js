@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
 import Snackbar from '@material-ui/core/Snackbar';
+import React from 'react';
 
 const SnackbarStatus = (props) => {
   return (
@@ -16,4 +16,4 @@ const SnackbarStatus = (props) => {
   );
 }
 
-export { SnackbarStatus }
+export { SnackbarStatus };

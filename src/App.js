@@ -21,7 +21,7 @@ function App() {
     if (typeof (cookies) === 'undefined') {
       dispatch(setDarkMode(prefersDarkMode))
     }
-  }, [prefersDarkMode, dispatch])
+  }, [prefersDarkMode, dispatch, cookies])
 
 
   return (

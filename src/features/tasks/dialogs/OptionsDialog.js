@@ -116,7 +116,7 @@ const OptionsDialog = (props) => {
         <SwitchLabels />
       </DialogContent>
       <DialogActions>
-        <Tooltip title={'close'}>
+        <Tooltip title={'Close'}>
           <IconButton
             onClick={props.handleClose}
             aria-label="close"

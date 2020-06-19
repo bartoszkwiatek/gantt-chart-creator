@@ -1,17 +1,14 @@
-import React, { useRef, useEffect } from 'react';
-import styled from 'styled-components'
-import { useSelector, useDispatch } from 'react-redux';
-import { selectToday, selectCalendar, selectTasks, selectGridLines } from '../tasksSlice';
+import { useTheme } from '@material-ui/core';
+import React, { useRef } from 'react';
+import { useSelector } from 'react-redux';
+import styled from 'styled-components';
 import { customGetDate, dateDifference, datesBetween } from '../common/dateHelper';
-import {
-  cellSize,
-  TableSectionTasks,
-  TableRow,
-  TableCell,
-} from './tables'
+import { selectCalendar, selectGridLines, selectTasks, selectToday } from '../tasksSlice';
 import { CalendarMainTask } from './CalendarMainTask';
 import { CalendarTask } from './CalendarTask';
-import { useTheme } from '@material-ui/core';
+import {
+  cellSize, TableCell, TableRow, TableSectionTasks
+} from './tables';
 
 const ContainerTasks = styled.div`
 // width: 90vw;
@@ -38,7 +35,6 @@ const CalendarTasks = () => {
   const theme = useTheme();
   const headerCount = Object.values(calendar.headers).filter(val => val).length
   const tasksRef = useRef(null)
-  const dispatch = useDispatch();
 
   return (
     <React.Fragment>
@@ -90,6 +86,7 @@ const CalendarTasks = () => {
                                 if (day === task.startDate) {
                                   return (
                                     <CalendarTask
+                                      mainTaskDates={{ start: mainTask.startDate, end: mainTask.endDate }}
                                       key={index}
                                       data={task}
                                     />
@@ -116,4 +113,5 @@ const CalendarTasks = () => {
   )
 }
 
-export { CalendarTasks }
+export { CalendarTasks };
+

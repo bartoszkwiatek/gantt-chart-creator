@@ -1,8 +1,8 @@
+import { Fade, Paper, Popper, Tooltip, Typography } from "@material-ui/core/";
 import React, { useState } from "react";
 import styled from 'styled-components';
-import { Fade, Paper, Popper, Typography } from "@material-ui/core/";
-import { cellSize, TableTask } from "./tables";
 import { CalendarTaskPopper } from './CalendarTaskPopper';
+import { cellSize, TableTask } from "./tables";
 
 const Header = styled.div`
   width: 100%;
@@ -19,45 +19,59 @@ const CalendarTask = (props) => {
     setOpen(open === false ? true : false);
   };
 
-
+  const checkColors = () => {
+    if (props.mainTaskDates.start > props.data.startDate || props.mainTaskDates.end < props.data.endDate) {
+      return ('#d50000')
+    } else if (props.data.completion === "100%") {
+      return ("#505050")
+    } else {
+      return (props.data.color)
+    }
+  }
   return (
     < TableTask
       className="task"
       id={`task-${props.data.id}`}
-      color={props.data.completion === "100%" ? "#505050" : props.data.color}
+      color={checkColors()}
       style={{
         gridColumn: `span ${props.data.duration}`,
       }}>
-      <Header onClick={handleClick()}>
-        <div style={
-          {
-            width: props.data.completion,
-            height: '100%',
-            backgroundColor: 'black',
-            opacity: 0.2,
-          }
-        } />
-        <div style={
-          {
-            display: 'flex',
-            alignItems: 'center',
-            height: cellSize,
-            position: 'relative',
-            bottom: cellSize,
-            paddingLeft: '1rem',
-            paddingRight: '1rem'
-          }
-        }>
-          <Typography style=
-            {{
-              color: '#fff',
-              overflow: 'hidden',
-              textOverflow: 'ellipsis'
-            }}>
-            {props.data.title}
-          </Typography>
-        </div>
-      </Header>
+      <Tooltip
+        title={checkColors() === '#d50000' ? 'Subtask should be contained inside a main task' : ''}
+        arrow
+      >
+
+        <Header onClick={handleClick()}>
+          <div style={
+            {
+              width: props.data.completion,
+              height: '100%',
+              backgroundColor: 'black',
+              opacity: 0.2,
+            }
+          } />
+          <div style={
+            {
+              display: 'flex',
+              alignItems: 'center',
+              height: cellSize,
+              position: 'relative',
+              bottom: cellSize,
+              paddingLeft: '1rem',
+              paddingRight: '1rem'
+            }
+          }>
+            <Typography style=
+              {{
+                color: '#fff',
+                overflow: 'hidden',
+                textOverflow: 'ellipsis'
+              }}>
+              {props.data.title}
+            </Typography>
+          </div>
+        </Header>
+      </Tooltip>
       <Popper
         open={open}
         anchorEl={anchorEl}
@@ -81,3 +95,4 @@ const CalendarTask = (props) => {
 
 }
 export { CalendarTask };
+

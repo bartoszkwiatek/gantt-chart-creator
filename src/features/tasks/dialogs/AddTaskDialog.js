@@ -1,13 +1,13 @@
 
-import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { selectCalendar, addEditMainTask, addEditTask, setCalendar, addCategory, addPerson, setMessage } from '../tasksSlice';
 import { Button, DialogActions, DialogContent, DialogTitle, IconButton, Tooltip } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
 import SaveAltIcon from '@material-ui/icons/SaveAlt';
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { addDays } from '../common/dateHelper';
-
+import { addCategory, addEditMainTask, addEditTask, addPerson, selectCalendar, setCalendar, setMessage } from '../tasksSlice';
 import { AddTaskForm } from './AddTaskForm';
+
 
 const AddTaskDialog = (props) => {
   const [data, setData] = useState(props.data || {});
@@ -77,7 +77,7 @@ const AddTaskDialog = (props) => {
         </Button>
           </span>
         </Tooltip>
-        <Tooltip title={'close'}>
+        <Tooltip title={'Close'}>
           <IconButton
             onClick={props.handleClose}
             aria-label="close"
@@ -91,3 +91,4 @@ const AddTaskDialog = (props) => {
 }
 
 export { AddTaskDialog };
+
