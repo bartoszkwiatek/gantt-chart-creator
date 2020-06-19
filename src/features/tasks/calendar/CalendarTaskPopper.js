@@ -1,6 +1,6 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { CardHeader, CardContent, CardActions, IconButton, Typography, Card, Container } from "@material-ui/core";
+import { CardHeader, CardContent, CardActions, IconButton, Typography, Card, Container, Tooltip } from "@material-ui/core";
 import CloseIcon from '@material-ui/icons/Close';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
@@ -47,8 +47,6 @@ const CalendarTaskPopper = (props) => {
       <Card className={classes.root}>
         <CardHeader
           title={props.data.title}
-          titleTypographyProps={{}}
-          subheaderTypographyProps
           subheader={props.data.category}
           action={!props.data.mainTask ?
             <TaskCompletionIndicator
@@ -76,24 +74,30 @@ const CalendarTaskPopper = (props) => {
         <CardActions style={{ justifyContent: 'space-between' }}>
           <LetterAvatar responsible={props.data.responsible} />
           <div>
-            <IconButton
-              aria-label="delete"
-              onClick={handleOpenDelete}
-            >
-              <DeleteIcon />
-            </IconButton>
-            <IconButton
-              aria-label="edit"
-              onClick={handleOpenEdit}
-            >
-              <EditIcon />
-            </IconButton>
-            <IconButton
-              onClick={(event) => props.click(event)}
-              aria-label="close"
-            >
-              <CloseIcon />
-            </IconButton>
+            <Tooltip title={'delete'}>
+              <IconButton
+                aria-label="delete"
+                onClick={handleOpenDelete}
+              >
+                <DeleteIcon />
+              </IconButton>
+            </Tooltip>
+            <Tooltip title={'edit'}>
+              <IconButton
+                aria-label="edit"
+                onClick={handleOpenEdit}
+              >
+                <EditIcon />
+              </IconButton>
+            </Tooltip>
+            <Tooltip title={'close'}>
+              <IconButton
+                onClick={(event) => props.click(event)}
+                aria-label="close"
+              >
+                <CloseIcon />
+              </IconButton>
+            </Tooltip>
           </div>
         </CardActions>
         <DraggableDialog

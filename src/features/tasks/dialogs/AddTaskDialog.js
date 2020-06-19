@@ -34,7 +34,7 @@ const AddTaskDialog = (props) => {
     } else {
       dispatch(addEditTask({ "target": objectToSave.parent, "data": objectToSave }))
     }
-    const message = data.id === '' ? `Task "${data.name}" added` : `Task "${data.name}" modified`
+    const message = data.id === '' ? `Task "${data.title}" added` : `Task "${data.title}" modified`
     dispatch(setMessage(message))
 
     const leftBoundaryDate = addDays(objectToSave.startDate, -15);
@@ -77,12 +77,14 @@ const AddTaskDialog = (props) => {
         </Button>
           </span>
         </Tooltip>
-        <IconButton
-          onClick={props.handleClose}
-          aria-label="close"
-        >
-          <CloseIcon />
-        </IconButton>
+        <Tooltip title={'close'}>
+          <IconButton
+            onClick={props.handleClose}
+            aria-label="close"
+          >
+            <CloseIcon />
+          </IconButton>
+        </Tooltip>
       </DialogActions>
     </ React.Fragment>
   )

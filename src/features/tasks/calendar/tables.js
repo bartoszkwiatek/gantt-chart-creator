@@ -39,9 +39,10 @@ const TableHeaderCell = styled.div`
       content:'';
       position: absolute;
       top: calc( -1 * calc(${cellSize} * ${props => props.headersCount}));
-      left: 0;
+      // left: 0;
       width: ${cellSize};
-      height: calc(88vh + 2 * ${cellSize});
+      // height: calc(88vh + 1.5 * ${cellSize});
+      height: calc(100vh);
       background-color: rgba(100%, 9%, 26.7%, 0.5);
   }
 `;

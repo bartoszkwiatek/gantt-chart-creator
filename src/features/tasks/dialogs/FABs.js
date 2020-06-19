@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Box, Fab, makeStyles, Backdrop, CircularProgress, Typography } from '@material-ui/core'
+import { Box, Fab, makeStyles, Backdrop, CircularProgress, Typography, Tooltip } from '@material-ui/core'
 import AddIcon from '@material-ui/icons/Add';
 import SettingsIcon from '@material-ui/icons/Settings';
 import { DraggableDialog } from './DraggableDialog';
@@ -112,23 +112,27 @@ const FABs = () => {
 
   return (
     <Box>
-      <Fab
-        className={classes.margin1}
-        size="small"
-        color="secondary"
-        aria-label="options"
-        onClick={() => handleOpen(options)}
-      >
-        <SettingsIcon />
-      </Fab>
-      <Fab
-        className={classes.margin2}
-        color="primary"
-        aria-label="add"
-        onClick={() => handleOpen(add)}
-      >
-        <AddIcon />
-      </Fab>
+      <Tooltip title={'options'}>
+        <Fab
+          className={classes.margin1}
+          size="small"
+          color="secondary"
+          aria-label="options"
+          onClick={() => handleOpen(options)}
+        >
+          <SettingsIcon />
+        </Fab>
+      </Tooltip>
+      <Tooltip title={'add task'}>
+        <Fab
+          className={classes.margin2}
+          color="primary"
+          aria-label="add"
+          onClick={() => handleOpen(add)}
+        >
+          <AddIcon />
+        </Fab>
+      </Tooltip>
       <DraggableDialog
         open={openOptions}
         name={options}

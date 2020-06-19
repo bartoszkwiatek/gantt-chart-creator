@@ -1,7 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { useDispatch, useSelector } from 'react-redux';
-import { Checkbox, DialogActions, DialogContent, DialogTitle, FormControl, FormControlLabel, FormGroup, FormLabel, IconButton, Switch } from '@material-ui/core';
+import { Checkbox, DialogActions, DialogContent, DialogTitle, FormControl, FormControlLabel, FormGroup, FormLabel, IconButton, Switch, Tooltip } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
 import { selectCalendar, selectDarkMode, selectGridLines, setCalendar, setDarkMode, setGridLines } from '../tasksSlice';
 
@@ -116,12 +116,14 @@ const OptionsDialog = (props) => {
         <SwitchLabels />
       </DialogContent>
       <DialogActions>
-        <IconButton
-          onClick={props.handleClose}
-          aria-label="close"
-        >
-          <CloseIcon />
-        </IconButton>
+        <Tooltip title={'close'}>
+          <IconButton
+            onClick={props.handleClose}
+            aria-label="close"
+          >
+            <CloseIcon />
+          </IconButton>
+        </Tooltip>
       </DialogActions>
     </ React.Fragment>
   )

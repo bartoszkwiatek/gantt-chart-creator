@@ -10,7 +10,7 @@ const SnackbarStatus = (props) => {
         onClose={() => props.close(true)}
         message={props.message}
         key={props.id}
-        autoHideDuration='2000'
+        autoHideDuration={2000}
       />
     </div>
   );
