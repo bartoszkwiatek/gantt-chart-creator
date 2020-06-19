@@ -7,11 +7,13 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { saveConsent, checkConsent } from '../common/localStorage';
 import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { setMessage } from '../tasksSlice';
 
 export default function AlertDialog() {
   const storageConsent = checkConsent()
   const [open, setOpen] = React.useState(true);
-  console.log(storageConsent)
+  const dispatch = useDispatch()
 
   useEffect(() => {
     if (storageConsent) {
@@ -22,6 +24,7 @@ export default function AlertDialog() {
   const handleClose = (decision) => {
     if (decision) {
       saveConsent(decision)
+      dispatch(setMessage('LocalStorage enabled'))
     }
     setOpen(false)
   };
@@ -31,8 +34,8 @@ export default function AlertDialog() {
       <Dialog
         open={open}
         onClose={handleClose}
-        aria-labelledby="localStorage use consent"
-        aria-describedby="alert asking if you want to enable localStorage"
+      // aria-labelledby="localStorage use consent"
+      // aria-describedby="alert asking if you want to enable localStorage"
       >
         <DialogTitle>{"Do you want to enable localStorage?"}</DialogTitle>
         <DialogContent>

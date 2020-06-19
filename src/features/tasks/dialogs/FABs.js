@@ -7,8 +7,11 @@ import { OptionsDialog } from './OptionsDialog';
 import { AddTaskDialog } from './AddTaskDialog';
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { selectTasks } from '../tasksSlice';
-import { findByLabelText } from '@testing-library/react';
+import { selectTasks, selectLastMessage } from '../tasksSlice';
+import { SnackbarStatus } from './SnackbarStatus';
+import store from '../../../app/store';
+import { useFirstRender } from '../common/useFirstRender';
+
 
 const useStyles = makeStyles((theme) => ({
   margin2: {
@@ -39,24 +42,35 @@ const useStyles = makeStyles((theme) => ({
 
 const FABs = () => {
   const classes = useStyles();
+  const tasks = useSelector(selectTasks)
+  const message = useSelector(selectLastMessage)
+  const isFirstRender = useFirstRender()
+
   const [openOptions, setOpenOptions] = useState(false);
   const [openAdd, setOpenAdd] = useState(false);
   const [openBackdrop, setOpenBackdrop] = useState(false);
-  const options = 'options'
-  const add = 'add'
-  const backdrop = 'backdrop'
-  const tasks = useSelector(selectTasks)
-
+  const [openSnackbar, setOpenSnackbar] = useState(false)
+  const [options, add, backdrop, snackbar] = ['options', 'add', 'backdrop', 'snackbar']
 
   useEffect(() => {
     if (tasks.length === 0) {
-      handleClickOpen(backdrop)
+      handleOpen(backdrop)
     } else {
       handleClose(backdrop)
     }
-  }, [tasks.length])
+  },
+    [tasks.length])
 
-  const handleClickOpen = (type) => {
+  useEffect(() => {
+    if (isFirstRender) {
+      // intentional empty block
+    } else {
+      handleOpen(snackbar)
+    }
+  }, [message])
+
+
+  const handleOpen = (type) => {
     switch (type) {
       case 'options':
         setOpenOptions(true)
@@ -66,6 +80,9 @@ const FABs = () => {
         break;
       case 'backdrop':
         setOpenBackdrop(true)
+        break;
+      case 'snackbar':
+        setOpenSnackbar(true)
         break;
       default:
         console.warn('Broken dialog opening')
@@ -84,6 +101,9 @@ const FABs = () => {
       case 'backdrop':
         setOpenBackdrop(false)
         break;
+      case 'snackbar':
+        setOpenSnackbar(false)
+        break;
       default:
         console.warn('Broken dialog closing')
         break;
@@ -97,7 +117,7 @@ const FABs = () => {
         size="small"
         color="secondary"
         aria-label="options"
-        onClick={() => handleClickOpen(options)}
+        onClick={() => handleOpen(options)}
       >
         <SettingsIcon />
       </Fab>
@@ -105,55 +125,61 @@ const FABs = () => {
         className={classes.margin2}
         color="primary"
         aria-label="add"
-        onClick={() => handleClickOpen(add)}
+        onClick={() => handleOpen(add)}
       >
         <AddIcon />
       </Fab>
       <DraggableDialog
         open={openOptions}
-        title={options}
+        name={options}
         handleClose={() => handleClose(options)}
       >
         <OptionsDialog
-          title={options}
+          name={options}
           handleClose={() => handleClose(options)}
         />
       </DraggableDialog>
       <DraggableDialog
         open={openAdd}
-        title={add}
+        name={add}
         handleClose={() => handleClose(add)}
       >
         <AddTaskDialog
-          title={add}
+          name={add}
           handleClose={() => handleClose(add)}
         />
       </DraggableDialog>
       <Backdrop
         className={classes.backdrop}
         open={openBackdrop}
-        onClick={''}>
+      >
         <Box
           className={classes.centralContainer}
         >
           <Typography
             variant="h3"
           >
-            Create first task
+            Add first task
             </Typography>
           <Fab
             className={classes.central}
             color="primary"
             aria-label="add"
-            onClick={() => handleClickOpen(add)}
+            onClick={() => handleOpen(add)}
           >
             <AddIcon
               style={{ width: '2.5rem', height: '2.5rem' }}
             />
           </Fab>
         </Box>
-      </Backdrop>
-    </Box>
+      </Backdrop >
+      <SnackbarStatus
+        message={message}
+        open={openSnackbar}
+        close={() => handleClose(snackbar)}
+        id={'snackbar'}
+      />
+    </Box >
   )
 }
 export { FABs }

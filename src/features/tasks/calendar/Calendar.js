@@ -5,13 +5,6 @@ import { CalendarTasks } from './CalendarTasks';
 import { FABs } from '../dialogs/FABs';
 
 const Calendar = () => {
-  // const today = useSelector(selectToday)
-  // const calendar = useSelector(selectCalendar)
-  // const data = useSelector(selectTasks)
-  // const scroll = useSelector(selectScrollPosition)
-  // const gtc = `repeat(${dateDifference(calendar.firstDay, calendar.lastDay) + 1}, ${cellSize})`
-  // const dispatch = useDispatch()
-
   return (
     <React.Fragment >
       <CalendarSidebar>

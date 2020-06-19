@@ -5,7 +5,7 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { deleteTask } from '../tasksSlice';
+import { deleteTask, setMessage } from '../tasksSlice';
 
 
 const DeleteDialog = (props) => {
@@ -29,6 +29,7 @@ const DeleteDialog = (props) => {
 
 const handleDelete = () => {
   dispatch(deleteTask(props.task))
+  dispatch(setMessage(`Task "${props.task.title}" removed`))
   props.handleClose(true)
 }
 

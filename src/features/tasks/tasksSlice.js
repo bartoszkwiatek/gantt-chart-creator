@@ -24,6 +24,7 @@ const tasksSlice = createSlice({
       },
     },
     data: [],
+    lastMessage: 'default message...',
   },
   reducers: {
     setDarkMode: (state, action) => {
@@ -50,10 +51,12 @@ const tasksSlice = createSlice({
       state.custom.categories.push(action.payload);
       state.custom.categories = Array.from(new Set(state.custom.categories))
     },
+
     addPerson: (state, action) => {
       state.custom.people.push(action.payload);
       state.custom.people = Array.from(new Set(state.custom.people))
     },
+
     addEditMainTask: (state, action) => {
       const mainTaskIndex = state.data.findIndex((mainTask) => mainTask.id === action.payload.id)
 
@@ -97,10 +100,13 @@ const tasksSlice = createSlice({
       }
     },
 
+    setMessage: (state, action) => {
+      state.lastMessage = action.payload
+    }
   },
 });
 
-const { setDarkMode, setGridLines, setCustom, setScrollPosition, setMaxScrollPosition, addCategory, addPerson, addEditMainTask, addEditTask, setToday, setCalendar, deleteTask, setCompletion } = tasksSlice.actions;
+const { setDarkMode, setGridLines, setCustom, setScrollPosition, setMaxScrollPosition, addCategory, addPerson, addEditMainTask, addEditTask, setToday, setCalendar, deleteTask, setCompletion, setMessage } = tasksSlice.actions;
 
 const selectDarkMode = state => state.tasks.view.darkMode;
 const selectGridLines = state => state.tasks.view.gridLines;
@@ -111,6 +117,7 @@ const selectCustomCategories = state => state.tasks.custom.categories;
 const selectTasks = state => state.tasks.data;
 const selectToday = state => state.tasks.calendar.today;
 const selectCalendar = state => state.tasks.calendar;
+const selectLastMessage = state => state.tasks.lastMessage;
 
 export {
   setDarkMode,
@@ -126,6 +133,7 @@ export {
   setCalendar,
   deleteTask,
   setCompletion,
+  setMessage,
   selectDarkMode,
   selectGridLines,
   selectCustom,
@@ -135,6 +143,7 @@ export {
   selectTasks,
   selectToday,
   selectCalendar,
+  selectLastMessage
 }
 export default tasksSlice.reducer;
 

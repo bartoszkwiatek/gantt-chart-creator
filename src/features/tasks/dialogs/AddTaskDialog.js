@@ -1,8 +1,8 @@
 
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { selectCalendar, addEditMainTask, addEditTask, setCalendar, addCategory, addPerson } from '../tasksSlice';
-import { Button, DialogActions, DialogContent, DialogTitle, IconButton } from '@material-ui/core';
+import { selectCalendar, addEditMainTask, addEditTask, setCalendar, addCategory, addPerson, setMessage } from '../tasksSlice';
+import { Button, DialogActions, DialogContent, DialogTitle, IconButton, Tooltip } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
 import SaveAltIcon from '@material-ui/icons/SaveAlt';
 import { addDays } from '../common/dateHelper';
@@ -12,7 +12,7 @@ import { AddTaskForm } from './AddTaskForm';
 const AddTaskDialog = (props) => {
   const [data, setData] = useState(props.data || {});
   const [validData, setValidData] = useState(false)
-  console.log(data)
+
   const handleDataInput = (formData) => {
     setData(formData)
   }
@@ -20,6 +20,7 @@ const AddTaskDialog = (props) => {
   const handleDataValidation = (isDataValid) => {
     setValidData(isDataValid)
   }
+
   const dispatch = useDispatch()
   const calendar = useSelector(selectCalendar)
 
@@ -33,7 +34,9 @@ const AddTaskDialog = (props) => {
     } else {
       dispatch(addEditTask({ "target": objectToSave.parent, "data": objectToSave }))
     }
-    console.log(objectToSave)
+    const message = data.id === '' ? `Task "${data.name}" added` : `Task "${data.name}" modified`
+    dispatch(setMessage(message))
+
     const leftBoundaryDate = addDays(objectToSave.startDate, -15);
     const rightBoundaryDate = addDays(objectToSave.endDate, 15);
     dispatch(setCalendar(
@@ -44,13 +47,12 @@ const AddTaskDialog = (props) => {
     dispatch(addCategory(data.category))
     dispatch(addPerson(data.responsible))
     props.handleClose(true)
-
   }
   return (
     < React.Fragment >
       <DialogTitle
         style={{ cursor: 'move' }}
-        id={`draggable-dialog-${props.title}`}>
+        id={`draggable-dialog-${props.name}`}>
         Add task
       </DialogTitle>
       <DialogContent>
@@ -61,16 +63,20 @@ const AddTaskDialog = (props) => {
         />
       </DialogContent>
       <DialogActions>
-        <Button
-          variant="contained"
-          color="primary"
-          size="large"
-          onClick={saveData}
-          startIcon={<SaveAltIcon />}
-          disabled={!validData}
-        >
-          Save
+        <Tooltip title={!validData ? 'All fields must be filled in to save' : ''}>
+          <span>
+            <Button
+              variant="contained"
+              color="primary"
+              size="large"
+              onClick={saveData}
+              startIcon={<SaveAltIcon />}
+              disabled={!validData}
+            >
+              Save
         </Button>
+          </span>
+        </Tooltip>
         <IconButton
           onClick={props.handleClose}
           aria-label="close"
