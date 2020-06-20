@@ -15,7 +15,6 @@ const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
     height: '100vh'
-
   },
   appBar: {
     transition: theme.transitions.create(['margin', 'width'], {
@@ -50,7 +49,8 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     padding: theme.spacing(0, 1),
     // necessary for content to be below app bar
-    ...theme.mixins.toolbar.dense,
+    // ...theme.mixins.toolbar.dense,
+    height: cellSize,
     justifyContent: 'flex-end',
   },
   content: {
@@ -59,7 +59,7 @@ const useStyles = makeStyles((theme) => ({
     height: "100vh",
     overflowX: "scroll",
     overflowY: "hidden",
-    paddingTop: theme.spacing(6),
+    paddingTop: cellSize,
     transition: theme.transitions.create('margin', {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
@@ -76,6 +76,14 @@ const useStyles = makeStyles((theme) => ({
   cellSize: {
     height: cellSize,
   },
+  dense: {
+    height: cellSize,
+    minHeight: cellSize,
+  },
+  rootAppBar: {
+    height: cellSize,
+    zIndex: 10,
+  }
 }));
 
 const CalendarSidebar = (props) => {
@@ -97,12 +105,13 @@ const CalendarSidebar = (props) => {
   return (
     <div className={classes.root}>
       <AppBar
+        classes={{ root: classes.rootAppBar }}
         position="fixed"
         className={clsx(classes.appBar, {
           [classes.appBarShift]: open,
         })}
       >
-        <Toolbar variant="dense">
+        <Toolbar variant="dense" classes={{ root: classes.rootAppBar, dense: classes.dense }}>
           <IconButton
             color="inherit"
             aria-label="open drawer"

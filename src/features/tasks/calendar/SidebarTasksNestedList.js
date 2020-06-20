@@ -1,14 +1,19 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import { IconButton, ListItemSecondaryAction } from '@material-ui/core';
+import Collapse from '@material-ui/core/Collapse';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
-import Collapse from '@material-ui/core/Collapse';
+import { makeStyles } from '@material-ui/core/styles';
+import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
+import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
-
-import { ListItemSecondaryAction } from '@material-ui/core';
+import React from 'react';
 import { cellSize } from './tables';
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { reorderTasks } from '../tasksSlice'
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -25,15 +30,32 @@ const useStyles = makeStyles((theme) => ({
 
 const SidebarTasksNestedList = (props) => {
   const classes = useStyles();
-  const [open, setOpen] = React.useState(props.startOpen);
+  const dispatch = useDispatch();
+  const [open, setOpen] = useState(props.startOpen);
 
   const handleClick = () => {
     setOpen(!open);
   };
 
+  const handleReorder = (data, direction) => {
+    switch (direction) {
+      case 'up':
+        dispatch(reorderTasks({ data: data, target: -1 }))
+        break;
+      case 'down':
+        dispatch(reorderTasks({ data: data, target: 1 }))
+        break
+      default:
+        console.warn('reordering did not work')
+        break;
+    }
+  }
+
   const scrollTo = (id) => {
     document.getElementById(`task-${id}`).scrollIntoView({ behavior: 'smooth', alignTo: false });
   }
+
+
   return (
     <List
       style={{
@@ -45,7 +67,10 @@ const SidebarTasksNestedList = (props) => {
       aria-labelledby="main task"
       className={classes.root}
     >
-      <ListItem button onClick={handleClick}>
+      <ListItem
+        button
+        onClick={handleClick}
+      >
         <ListItemText
           primary={props.title || props.data.title}
         />
@@ -61,11 +86,33 @@ const SidebarTasksNestedList = (props) => {
           {props.data.tasks.map((task, index) => {
             return (
               <ListItem
-                onClick={() => scrollTo(task.id)}
                 key={index}
-                button
-                className={classes.nested}>
-                <ListItemText primary={task.title} />
+                className={classes.nested}
+              >
+                <div style={{ display: 'flex', flexDirection: 'column' }}>
+
+                  {index !== 0 &&
+                    <IconButton
+                      onClick={() => handleReorder(task, 'up')}
+                      size="small"
+                      style={{ marginBottom: "-10px" }}>
+                      <ArrowDropUpIcon />
+                    </IconButton>
+                  }
+                  {index !== props.data.tasks.length - 1 &&
+
+                    <IconButton
+                      onClick={() => handleReorder(task, 'down')}
+                      size="small">
+                      <ArrowDropDownIcon />
+                    </IconButton>
+                  }
+                </div>
+                <ListItem
+                  onClick={() => scrollTo(task.id)}
+                  button >
+                  <ListItemText primary={task.title} />
+                </ListItem>
                 <ListItemSecondaryAction>
                   <ListItemText secondary={task.completion} />
                 </ListItemSecondaryAction>
@@ -77,4 +124,4 @@ const SidebarTasksNestedList = (props) => {
     </List>
   );
 }
-export { SidebarTasksNestedList }
+export { SidebarTasksNestedList };

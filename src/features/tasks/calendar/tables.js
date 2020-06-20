@@ -42,7 +42,7 @@ const TableHeaderCell = styled.div`
       // left: 0;
       width: ${cellSize};
       // height: calc(88vh + 1.5 * ${cellSize});
-      height: calc(100vh);
+      height: calc(100vh - 18px);
       background-color: rgba(100%, 9%, 26.7%, 0.5);
   }
 `;

@@ -107,6 +107,7 @@ const AddTaskForm = (props) => {
             name="title"
             label="New task name"
             value={data.title}
+            inputProps={{ maxlength: 50 }}
             onChange={e => {
               handleChangeData({ [e.target.name]: e.target.value })
             }} />

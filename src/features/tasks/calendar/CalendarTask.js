@@ -1,4 +1,4 @@
-import { Fade, Paper, Popper, Tooltip, Typography } from "@material-ui/core/";
+import { Fade, Paper, Popper, Tooltip, Typography, Grow } from "@material-ui/core/";
 import React, { useState } from "react";
 import styled from 'styled-components';
 import { CalendarTaskPopper } from './CalendarTaskPopper';
@@ -29,68 +29,75 @@ const CalendarTask = (props) => {
     }
   }
   return (
-    < TableTask
-      className="task"
-      id={`task-${props.data.id}`}
-      color={checkColors()}
-      style={{
-        gridColumn: `span ${props.data.duration}`,
-      }}>
-      <Tooltip
-        title={checkColors() === '#d50000' ? 'Subtask should be contained inside a main task' : ''}
-        arrow
-      >
 
-        <Header onClick={handleClick()}>
-          <div style={
-            {
-              width: props.data.completion,
-              height: '100%',
-              backgroundColor: 'black',
-              opacity: 0.2,
-            }
-          } />
-          <div style={
-            {
-              display: 'flex',
-              alignItems: 'center',
-              height: cellSize,
-              position: 'relative',
-              bottom: cellSize,
-              paddingLeft: '1rem',
-              paddingRight: '1rem'
-            }
-          }>
-            <Typography style=
-              {{
-                color: '#fff',
-                overflow: 'hidden',
-                textOverflow: 'ellipsis'
-              }}>
-              {props.data.title}
-            </Typography>
-          </div>
-        </Header>
-      </Tooltip>
-      <Popper
-        open={open}
-        anchorEl={anchorEl}
-        placement="bottom-start"
-        transition
-        style={{ zIndex: '11' }}
-      >
-        {({ TransitionProps }) => (
-          <Fade {...TransitionProps} timeout={350}>
-            <Paper>
-              <CalendarTaskPopper
-                data={props.data}
-                click={handleClick()}
-              />
-            </Paper>
-          </Fade>
-        )}
-      </Popper>
-    </TableTask >
+    <Grow
+      in={true}
+      style={{ transformOrigin: '0 0 0' }}
+    // {...(checked ? { timeout: 1000 } : {})}
+    >
+      < TableTask
+        className="task"
+        id={`task-${props.data.id}`}
+        color={checkColors()}
+        style={{
+          gridColumn: `span ${props.data.duration}`,
+        }}>
+        <Tooltip
+          title={checkColors() === '#d50000' ? 'Subtask should be contained inside a main task' : ''}
+          arrow
+        >
+
+          <Header onClick={handleClick()}>
+            <div style={
+              {
+                width: props.data.completion,
+                height: '100%',
+                backgroundColor: 'black',
+                opacity: 0.2,
+              }
+            } />
+            <div style={
+              {
+                display: 'flex',
+                alignItems: 'center',
+                height: cellSize,
+                position: 'relative',
+                bottom: cellSize,
+                paddingLeft: '1rem',
+                paddingRight: '1rem'
+              }
+            }>
+              <Typography style=
+                {{
+                  color: '#fff',
+                  overflow: 'hidden',
+                  textOverflow: 'ellipsis'
+                }}>
+                {props.data.title}
+              </Typography>
+            </div>
+          </Header>
+        </Tooltip>
+        <Popper
+          open={open}
+          anchorEl={anchorEl}
+          placement="bottom-start"
+          transition
+          style={{ zIndex: '11' }}
+        >
+          {({ TransitionProps }) => (
+            <Fade {...TransitionProps} timeout={350}>
+              <Paper>
+                <CalendarTaskPopper
+                  data={props.data}
+                  click={handleClick()}
+                />
+              </Paper>
+            </Fade>
+          )}
+        </Popper>
+      </TableTask >
+    </Grow>
   )
 
 }

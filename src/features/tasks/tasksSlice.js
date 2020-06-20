@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { today, addDays } from './common/dateHelper';
+import { swapPositions } from './common/swapPositions';
 
 const tasksSlice = createSlice({
   name: 'tasks',
@@ -102,11 +103,23 @@ const tasksSlice = createSlice({
 
     setMessage: (state, action) => {
       state.lastMessage = action.payload
+    },
+
+    reorderTasks: (state, action) => {
+      const targetParentIndex = state.data.findIndex((mainTask) => mainTask.id === action.payload.data.parent)
+      const taskIndex = state.data[targetParentIndex].tasks.findIndex((task) => task.id === action.payload.data.id)
+      const tasksToReorder = state.data[targetParentIndex].tasks
+      if (taskIndex === -1) {
+        console.warn('error')
+      } else {
+        swapPositions(tasksToReorder, taskIndex, (taskIndex + action.payload.target));
+        state.data[targetParentIndex].tasks = tasksToReorder
+      }
     }
   },
 });
 
-const { setDarkMode, setGridLines, setCustom, setScrollPosition, setMaxScrollPosition, addCategory, addPerson, addEditMainTask, addEditTask, setToday, setCalendar, deleteTask, setCompletion, setMessage } = tasksSlice.actions;
+const { setDarkMode, setGridLines, setCustom, setScrollPosition, setMaxScrollPosition, addCategory, addPerson, addEditMainTask, addEditTask, setToday, setCalendar, deleteTask, setCompletion, setMessage, reorderTasks } = tasksSlice.actions;
 
 const selectDarkMode = state => state.tasks.view.darkMode;
 const selectGridLines = state => state.tasks.view.gridLines;
@@ -134,6 +147,7 @@ export {
   deleteTask,
   setCompletion,
   setMessage,
+  reorderTasks,
   selectDarkMode,
   selectGridLines,
   selectCustom,
@@ -143,7 +157,7 @@ export {
   selectTasks,
   selectToday,
   selectCalendar,
-  selectLastMessage
+  selectLastMessage,
 }
 export default tasksSlice.reducer;
 
