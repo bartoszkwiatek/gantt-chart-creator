@@ -16,7 +16,6 @@ const TaskCompletionIndicator = (props) => {
     setEdit(false)
     const completionValue = roundedValue(value) + '%'
     dispatch(setCompletion({ data: props.data, completion: completionValue }))
-    console.log(completionValue)
   }
 
   const roundedValue = (inputValue) => {

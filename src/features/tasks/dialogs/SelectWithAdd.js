@@ -31,7 +31,7 @@ const SelectWithAdd = (props) => {
         if (params.inputValue !== '') {
           filtered.push({
             inputValue: params.inputValue,
-            [props.name]: `Add category: ${params.inputValue}`,
+            [props.name]: `Add ${props.name}: ${params.inputValue}`,
           });
         }
 
