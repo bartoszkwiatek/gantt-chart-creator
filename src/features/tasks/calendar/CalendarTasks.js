@@ -1,4 +1,4 @@
-import { useTheme, Grow } from '@material-ui/core';
+import { useTheme } from '@material-ui/core';
 import React, { useRef } from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
@@ -6,9 +6,7 @@ import { customGetDate, dateDifference, datesBetween } from '../common/dateHelpe
 import { selectCalendar, selectGridLines, selectTasks, selectToday } from '../tasksSlice';
 import { CalendarMainTask } from './CalendarMainTask';
 import { CalendarTask } from './CalendarTask';
-import {
-  cellSize, TableCell, TableRow, TableSectionTasks
-} from './tables';
+import { cellSize, TableCell, TableRow, TableSectionTasks } from './tables';
 
 const ContainerTasks = styled.div`
 // width: 90vw;

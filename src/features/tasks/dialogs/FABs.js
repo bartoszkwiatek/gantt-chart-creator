@@ -145,7 +145,7 @@ const FABs = () => {
       <DraggableDialog
         open={openAdd}
         name={add}
-        handleClose={() => handleClose(add)}
+      // handleClose={() => handleClose(add)}    i dont want to accidently close during adding
       >
         <AddTaskDialog
           name={add}

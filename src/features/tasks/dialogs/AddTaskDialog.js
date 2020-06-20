@@ -21,6 +21,10 @@ const AddTaskDialog = (props) => {
     setValidData(isDataValid)
   }
 
+  const handleClose = () => {
+    props.handleClose(true)
+  }
+
   const dispatch = useDispatch()
   const calendar = useSelector(selectCalendar)
 
@@ -46,7 +50,7 @@ const AddTaskDialog = (props) => {
       }))
     dispatch(addCategory(data.category))
     dispatch(addPerson(data.responsible))
-    props.handleClose(true)
+    handleClose()
   }
   return (
     < React.Fragment >
@@ -79,13 +83,14 @@ const AddTaskDialog = (props) => {
         </Tooltip>
         <Tooltip title={'Close'}>
           <IconButton
-            onClick={props.handleClose}
+            onClick={() => handleClose()}
             aria-label="close"
           >
             <CloseIcon />
           </IconButton>
         </Tooltip>
       </DialogActions>
+      {Object.keys(data).length === 0}
     </ React.Fragment>
   )
 }

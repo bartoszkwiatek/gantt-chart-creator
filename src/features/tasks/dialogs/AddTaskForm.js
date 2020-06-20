@@ -18,7 +18,6 @@ const useStyles = makeStyles((theme) => ({
     display: 'grid',
     gridTemplateColumns: '2fr 1fr',
     columnGap: theme.spacing(3)
-
   },
   formControl: {
     marginBottom: theme.spacing(1),
@@ -103,7 +102,7 @@ const AddTaskForm = (props) => {
       <div className={classes.root}>
         <FormControl className={classes.formControl}>
           <TextField
-            id="standard-name"
+            id="title-input"
             name="title"
             label="New task name"
             value={data.title}
@@ -114,17 +113,19 @@ const AddTaskForm = (props) => {
         </FormControl>
         <FormControl className={classes.formControl}>
           <SelectWithAdd
-            id="select-category"
+            id="select-category-input"
             name="category"
             label="Choose category or enter new"
             options={categories}
             value={data.category}
-            onChange={handleChangeData}
+            onChange={e => {
+              handleChangeData(e)
+            }}
           />
         </FormControl>
         <FormControl className={classes.formControl}>
           <TextField
-            id="standard-name-multiline"
+            id="description-name"
             label="Description"
             value={data.description}
             onChange={e => {
@@ -136,12 +137,14 @@ const AddTaskForm = (props) => {
         </FormControl>
         <FormControl className={classes.formControl}>
           <SelectWithAdd
-            id="select-person"
+            id="select-person-input"
             name="responsible"
             label="Choose person responsible or enter new"
             options={people}
             value={data.responsible}
-            onChange={handleChangeData}
+            onChange={e => {
+              handleChangeData(e)
+            }}
           />
         </FormControl>
       </div>
@@ -149,7 +152,9 @@ const AddTaskForm = (props) => {
       <div className={classes.root}>
         <FormControl className={classes.formControl}>
           <MainAndParentOptions
-            onChange={handleChangeData}
+            onChange={e => {
+              handleChangeData(e)
+            }}
             data={data}
           />
         </FormControl>
@@ -171,7 +176,7 @@ const AddTaskForm = (props) => {
         </FormControl>
         <FormControl className={classes.formControl}>
           <TextField
-            id="standard-number"
+            id="task-duration-input"
             label="Task duration"
             name="duration"
             value={data.duration}
