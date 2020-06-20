@@ -1,5 +1,5 @@
 import React from 'react';
-import { Paper, Dialog } from '@material-ui/core';
+import { Paper, Dialog, useMediaQuery, useTheme } from '@material-ui/core';
 import Draggable from 'react-draggable';
 
 function PaperComponent(props) {
@@ -11,8 +11,12 @@ function PaperComponent(props) {
 }
 
 const DraggableDialog = (props) => {
+  const theme = useTheme()
+  const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
+
   return (
     <Dialog
+      fullScreen={fullScreen}
       open={props.open}
       onClose={props.handleClose}
       PaperComponent={PaperComponent}

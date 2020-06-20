@@ -17,8 +17,12 @@ const useStyles = makeStyles((theme) => ({
   form: {
     display: 'grid',
     gridTemplateColumns: '2fr 1fr',
-    columnGap: theme.spacing(3)
+    columnGap: theme.spacing(3),
+    [theme.breakpoints.down('sm')]: {
+      gridTemplateColumns: '1fr',
+    },
   },
+
   formControl: {
     marginBottom: theme.spacing(1),
   },
