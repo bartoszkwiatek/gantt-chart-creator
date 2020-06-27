@@ -4,18 +4,21 @@ import { useDispatch, useSelector } from 'react-redux';
 import './App.css';
 import { checkConsent } from './features/tasks/common/localStorage';
 import { Tasks } from './features/tasks/Tasks';
-import { selectDarkMode, setDarkMode } from './features/tasks/tasksSlice';
+import { selectDarkMode, setDarkMode, selectToday, setToday } from './features/tasks/tasksSlice';
 import { Theme } from './Theme';
+import { today } from './features/tasks/common/dateHelper';
+
 
 
 function App() {
-
   const darkMode = useSelector(selectDarkMode)
   const dispatch = useDispatch();
   const primaryColor = '#e91e63'
   const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');   // check prefered user mode 
   const theme = Theme(darkMode, primaryColor);
   const cookies = checkConsent()
+  const dayToday = today()
+  const savedToday = useSelector(selectToday)
 
   useEffect(() => {
     if (typeof (cookies) === 'undefined') {
@@ -23,6 +26,11 @@ function App() {
     }
   }, [prefersDarkMode, dispatch, cookies])
 
+  useEffect(() => {
+    if (dayToday !== savedToday) {
+      dispatch(setToday(dayToday))
+    }
+  }, [])
 
   return (
     <ThemeProvider theme={theme}>
