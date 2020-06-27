@@ -61,7 +61,7 @@ const SidebarTasksNestedList = (props) => {
       style={{
         padding: 0,
         paddingBottom: '24px',
-        wordBreak: "break-all"
+        wordBreak: "break-word"
       }}
       component="nav"
       aria-labelledby="main task"

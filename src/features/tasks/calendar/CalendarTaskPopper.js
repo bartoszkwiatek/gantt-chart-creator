@@ -13,7 +13,7 @@ import { TaskCompletionIndicator } from "./TaskCompletionIndicator";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    wordBreak: "break-all"
+    wordBreak: "break-word"
   }
 }));
 
