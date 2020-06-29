@@ -13,7 +13,16 @@ import { TaskCompletionIndicator } from "./TaskCompletionIndicator";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    wordBreak: "break-word"
+    wordBreak: "break-word",
+    maxHeight: "75vh",
+    [theme.breakpoints.down('sm')]: {
+      maxHeight: "90vh",
+    },
+    display: 'flex',
+    flexDirection: 'column',
+  },
+  xd: {
+    maxHeight: "33vh",
   }
 }));
 
@@ -41,7 +50,8 @@ const CalendarTaskPopper = (props) => {
   return (
     <Container
       disableGutters
-      maxWidth="xs">
+      maxWidth="xs"
+    >
 
       <Card className={classes.root}>
         <CardHeader
@@ -123,7 +133,7 @@ const CalendarTaskPopper = (props) => {
           />
         </DraggableDialog>
       </Card>
-    </Container>
+    </Container >
   );
 }
 

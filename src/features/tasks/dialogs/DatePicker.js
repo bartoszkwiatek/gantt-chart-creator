@@ -1,10 +1,12 @@
 import React from 'react'
 import { MuiPickersUtilsProvider, KeyboardDatePicker } from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
+// import { pl } from "date-fns/locale";
 
 const DatePicker = (props) => {
   return (
     <MuiPickersUtilsProvider
+      // locale={pl}
       utils={DateFnsUtils}>
       <KeyboardDatePicker
         fullWidth
