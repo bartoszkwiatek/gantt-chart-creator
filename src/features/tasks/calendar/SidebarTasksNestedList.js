@@ -20,6 +20,7 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
     // maxWidth: 360,
     backgroundColor: theme.palette.background.paper,
+    minHeight: cellSize,
   },
   nested: {
     paddingLeft: theme.spacing(4),
@@ -58,6 +59,7 @@ const SidebarTasksNestedList = (props) => {
 
   return (
     <List
+
       style={{
         padding: 0,
         paddingBottom: '24px',
@@ -65,7 +67,7 @@ const SidebarTasksNestedList = (props) => {
       }}
       component="nav"
       aria-labelledby="main task"
-      className={classes.root}
+      className={`${classes.root} list `}
     >
       <ListItem
         button

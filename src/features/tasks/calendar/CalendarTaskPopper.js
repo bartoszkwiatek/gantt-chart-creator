@@ -15,15 +15,12 @@ const useStyles = makeStyles((theme) => ({
   root: {
     wordBreak: "break-word",
     maxHeight: "75vh",
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('md')]: {
       maxHeight: "90vh",
     },
     display: 'flex',
     flexDirection: 'column',
   },
-  xd: {
-    maxHeight: "33vh",
-  }
 }));
 
 const CalendarTaskPopper = (props) => {
@@ -53,7 +50,8 @@ const CalendarTaskPopper = (props) => {
       maxWidth="xs"
     >
 
-      <Card className={classes.root}>
+      <Card className={`${classes.root} card`}
+      >
         <CardHeader
           title={props.data.title}
           subheader={props.data.category}

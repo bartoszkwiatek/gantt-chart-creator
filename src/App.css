@@ -1,9 +1,0 @@
-.MuiPaper-root > .MuiList-root {
-  max-height: 40vh;
-  display: flex;
-  flex-direction: column;
-}
-
-.MuiPaper-root > .MuiList-root > .MuiCollapse-container {
-  overflow-y: auto;
-}
