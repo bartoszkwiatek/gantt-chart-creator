@@ -1,7 +1,8 @@
 # Task planner app
 
 ## TODO:
-
+- on enter center view on "Today" !important
+- mock data
 - change react-draggable to react D&D -> replace buttons to change order with proper touch-and-hold reorder
 - fix mobile problems
 - PWA
