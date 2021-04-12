@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/GanttChartCreator/precache-manifest.d0d939b57825f4a32a3d62152eec6e3d.js"
+  "/GanttChartCreator/precache-manifest.51435bc12b71cdce83c449456c105519.js"
 );
 
 self.addEventListener('message', (event) => {
