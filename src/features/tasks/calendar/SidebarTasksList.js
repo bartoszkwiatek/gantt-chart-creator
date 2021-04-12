@@ -1,8 +1,7 @@
-
-import React from 'react';
-import { useSelector } from 'react-redux';
-import { selectTasks } from '../tasksSlice';
-import { List } from "@material-ui/core"
+import React from 'react'
+import { useSelector } from 'react-redux'
+import { selectTasks } from '../tasksSlice'
+import { List } from '@material-ui/core'
 import { SidebarTasksNestedList } from './SidebarTasksNestedList'
 
 const SidebarTasksList = () => {
@@ -12,7 +11,7 @@ const SidebarTasksList = () => {
     <List style={{ padding: 0 }}>
       {data.map((mainTask, index) => {
         return (
-          < SidebarTasksNestedList
+          <SidebarTasksNestedList
             key={index}
             data={mainTask}
             startOpen={true}
@@ -22,6 +21,5 @@ const SidebarTasksList = () => {
     </List>
   )
 }
-
 
 export { SidebarTasksList }
