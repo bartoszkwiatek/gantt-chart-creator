@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/GanttChartCreator/static/css/main.bb212a66.chunk.css",
-    "main.js": "/GanttChartCreator/static/js/main.f119e5d2.chunk.js",
-    "main.js.map": "/GanttChartCreator/static/js/main.f119e5d2.chunk.js.map",
+    "main.js": "/GanttChartCreator/static/js/main.ae5ffc0a.chunk.js",
+    "main.js.map": "/GanttChartCreator/static/js/main.ae5ffc0a.chunk.js.map",
     "runtime-main.js": "/GanttChartCreator/static/js/runtime-main.dfe7a9a4.js",
     "runtime-main.js.map": "/GanttChartCreator/static/js/runtime-main.dfe7a9a4.js.map",
     "static/js/2.8465ed24.chunk.js": "/GanttChartCreator/static/js/2.8465ed24.chunk.js",
     "static/js/2.8465ed24.chunk.js.map": "/GanttChartCreator/static/js/2.8465ed24.chunk.js.map",
     "index.html": "/GanttChartCreator/index.html",
-    "precache-manifest.51435bc12b71cdce83c449456c105519.js": "/GanttChartCreator/precache-manifest.51435bc12b71cdce83c449456c105519.js",
+    "precache-manifest.e6ee6fffefc5e597591ad0b7a9f620a0.js": "/GanttChartCreator/precache-manifest.e6ee6fffefc5e597591ad0b7a9f620a0.js",
     "service-worker.js": "/GanttChartCreator/service-worker.js",
     "static/css/main.bb212a66.chunk.css.map": "/GanttChartCreator/static/css/main.bb212a66.chunk.css.map",
     "static/js/2.8465ed24.chunk.js.LICENSE.txt": "/GanttChartCreator/static/js/2.8465ed24.chunk.js.LICENSE.txt"
@@ -17,6 +17,6 @@
     "static/js/runtime-main.dfe7a9a4.js",
     "static/js/2.8465ed24.chunk.js",
     "static/css/main.bb212a66.chunk.css",
-    "static/js/main.f119e5d2.chunk.js"
+    "static/js/main.ae5ffc0a.chunk.js"
   ]
 }
