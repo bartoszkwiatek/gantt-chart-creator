@@ -6,7 +6,6 @@ const now = () => {
 const today = () => {
   const day = new Date().toDateString() // doing this to be sure that I only get day, with 0 hours and minutes
   const today = Date.parse(day)
-  console.log(today)
   return today
 }
 
@@ -108,8 +107,6 @@ const datesBetween = (firstDate, secondDate, skip = null) => {
   if (skip !== null) {
     dates.splice(dates.indexOf(skip[0]) + 1, skip[1] - 1)
   }
-  console.log(dates)
-  console.log(dates.map((date) => new Date(date).toString()))
   return dates
 }
 
