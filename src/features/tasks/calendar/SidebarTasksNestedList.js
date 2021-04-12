@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
     // maxWidth: 360,
     backgroundColor: theme.palette.background.paper,
-    minHeight: cellSize,
+    minHeight: cellSize
   },
   nested: {
     paddingLeft: theme.spacing(4),

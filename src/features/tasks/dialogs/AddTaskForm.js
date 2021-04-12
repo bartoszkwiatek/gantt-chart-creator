@@ -1,13 +1,12 @@
-
-import { FormControl, makeStyles, TextField } from '@material-ui/core';
-import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
-import { ColorPicker } from './ColorPicker';
-import { addDays } from '../common/dateHelper';
-import { DatePicker } from './DatePicker';
-import { MainAndParentOptions } from './MainAndParentOptions';
-import { SelectWithAdd } from './SelectWithAdd';
-import { selectCustom } from '../tasksSlice';
+import { FormControl, makeStyles, TextField } from '@material-ui/core'
+import React, { useState } from 'react'
+import { useSelector } from 'react-redux'
+import { ColorPicker } from './ColorPicker'
+import { addDays } from '../common/dateHelper'
+import { DatePicker } from './DatePicker'
+import { MainAndParentOptions } from './MainAndParentOptions'
+import { SelectWithAdd } from './SelectWithAdd'
+import { selectCustom } from '../tasksSlice'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -26,18 +25,16 @@ const useStyles = makeStyles((theme) => ({
   formControl: {
     marginBottom: theme.spacing(1),
   },
-}));
+}))
 
 const AddTaskForm = (props) => {
-  const classes = useStyles();
-  const categories = useSelector(selectCustom).categories
-    .map((category) => {
-      return { 'category': category }
-    })
-  const people = useSelector(selectCustom).people
-    .map((person) => {
-      return { 'responsible': person }
-    })
+  const classes = useStyles()
+  const categories = useSelector(selectCustom).categories.map((category) => {
+    return { category: category }
+  })
+  const people = useSelector(selectCustom).people.map((person) => {
+    return { responsible: person }
+  })
 
   // TODO: change from object to consts. Right know each key event in text fields rerenders whole form and causes lags
   let initialState = {}
@@ -62,8 +59,8 @@ const AddTaskForm = (props) => {
   const [data, setData] = useState(initialState)
 
   const handleChangeData = (value) => {
-    setData({ ...data, ...value });
-  };
+    setData({ ...data, ...value })
+  }
 
   const sendData = () => {
     dataValidation(data)
@@ -71,25 +68,25 @@ const AddTaskForm = (props) => {
   }
 
   const dataValidation = (inputData) => {
-    let valid = false;
+    let valid = false
     if (inputData.title === '') {
-      valid = false;
+      valid = false
     } else if (inputData.description === '') {
-      valid = false;
+      valid = false
     } else if (inputData.startDate === 0) {
-      valid = false;
+      valid = false
     } else if (inputData.duration === 0) {
-      valid = false;
+      valid = false
     } else if (inputData.mainTask === false && inputData.parent === '') {
-      valid = false;
+      valid = false
     } else if (inputData.category === '') {
-      valid = false;
+      valid = false
     } else if (inputData.responsible === '') {
-      valid = false;
+      valid = false
     } else if (inputData.color === '') {
-      valid = false;
+      valid = false
     } else {
-      valid = true;
+      valid = true
     }
     props.dataValidation(valid)
   }
@@ -102,7 +99,6 @@ const AddTaskForm = (props) => {
       onChange={sendData}
       onBlur={sendData}
     >
-
       <div className={classes.root}>
         <FormControl className={classes.formControl}>
           <TextField
@@ -110,10 +106,11 @@ const AddTaskForm = (props) => {
             name="title"
             label="New task name"
             value={data.title}
-            inputProps={{ maxlength: 50 }}
-            onChange={e => {
+            inputProps={{ maxLength: 50 }}
+            onChange={(e) => {
               handleChangeData({ [e.target.name]: e.target.value })
-            }} />
+            }}
+          />
         </FormControl>
         <FormControl className={classes.formControl}>
           <SelectWithAdd
@@ -122,7 +119,7 @@ const AddTaskForm = (props) => {
             label="Choose category or enter new"
             options={categories}
             value={data.category}
-            onChange={e => {
+            onChange={(e) => {
               handleChangeData(e)
             }}
           />
@@ -132,8 +129,8 @@ const AddTaskForm = (props) => {
             id="description-name"
             label="Description"
             value={data.description}
-            onChange={e => {
-              handleChangeData({ 'description': e.target.value })
+            onChange={(e) => {
+              handleChangeData({ description: e.target.value })
             }}
             multiline
             rows={4}
@@ -146,7 +143,7 @@ const AddTaskForm = (props) => {
             label="Choose person responsible or enter new"
             options={people}
             value={data.responsible}
-            onChange={e => {
+            onChange={(e) => {
               handleChangeData(e)
             }}
           />
@@ -156,7 +153,7 @@ const AddTaskForm = (props) => {
       <div className={classes.root}>
         <FormControl className={classes.formControl}>
           <MainAndParentOptions
-            onChange={e => {
+            onChange={(e) => {
               handleChangeData(e)
             }}
             data={data}
@@ -164,7 +161,7 @@ const AddTaskForm = (props) => {
         </FormControl>
         <FormControl className={classes.formControl}>
           <ColorPicker
-            onChange={e => {
+            onChange={(e) => {
               handleChangeData({ [e.target.name]: e.target.value })
             }}
             data={data}
@@ -172,8 +169,8 @@ const AddTaskForm = (props) => {
         </FormControl>
         <FormControl className={classes.formControl}>
           <DatePicker
-            onChange={e => {
-              handleChangeData({ "startDate": addDays(e) })
+            onChange={(e) => {
+              handleChangeData({ startDate: addDays(e) })
             }}
             data={data}
           />
@@ -184,13 +181,13 @@ const AddTaskForm = (props) => {
             label="Task duration"
             name="duration"
             value={data.duration}
-            onChange={e => {
+            onChange={(e) => {
               handleChangeData({ [e.target.name]: Number(e.target.value) })
             }}
             type="number"
             inputProps={{
-              "min": 1,
-              "step": 1,
+              min: 1,
+              step: 1,
             }}
             InputLabelProps={{
               shrink: true,
@@ -198,8 +195,8 @@ const AddTaskForm = (props) => {
           />
         </FormControl>
       </div>
-    </form >
+    </form>
   )
 }
 
-export { AddTaskForm };
+export { AddTaskForm }
