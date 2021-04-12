@@ -38,7 +38,6 @@ const SidebarTasksNestedList = (props) => {
     setOpen(!open)
   }
 
-  console.log(props.data.id)
   const handleReorder = (data, direction) => {
     switch (direction) {
       case 'up':
